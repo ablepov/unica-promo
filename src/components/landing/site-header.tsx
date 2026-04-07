@@ -1,40 +1,42 @@
 const navigation = [
   { label: "Сценарии", href: "#scenarios" },
   { label: "Платформа", href: "#platform" },
-  { label: "Безопасность", href: "#security" },
+  { label: "Контур", href: "#security" },
   { label: "Архитектура", href: "#architecture" },
   { label: "Стоимость", href: "#pricing" },
 ];
 
 export function SiteHeader() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50 border-b border-white/8 bg-[rgba(4,10,16,0.72)] backdrop-blur-xl">
-      <div className="page-shell flex h-20 items-center justify-between gap-6">
-        <a href="#top" className="flex items-center gap-3 text-white">
-          <span className="inline-flex size-10 items-center justify-center rounded-2xl border border-cyan-400/22 bg-[linear-gradient(180deg,rgba(28,58,90,0.9),rgba(7,17,28,0.9))] font-mono text-sm font-semibold tracking-[0.22em]">
-            U
-          </span>
-          <span>
-            <span className="block text-sm font-medium uppercase tracking-[0.26em] text-[var(--muted)]">
-              Unica AI
+    <header className="fixed inset-x-0 top-0 z-50">
+      <div className="page-shell">
+        <div className="mt-4 flex h-16 items-center justify-between gap-4 rounded-full border border-white/8 bg-[rgba(5,8,12,0.72)] px-4 shadow-[0_18px_60px_rgba(0,0,0,0.28)] backdrop-blur-xl sm:px-6">
+          <a href="#top" className="flex min-w-0 items-center gap-3 text-white">
+            <span className="inline-flex size-10 shrink-0 items-center justify-center rounded-full border border-white/12 bg-white/[0.04] font-mono text-sm font-medium tracking-[0.28em] text-slate-100">
+              U
             </span>
-            <span className="block text-sm text-slate-100">
-              Enterprise orchestration platform
+            <span className="min-w-0">
+              <span className="block truncate font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
+                Unica AI
+              </span>
+              <span className="block truncate text-sm text-slate-100">
+                Enterprise AI orchestration
+              </span>
             </span>
-          </span>
-        </a>
+          </a>
 
-        <nav className="hidden items-center gap-6 text-sm text-[var(--muted-strong)] lg:flex">
-          {navigation.map((item) => (
-            <a key={item.href} href={item.href} className="transition hover:text-white">
-              {item.label}
-            </a>
-          ))}
-        </nav>
+          <nav className="hidden items-center gap-6 text-sm text-[var(--muted-strong)] xl:flex">
+            {navigation.map((item) => (
+              <a key={item.href} href={item.href} className="hover:text-white">
+                {item.label}
+              </a>
+            ))}
+          </nav>
 
-        <a href="#lead-form" className="btn-secondary hidden sm:inline-flex">
-          Заказать демо
-        </a>
+          <a href="#lead-form" className="btn-secondary hidden sm:inline-flex">
+            Запросить демо
+          </a>
+        </div>
       </div>
     </header>
   );

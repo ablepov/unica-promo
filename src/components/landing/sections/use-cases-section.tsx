@@ -1,109 +1,84 @@
-import {
-  BrainCircuit,
-  FileText,
-  GitBranchPlus,
-  Radar,
-  Sparkles,
-  Workflow,
-} from "lucide-react";
-
 import { Reveal } from "@/components/landing/reveal";
-import { ChatBubble, SectionIntro } from "@/components/landing/ui";
-import { useCases } from "@/lib/landing-content";
-
-const useCaseIcons = [
-  Radar,
-  Workflow,
-  FileText,
-  BrainCircuit,
-  Sparkles,
-  GitBranchPlus,
-] as const;
+import { SectionHeading } from "@/components/landing/ui";
+import { featuredUseCases } from "@/lib/landing-content";
 
 export function UseCasesSection() {
   return (
     <section id="scenarios" className="scroll-mt-28 border-b border-white/8 py-24">
       <div className="page-shell">
         <Reveal>
-          <SectionIntro
+          <SectionHeading
             label="Сценарии запуска"
-            title="С чего enterprise-команды начинают уже сейчас"
-            description="Unica помогает быстро запускать прикладные AI-сценарии для сотрудников, контакт-центров, сервисных функций и руководителей."
+            title="Три сценария, с которых enterprise-команды начинают уже сейчас"
+            description="В первой версии лендинга фокус на сценариях, где ценность понятна за один экран: знания, сервисные процессы и документы."
           />
         </Reveal>
 
-        <div className="mt-14 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-          {useCases.map((item, index) => {
-            const Icon = useCaseIcons[index];
-            return (
-              <Reveal key={item.title} delay={index * 0.04}>
-                <div className="surface-panel group relative h-full overflow-hidden p-6">
-                  <div className="absolute inset-0 opacity-0 transition-opacity duration-500 group-hover:opacity-100 bg-[radial-gradient(circle_at_top_right,rgba(115,214,255,0.18),transparent_28%),radial-gradient(circle_at_bottom_left,rgba(76,239,214,0.16),transparent_28%)]" />
-                  <div className="relative flex h-full flex-col">
-                    <div className="icon-chip">
-                      <Icon className="size-5" />
-                    </div>
-                    <h3 className="mt-6 text-2xl font-semibold text-white">
-                      {item.title}
-                    </h3>
-                    <p className="mt-4 text-sm leading-7 text-[var(--muted-strong)]">
-                      {item.description}
+        <div className="mt-16 space-y-16">
+          {featuredUseCases.map((useCase, index) => (
+            <Reveal key={useCase.title} delay={index * 0.04}>
+              <article className="group border-t border-white/8 pt-10">
+                <div className="grid gap-10 lg:grid-cols-[minmax(0,0.8fr)_minmax(0,1.2fr)] lg:items-center">
+                  <div className={index % 2 === 1 ? "lg:order-2" : ""}>
+                    <p className="font-mono text-[11px] uppercase tracking-[0.32em] text-[var(--muted)]">
+                      Use case {useCase.number}
                     </p>
-                    <div className="mt-6 grid gap-2 text-xs uppercase tracking-[0.2em] text-[var(--muted)]">
-                      {item.tags.map((tag) => (
-                        <span key={tag}>{tag}</span>
+                    <h3 className="mt-4 text-4xl leading-tight font-semibold tracking-[-0.05em] text-white">
+                      {useCase.title}
+                    </h3>
+                    <p className="mt-4 max-w-xl text-base leading-8 text-[var(--muted-strong)]">
+                      {useCase.description}
+                    </p>
+
+                    <ul className="mt-8 space-y-3">
+                      {useCase.bullets.map((item) => (
+                        <li
+                          key={item}
+                          className="flex items-start gap-3 text-sm leading-6 text-slate-100"
+                        >
+                          <span className="mt-2 inline-flex size-1.5 rounded-full bg-[var(--accent)]" />
+                          <span>{item}</span>
+                        </li>
                       ))}
+                    </ul>
+
+                    <p className="mt-8 font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
+                      {useCase.outcome}
+                    </p>
+                  </div>
+
+                  <div className={index % 2 === 1 ? "lg:order-1" : ""}>
+                    <div className="section-plane relative overflow-hidden px-6 py-7 transition duration-500 group-hover:border-cyan-300/18 group-hover:bg-white/[0.04] sm:px-8 sm:py-8">
+                      <div className="hero-grid absolute inset-0 opacity-20" />
+                      <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_15%,rgba(115,179,255,0.12),transparent_24%),radial-gradient(circle_at_12%_88%,rgba(76,239,214,0.06),transparent_24%)]" />
+                      <div className="absolute left-8 top-8 bottom-8 w-px bg-[linear-gradient(180deg,rgba(255,255,255,0),rgba(115,179,255,0.55),rgba(255,255,255,0))]" />
+
+                      <div className="relative ml-5 space-y-8">
+                        {useCase.steps.map((step, stepIndex) => (
+                          <div key={step.title} className="grid gap-4 sm:grid-cols-[auto_1fr]">
+                            <div className="flex items-start gap-4">
+                              <span className="inline-flex size-9 items-center justify-center rounded-full border border-cyan-300/24 bg-cyan-400/[0.08] font-mono text-[11px] tracking-[0.22em] text-cyan-100">
+                                0{stepIndex + 1}
+                              </span>
+                            </div>
+                            <div>
+                              <p className="text-base font-semibold text-white">
+                                {step.title}
+                              </p>
+                              <p className="mt-2 max-w-xl text-sm leading-7 text-[var(--muted-strong)]">
+                                {step.detail}
+                              </p>
+                            </div>
+                          </div>
+                        ))}
+                      </div>
                     </div>
                   </div>
                 </div>
-              </Reveal>
-            );
-          })}
+              </article>
+            </Reveal>
+          ))}
         </div>
-
-        <Reveal delay={0.15}>
-          <div className="surface-panel mt-12 grid gap-8 overflow-hidden p-7 lg:grid-cols-[1.05fr_0.95fr] lg:p-8">
-            <div className="relative">
-              <div className="absolute left-0 top-0 h-full w-px bg-[linear-gradient(180deg,transparent,rgba(123,144,169,0.35),transparent)]" />
-              <div className="pl-6">
-                <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
-                  Presale assistant
-                </p>
-                <h3 className="mt-4 text-3xl font-semibold text-white">
-                  Опишите задачу. Unica поможет очертить путь пилота.
-                </h3>
-                <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--muted-strong)]">
-                  На следующем этапе сюда можно встроить пресейл-ассистента.
-                  Сейчас в драфте оставил место под диалоговый блок и быструю
-                  конверсию в заявку.
-                </p>
-                <a href="#lead-form" className="btn-secondary mt-6 inline-flex">
-                  Описать задачу
-                </a>
-              </div>
-            </div>
-
-            <div className="surface-subtle p-5">
-              <div className="space-y-3 text-sm">
-                <ChatBubble
-                  speaker="Клиент"
-                  tone="user"
-                  message="Нужно ускорить первую линию сервис-деска и подключить корпоративную базу знаний."
-                />
-                <ChatBubble
-                  speaker="Unica"
-                  tone="assistant"
-                  message="Покажем сценарий на базе knowledge search, маршрутизации обращений и контрольного журнала действий. Возможен cloud и on-prem."
-                />
-                <ChatBubble
-                  speaker="Unica"
-                  tone="assistant"
-                  message="Следующий шаг: короткое демо по вашим источникам, ролям и требованиям к безопасности."
-                />
-              </div>
-            </div>
-          </div>
-        </Reveal>
       </div>
     </section>
   );

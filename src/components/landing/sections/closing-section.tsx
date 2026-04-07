@@ -1,33 +1,48 @@
 import { LeadForm } from "@/components/landing/lead-form";
 import { Reveal } from "@/components/landing/reveal";
-import { ChatBubble, SectionIntro } from "@/components/landing/ui";
-import { faqItems } from "@/lib/landing-content";
+import { SectionHeading } from "@/components/landing/ui";
+import { ctaPoints, faqItems, pricingNote, pricingPlans } from "@/lib/landing-content";
 
 export function ClosingSection() {
   return (
     <>
-      <section className="border-b border-white/8 py-24">
+      <section id="pricing" className="scroll-mt-28 border-b border-white/8 py-24">
         <div className="page-shell">
           <Reveal>
-            <div className="surface-panel relative overflow-hidden px-6 py-10 sm:px-10 sm:py-12 lg:px-14">
-              <div className="hero-grid absolute inset-0 opacity-35" />
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_12%_18%,rgba(76,239,214,0.16),transparent_20%),radial-gradient(circle_at_88%_20%,rgba(32,114,255,0.18),transparent_22%)]" />
-              <div className="relative max-w-4xl">
-                <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
-                  Миссия
-                </p>
-                <h2 className="mt-6 text-4xl leading-tight font-semibold tracking-[-0.04em] text-white sm:text-5xl">
-                  Мы помогаем компаниям и государству кратно увеличивать
-                  производительность труда за счёт запуска безопасного
-                  искусственного интеллекта.
-                </h2>
-                <p className="mt-6 max-w-3xl text-base leading-8 text-[var(--muted-strong)]">
-                  AI должен не просто впечатлять, а приносить измеримую пользу в
-                  реальных процессах. Поэтому Unica создаётся как платформа,
-                  которая делает знания, документы, речь и бизнес-логику частью
-                  новой цифровой рабочей силы: управляемой, безопасной и полезной
-                  для экономики.
-                </p>
+            <div className="section-plane relative overflow-hidden px-6 py-8 sm:px-10 sm:py-10">
+              <div className="absolute inset-0 bg-[radial-gradient(circle_at_84%_14%,rgba(115,179,255,0.12),transparent_24%),linear-gradient(180deg,rgba(255,255,255,0.03),rgba(255,255,255,0))]" />
+
+              <div className="relative grid gap-10 lg:grid-cols-[0.8fr_1.2fr] lg:items-end">
+                <div className="max-w-xl">
+                  <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--muted)]">
+                    Стоимость
+                  </p>
+                  <h2 className="mt-4 text-4xl leading-[0.96] font-semibold tracking-[-0.05em] text-white sm:text-5xl">
+                    Старт не должен превращаться в отдельный проект по сборке AI.
+                  </h2>
+                  <p className="mt-5 text-base leading-8 text-[var(--muted-strong)]">
+                    {pricingNote}
+                  </p>
+                </div>
+
+                <div className="grid gap-5 sm:grid-cols-2">
+                  {pricingPlans.map((plan) => (
+                    <div
+                      key={plan.name}
+                      className="rounded-[1.8rem] border border-white/10 bg-white/[0.03] px-5 py-6"
+                    >
+                      <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
+                        {plan.name}
+                      </p>
+                      <p className="mt-4 text-4xl font-semibold tracking-[-0.04em] text-white">
+                        {plan.price}
+                      </p>
+                      <p className="mt-4 text-sm leading-7 text-[var(--muted-strong)]">
+                        {plan.description}
+                      </p>
+                    </div>
+                  ))}
+                </div>
               </div>
             </div>
           </Reveal>
@@ -35,83 +50,58 @@ export function ClosingSection() {
       </section>
 
       <section id="lead-form" className="scroll-mt-28 py-24">
-        <div className="page-shell grid gap-10 xl:grid-cols-[0.96fr_1.04fr]">
+        <div className="page-shell grid gap-12 lg:grid-cols-[0.78fr_1.22fr]">
           <Reveal>
-            <div>
-              <SectionIntro
-                label="FAQ"
-                title="Частые вопросы"
-                description="Сайт должен закрывать ключевые возражения ещё до разговора с менеджером: чем платформа отличается от чат-бота, как контролируется качество и возможен ли on-prem."
+            <div className="lg:pr-8">
+              <SectionHeading
+                label="Request demo"
+                title="Покажите контур, процессы и ограничения. Мы предложим формат пилота."
+                description="Основная цель первой версии лендинга — быстро собрать корректный enterprise-лид без лишнего маркетингового шума."
               />
               <div className="mt-10 space-y-4">
-                {faqItems.map((item) => (
-                  <details key={item.question} className="surface-panel group p-5">
-                    <summary className="flex cursor-pointer list-none items-start justify-between gap-4 text-left">
-                      <span className="text-base font-semibold text-white">
-                        {item.question}
-                      </span>
-                      <span className="mt-1 text-cyan-100 transition-transform duration-300 group-open:rotate-45">
-                        +
-                      </span>
-                    </summary>
-                    <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--muted-strong)]">
-                      {item.answer}
-                    </p>
-                  </details>
+                {ctaPoints.map((item) => (
+                  <div key={item} className="border-t border-white/8 pt-4">
+                    <p className="text-sm leading-7 text-slate-100">{item}</p>
+                  </div>
                 ))}
               </div>
             </div>
           </Reveal>
 
           <Reveal delay={0.12}>
-            <div className="surface-panel relative overflow-hidden p-6 sm:p-8">
-              <div className="absolute inset-0 bg-[radial-gradient(circle_at_85%_12%,rgba(76,239,214,0.14),transparent_22%),radial-gradient(circle_at_12%_90%,rgba(32,114,255,0.18),transparent_24%)]" />
-              <div className="relative">
-                <p className="font-mono text-[11px] uppercase tracking-[0.28em] text-[var(--muted)]">
-                  Финальный CTA
-                </p>
-                <h2 className="mt-4 text-4xl leading-tight font-semibold tracking-[-0.04em] text-white">
-                  Покажите нам вашу задачу. Мы предложим, как реализовать её на
-                  Unica.
-                </h2>
-                <p className="mt-4 max-w-2xl text-sm leading-7 text-[var(--muted-strong)]">
-                  Опишите сценарий, и мы покажем, как он может работать в облаке
-                  или on-prem. Форму уже подготовил так, чтобы её можно было
-                  быстро подключить к email-сбору лидов.
-                </p>
-
-                <div className="mt-8 grid gap-6 xl:grid-cols-[1.05fr_0.95fr]">
-                  <div className="surface-subtle p-5">
-                    <p className="font-mono text-[10px] uppercase tracking-[0.28em] text-[var(--muted)]">
-                      Обсудить с AI-ассистентом
-                    </p>
-                    <h3 className="mt-4 text-xl font-semibold text-white">
-                      Место под пресейл-ассистента уже заложено в композицию
-                    </h3>
-                    <p className="mt-3 text-sm leading-7 text-[var(--muted-strong)]">
-                      Во второй итерации сюда можно встроить диалоговый виджет
-                      Unica, который соберёт контекст задачи, предложит сценарий
-                      реализации и подготовит лида менеджеру.
-                    </p>
-                    <div className="mt-5 space-y-3">
-                      <ChatBubble
-                        speaker="Unica"
-                        tone="assistant"
-                        message="Расскажите, какие источники нужно подключить и в каком контуре должен работать AI."
-                      />
-                      <ChatBubble
-                        speaker="Вы"
-                        tone="user"
-                        message="Нужен pilot для внутренних знаний и сервис-деска."
-                      />
-                    </div>
-                  </div>
-
-                  <LeadForm />
-                </div>
-              </div>
-            </div>
+            <LeadForm />
           </Reveal>
+        </div>
+
+        <div className="page-shell mt-20 border-t border-white/8 pt-16">
+          <Reveal>
+            <SectionHeading
+              label="FAQ"
+              title="Частые вопросы"
+              description="Эта часть закрывает базовые enterprise-возражения ещё до разговора с менеджером."
+            />
+          </Reveal>
+
+          <div className="mt-10 max-w-4xl">
+            {faqItems.map((item, index) => (
+              <details
+                key={item.question}
+                className={`group ${index > 0 ? "border-t border-white/8" : ""}`}
+              >
+                <summary className="flex cursor-pointer list-none items-start justify-between gap-6 py-6 text-left">
+                  <span className="text-lg font-semibold text-white">
+                    {item.question}
+                  </span>
+                  <span className="mt-1 font-mono text-sm text-[var(--muted)] transition-transform duration-300 group-open:rotate-45">
+                    +
+                  </span>
+                </summary>
+                <p className="max-w-3xl pb-6 text-sm leading-7 text-[var(--muted-strong)]">
+                  {item.answer}
+                </p>
+              </details>
+            ))}
+          </div>
         </div>
       </section>
     </>
