@@ -1,0 +1,477 @@
+- generic [active] [ref=e1]:
+  - banner [ref=e2]:
+    - generic [ref=e4]:
+      - link "U Unica AI Управляемый запуск AI" [ref=e5] [cursor=pointer]:
+        - /url: "#top"
+        - generic [ref=e6]: U
+        - generic [ref=e7]:
+          - generic [ref=e8]: Unica AI
+          - generic [ref=e9]: Управляемый запуск AI
+      - navigation [ref=e10]:
+        - link "Платформа" [ref=e11] [cursor=pointer]:
+          - /url: "#platform"
+        - link "Архитектура" [ref=e12] [cursor=pointer]:
+          - /url: "#architecture"
+        - link "Сценарии" [ref=e13] [cursor=pointer]:
+          - /url: "#scenarios"
+        - link "Контур запуска" [ref=e14] [cursor=pointer]:
+          - /url: "#security"
+        - link "Стоимость" [ref=e15] [cursor=pointer]:
+          - /url: "#pricing"
+      - link "Запросить демо" [ref=e16] [cursor=pointer]:
+        - /url: "#lead-form"
+  - main [ref=e17]:
+    - generic [ref=e23]:
+      - generic [ref=e24]:
+        - paragraph [ref=e25]: Unica AI / orbital control
+        - heading "AI в контуре бизнеса. Не в режиме демо." [level=1] [ref=e26]:
+          - text: AI в контуре бизнеса.
+          - text: Не в режиме демо.
+        - paragraph [ref=e27]: Единый control plane для источников, сценариев и политик. Запуск в cloud, on-prem или hybrid без хаоса из пилотов и ручных склеек.
+        - generic [ref=e28]:
+          - link "Запросить демо" [ref=e29] [cursor=pointer]:
+            - /url: "#lead-form"
+            - text: Запросить демо
+            - img [ref=e30]
+          - link "Смотреть архитектуру" [ref=e32] [cursor=pointer]:
+            - /url: "#architecture"
+        - generic [ref=e33]:
+          - generic [ref=e34]:
+            - paragraph [ref=e35]: Контур
+            - paragraph [ref=e36]: Cloud, on-prem, hybrid
+          - generic [ref=e37]:
+            - paragraph [ref=e38]: Контроль
+            - paragraph [ref=e39]: RBAC, аудит, цитаты
+          - generic [ref=e40]:
+            - paragraph [ref=e41]: Источники
+            - paragraph [ref=e42]: DMS, CRM, SharePoint
+      - generic [ref=e44]:
+        - generic [ref=e45]: T-09
+        - generic [ref=e46]:
+          - generic [ref=e52]: Mission control active
+          - generic [ref=e53]:
+            - generic [ref=e55]:
+              - generic [ref=e57]: CP
+              - generic [ref=e59]: DB
+              - generic [ref=e61]: SC
+              - generic [ref=e63]: PL
+              - generic [ref=e65]: AU
+            - generic [ref=e66]:
+              - generic [ref=e67]:
+                - generic [ref=e68]:
+                  - generic [ref=e70]:
+                    - paragraph [ref=e71]: Launch board
+                    - heading [level=2] [ref=e72]: Ассистент сервис-деска
+                    - paragraph [ref=e73]: Контекст из базы знаний, маршрутизация по сценарию и ответ под политиками доступа.
+                  - generic [ref=e79]:
+                    - generic [ref=e86]: Intake
+                    - generic [ref=e87]: Route
+                    - generic [ref=e88]: Verify
+                    - generic [ref=e89]: Respond
+                    - generic [ref=e90]:
+                      - paragraph [ref=e91]: Flow status
+                      - generic [ref=e92]:
+                        - generic [ref=e95]: Контекст синхронизирован
+                        - generic [ref=e98]: Сценарий применён
+                        - generic [ref=e101]: Источники прикреплены
+                - generic [ref=e102]:
+                  - generic [ref=e103]:
+                    - paragraph [ref=e104]: Контур знаний
+                    - generic [ref=e105]:
+                      - generic [ref=e107]:
+                        - generic [ref=e108]: База знаний
+                        - generic [ref=e109]: 92%
+                      - generic [ref=e113]:
+                        - generic [ref=e114]: Service desk
+                        - generic [ref=e115]: 84%
+                      - generic [ref=e119]:
+                        - generic [ref=e120]: Документы / OCR
+                        - generic [ref=e121]: 76%
+                  - generic [ref=e124]:
+                    - paragraph [ref=e125]: Проверки ответа
+                    - generic [ref=e126]:
+                      - generic [ref=e127]:
+                        - generic [ref=e130]: RBAC
+                        - paragraph [ref=e131]: роли применены
+                      - generic [ref=e132]:
+                        - generic [ref=e135]: Audit trail
+                        - paragraph [ref=e136]: действия журналируются
+                      - generic [ref=e137]:
+                        - generic [ref=e139]: Citations
+                        - paragraph [ref=e140]: источники видимы
+                - generic [ref=e141]:
+                  - generic [ref=e142]:
+                    - paragraph [ref=e143]: Запрос оператора
+                    - generic [ref=e144]: audit trail
+                  - generic [ref=e145]: Как восстановить доступ в ERP и сохранить историю действий?
+                  - generic [ref=e147]:
+                    - generic [ref=e148]: ERP policy
+                    - generic [ref=e149]: RBAC
+                    - generic [ref=e150]: KB article 41
+              - generic [ref=e155]:
+                - generic [ref=e156]:
+                  - paragraph [ref=e157]: Статус контура
+                  - generic [ref=e158]:
+                    - generic [ref=e159]:
+                      - generic [ref=e160]: Контур
+                      - generic [ref=e161]: активен
+                    - generic [ref=e162]:
+                      - generic [ref=e163]: Режим
+                      - generic [ref=e164]: mission ready
+                    - generic [ref=e165]:
+                      - generic [ref=e166]: Среда
+                      - generic [ref=e167]: private deployment
+                - generic [ref=e168]:
+                  - paragraph [ref=e169]: Источники
+                  - generic [ref=e170]:
+                    - generic [ref=e171]: DMS
+                    - generic [ref=e172]: CRM
+                    - generic [ref=e173]: Confluence
+                    - generic [ref=e174]: SharePoint
+                - generic [ref=e175]:
+                  - paragraph [ref=e176]: Режим запуска
+                  - generic [ref=e177]:
+                    - generic [ref=e178]: Cloud ready
+                    - generic [ref=e179]: On-prem ready
+                    - generic [ref=e180]: Hybrid ready
+    - generic [ref=e184]:
+      - generic [ref=e185]:
+        - generic [ref=e186]:
+          - paragraph [ref=e187]: Контур доверия
+          - paragraph [ref=e188]: Для команд, которым нужен не demo-бот, а управляемый запуск AI рядом с корпоративными системами и правилами доступа.
+        - generic [ref=e189]:
+          - generic [ref=e191]: Верховный суд
+          - generic [ref=e194]: МТС
+          - generic [ref=e197]: ДИТ Москвы
+          - generic [ref=e200]: Татарстан
+          - generic [ref=e203]: Промомед
+          - generic [ref=e206]: Нефтиса
+      - generic [ref=e207]:
+        - generic [ref=e208]:
+          - paragraph [ref=e209]: Контур запуска
+          - paragraph [ref=e210]: Cloud / On-prem / Hybrid
+        - generic [ref=e211]:
+          - paragraph [ref=e212]: Уровень контроля
+          - paragraph [ref=e213]: RBAC, аудит, политики, лимиты
+        - generic [ref=e214]:
+          - paragraph [ref=e215]: Подключения
+          - paragraph [ref=e216]: LLM, DMS, CRM, ERP, IAM, телефония
+    - generic [ref=e218]:
+      - generic [ref=e220]:
+        - paragraph [ref=e221]: Архитектура
+        - heading "Не ещё один AI-бот, а полноценный control plane поверх вашего стека." [level=2] [ref=e222]
+        - paragraph [ref=e223]: "Главное здесь не количество слов, а предсказуемость конструкции: источники, сценарии, контроль и каналы живут в одной системе."
+      - generic [ref=e224]:
+        - generic [ref=e226]:
+          - generic [ref=e227]:
+            - generic [ref=e228]:
+              - paragraph [ref=e229]: Контур платформы
+              - heading "Четыре слоя, которые держат запуск в production-режиме." [level=3] [ref=e230]
+            - generic [ref=e231]: stack visible
+          - generic [ref=e232]:
+            - generic [ref=e234]:
+              - generic [ref=e235]:
+                - paragraph [ref=e236]: Слой 01
+                - paragraph [ref=e237]: Инфраструктура и модели
+                - paragraph [ref=e238]: LLM, on-prem и отечественные модели, векторные базы и корпоративные API.
+              - generic [ref=e239]:
+                - generic [ref=e240]: LLM
+                - generic [ref=e241]: On-prem модели
+                - generic [ref=e242]: Отечественные модели
+                - generic [ref=e243]: Vector DB
+            - generic [ref=e245]:
+              - generic [ref=e246]:
+                - paragraph [ref=e247]: Слой 02
+                - paragraph [ref=e248]: Сервисы Unica
+                - paragraph [ref=e249]: RAG, OCR, ASR, слой знаний, оркестрация, навыки и маршрутизация.
+              - generic [ref=e250]:
+                - generic [ref=e251]: RAG
+                - generic [ref=e252]: OCR
+                - generic [ref=e253]: ASR
+                - generic [ref=e254]: Knowledge layer
+            - generic [ref=e256]:
+              - generic [ref=e257]:
+                - paragraph [ref=e258]: Слой 03
+                - paragraph [ref=e259]: Бизнес-логика и контроль
+                - paragraph [ref=e260]: Workflow, автоматизация, роли, правила, аудит и мониторинг.
+              - generic [ref=e261]:
+                - generic [ref=e262]: Workflow
+                - generic [ref=e263]: Automation
+                - generic [ref=e264]: Rules
+                - generic [ref=e265]: Roles
+            - generic [ref=e267]:
+              - generic [ref=e268]:
+                - paragraph [ref=e269]: Слой 04
+                - paragraph [ref=e270]: Пользователи и каналы
+                - paragraph [ref=e271]: Сотрудники, сервисные команды, руководители, контакт-центр, web UI, чаты и телефония.
+              - generic [ref=e272]:
+                - generic [ref=e273]: Сотрудники
+                - generic [ref=e274]: Сервисные команды
+                - generic [ref=e275]: Руководители
+                - generic [ref=e276]: Контакт-центр
+        - generic [ref=e277]:
+          - generic [ref=e279]:
+            - paragraph [ref=e280]: Ядро запуска
+            - generic [ref=e281]:
+              - generic [ref=e282]:
+                - generic [ref=e283]: "01"
+                - generic [ref=e284]:
+                  - paragraph [ref=e285]: Контекст
+                  - paragraph [ref=e286]: Поднимает документы, базы знаний, звонки и CRM в единый слой контекста.
+              - generic [ref=e287]:
+                - generic [ref=e288]: "02"
+                - generic [ref=e289]:
+                  - paragraph [ref=e290]: Оркестрация
+                  - paragraph [ref=e291]: Собирает сценарий из retrieval, навыков, агентов, правил и действий.
+              - generic [ref=e292]:
+                - generic [ref=e293]: "03"
+                - generic [ref=e294]:
+                  - paragraph [ref=e295]: Контроль
+                  - paragraph [ref=e296]: Оставляет AI под наблюдением ИТ, ИБ и бизнеса.
+          - generic [ref=e298]:
+            - paragraph [ref=e299]: Подключения
+            - generic [ref=e300]:
+              - generic [ref=e301]:
+                - paragraph [ref=e302]: Модели и вычисления
+                - generic [ref=e303]:
+                  - generic [ref=e304]: Open-source LLM
+                  - generic [ref=e305]: On-prem
+                  - generic [ref=e306]: Отечественные модели
+              - generic [ref=e307]:
+                - paragraph [ref=e308]: Знания и хранилища
+                - generic [ref=e309]:
+                  - generic [ref=e310]: DMS
+                  - generic [ref=e311]: SharePoint
+                  - generic [ref=e312]: Confluence
+              - generic [ref=e313]:
+                - paragraph [ref=e314]: Корпоративные системы
+                - generic [ref=e315]:
+                  - generic [ref=e316]: CRM
+                  - generic [ref=e317]: ERP
+                  - generic [ref=e318]: Service Desk
+              - generic [ref=e319]:
+                - paragraph [ref=e320]: Доступ и коммуникации
+                - generic [ref=e321]:
+                  - generic [ref=e322]: IAM
+                  - generic [ref=e323]: SSO
+                  - generic [ref=e324]: Телефония
+    - generic [ref=e326]:
+      - generic [ref=e328]:
+        - paragraph [ref=e329]: Сценарии запуска
+        - heading "Показываем три рабочих сценария, а не бесконечный список обещаний." [level=2] [ref=e330]
+        - paragraph [ref=e331]: "Каждый сценарий оформлен как продуктовый блок: короткий смысл, два ключевых эффекта и понятная механика внутри."
+      - generic [ref=e332]:
+        - article [ref=e334]:
+          - generic [ref=e335]:
+            - paragraph [ref=e336]: Сценарий 01
+            - generic [ref=e337]: Быстрый входной сценарий.
+          - heading "Внутренний поиск по знаниям и регламентам" [level=3] [ref=e338]
+          - paragraph [ref=e339]: Ответы по вашим документам и базам знаний, а не по догадкам модели.
+          - generic [ref=e340]:
+            - generic [ref=e341]: Ответы со ссылками на документы
+            - generic [ref=e342]: Контроль ролей и прав доступа
+          - generic [ref=e344]:
+            - generic [ref=e345]:
+              - generic [ref=e346]: "01"
+              - generic [ref=e347]:
+                - paragraph [ref=e348]: Источники
+                - paragraph [ref=e349]: DMS, SharePoint, Confluence, CRM.
+            - generic [ref=e350]:
+              - generic [ref=e351]: "02"
+              - generic [ref=e352]:
+                - paragraph [ref=e353]: RAG
+                - paragraph [ref=e354]: Релевантные фрагменты и проверка доступа.
+            - generic [ref=e355]:
+              - generic [ref=e356]: "03"
+              - generic [ref=e357]:
+                - paragraph [ref=e358]: Ответ
+                - paragraph [ref=e359]: Короткий вывод, источник и следующий шаг.
+        - article [ref=e361]:
+          - generic [ref=e362]:
+            - paragraph [ref=e363]: Сценарий 02
+            - generic [ref=e364]: Меньше нагрузки на первую линию.
+          - heading "Ассистент сервис-деска и первой линии" [level=3] [ref=e365]
+          - paragraph [ref=e366]: Подсказывает оператору и эскалирует дальше только нужные кейсы.
+          - generic [ref=e367]:
+            - generic [ref=e368]: Маршрутизация по типу задачи и приоритету
+            - generic [ref=e369]: Прозрачная эскалация и журнал действий
+          - generic [ref=e371]:
+            - generic [ref=e372]:
+              - generic [ref=e373]: "01"
+              - generic [ref=e374]:
+                - paragraph [ref=e375]: Входящие
+                - paragraph [ref=e376]: Письма, чаты, формы и service desk.
+            - generic [ref=e377]:
+              - generic [ref=e378]: "02"
+              - generic [ref=e379]:
+                - paragraph [ref=e380]: Подсказка
+                - paragraph [ref=e381]: Решение, класс обращения и маршрут.
+            - generic [ref=e382]:
+              - generic [ref=e383]: "03"
+              - generic [ref=e384]:
+                - paragraph [ref=e385]: Эскалация
+                - paragraph [ref=e386]: Контекст и черновик ответа уходят дальше.
+        - article [ref=e388]:
+          - generic [ref=e389]:
+            - paragraph [ref=e390]: Сценарий 03
+            - generic [ref=e391]: Убирает ручную обработку.
+          - heading "Извлечение данных из документов" [level=3] [ref=e392]
+          - paragraph [ref=e393]: OCR и классификация превращают документы в структурированные данные.
+          - generic [ref=e394]:
+            - generic [ref=e395]: PDF, сканы и шаблонные формы
+            - generic [ref=e396]: Передача результата в workflow, CRM, ECM или ERP
+          - generic [ref=e398]:
+            - generic [ref=e399]:
+              - generic [ref=e400]: "01"
+              - generic [ref=e401]:
+                - paragraph [ref=e402]: Приём
+                - paragraph [ref=e403]: Документы попадают в защищённый pipeline.
+            - generic [ref=e404]:
+              - generic [ref=e405]: "02"
+              - generic [ref=e406]:
+                - paragraph [ref=e407]: OCR
+                - paragraph [ref=e408]: Поля, тип документа и обязательные признаки.
+            - generic [ref=e409]:
+              - generic [ref=e410]: "03"
+              - generic [ref=e411]:
+                - paragraph [ref=e412]: Передача
+                - paragraph [ref=e413]: Результат уходит в систему учёта или workflow.
+    - generic [ref=e415]:
+      - generic [ref=e417]:
+        - paragraph [ref=e418]: Контур запуска
+        - heading "Модель поставки выбирается под вашу среду, а не под чужой шаблон." [level=2] [ref=e419]
+        - paragraph [ref=e420]: Cloud, on-prem и hybrid остаются частью одного интерфейса управления без раздвоения продукта.
+      - generic [ref=e421]:
+        - generic [ref=e423]:
+          - paragraph [ref=e424]: Режимы развёртывания
+          - generic [ref=e425]:
+            - generic [ref=e427]:
+              - paragraph [ref=e428]: Cloud
+              - paragraph [ref=e429]: Быстрый старт без тяжёлой инфраструктурной фазы.
+            - generic [ref=e431]:
+              - paragraph [ref=e432]: On-prem
+              - paragraph [ref=e433]: Для закрытого контура и контроля инфраструктуры.
+            - generic [ref=e435]:
+              - paragraph [ref=e436]: Hybrid
+              - paragraph [ref=e437]: Для смешанного ландшафта и поэтапного запуска.
+        - generic [ref=e440]:
+          - generic [ref=e441]:
+            - paragraph [ref=e442]: Операционный контроль
+            - generic [ref=e443]:
+              - generic [ref=e444]:
+                - generic [ref=e445]: Источники
+                - generic [ref=e446]: под контролем
+              - generic [ref=e447]:
+                - generic [ref=e448]: Маршруты
+                - generic [ref=e449]: под наблюдением
+              - generic [ref=e450]:
+                - generic [ref=e451]: Роли и доступ
+                - generic [ref=e452]: применяются
+              - generic [ref=e453]:
+                - generic [ref=e454]: Аудит
+                - generic [ref=e455]: включён
+          - generic [ref=e456]:
+            - paragraph [ref=e457]: Блок контроля
+            - generic [ref=e458]:
+              - generic [ref=e461]: RBAC и разграничение доступа по ролям
+              - generic [ref=e464]: Журналы действий, запросов и результатов
+              - generic [ref=e467]: Контроль источников, маршрутов и политик ответа
+              - generic [ref=e470]: Лимиты потребления и наблюдаемость по сценариям
+    - generic [ref=e475]:
+      - generic [ref=e476]:
+        - paragraph [ref=e477]: Стоимость
+        - heading "Старт без лишней кастомной сборки." [level=2] [ref=e478]
+        - paragraph [ref=e479]: Стоимость зависит от модели поставки, модулей, интеграций и требований к безопасности.
+      - generic [ref=e480]:
+        - generic [ref=e481]:
+          - paragraph [ref=e482]: Базовый запуск
+          - paragraph [ref=e483]: от 650 000 ₽ / год
+          - paragraph [ref=e484]: Для первого управляемого сценария, пилота и быстрой проверки архитектуры на реальном контуре.
+        - generic [ref=e485]:
+          - paragraph [ref=e486]: Enterprise-контур
+          - paragraph [ref=e487]: от 4,5 млн ₽ / год
+          - paragraph [ref=e488]: Для закрытых сред, сложных интеграций, расширенных модулей и требований к безопасности.
+    - generic [ref=e489]:
+      - generic [ref=e490]:
+        - generic [ref=e492]:
+          - generic [ref=e493]:
+            - paragraph [ref=e494]: Запросить демо
+            - heading "Покажите процесс и ограничения. Мы соберём следующий шаг." [level=2] [ref=e495]
+            - paragraph [ref=e496]: Нам нужен только контур запуска, ключевой сценарий и ограничения по среде.
+          - generic [ref=e497]:
+            - paragraph [ref=e499]: "Определим, где должен жить контур: cloud, on-prem или hybrid."
+            - paragraph [ref=e501]: Предложим формат пилота и следующий шаг для ИТ, ИБ и бизнеса.
+        - generic [ref=e505]:
+          - paragraph [ref=e506]: Запрос на демо
+          - heading "Покажите процесс, контур и ограничения." [level=3] [ref=e507]
+          - paragraph [ref=e508]: Этого достаточно, чтобы предложить формат пилота, набор интеграций и следующий шаг без длинного брифа.
+          - generic [ref=e509]:
+            - generic [ref=e510]:
+              - text: Имя
+              - textbox "Имя" [ref=e511]:
+                - /placeholder: Например, Антон
+            - generic [ref=e512]:
+              - text: Компания
+              - textbox "Компания" [ref=e513]:
+                - /placeholder: Название компании
+            - generic [ref=e514]:
+              - text: Контакт
+              - textbox "Контакт" [ref=e515]:
+                - /placeholder: Email, телефон или Telegram
+            - generic [ref=e516]:
+              - text: Контур запуска
+              - generic [ref=e517]:
+                - generic [ref=e518] [cursor=pointer]:
+                  - radio "Cloud Для быстрого пилота и первого запуска." [checked] [ref=e519]
+                  - generic [ref=e521]:
+                    - generic [ref=e522]: Cloud
+                    - generic [ref=e523]: Для быстрого пилота и первого запуска.
+                - generic [ref=e524] [cursor=pointer]:
+                  - radio "On-prem Для закрытого контура и контроля инфраструктуры." [ref=e525]
+                  - generic [ref=e527]:
+                    - generic [ref=e528]: On-prem
+                    - generic [ref=e529]: Для закрытого контура и контроля инфраструктуры.
+                - generic [ref=e530] [cursor=pointer]:
+                  - radio "Hybrid Для смешанного ландшафта и поэтапного развёртывания." [ref=e531]
+                  - generic [ref=e533]:
+                    - generic [ref=e534]: Hybrid
+                    - generic [ref=e535]: Для смешанного ландшафта и поэтапного развёртывания.
+            - generic [ref=e536]:
+              - text: Сценарий или задача
+              - textbox "Сценарий или задача" [ref=e537]:
+                - /placeholder: "Например: внутренний поиск по базе знаний, сервис-деск, документы, контакт-центр, on-prem, требования ИБ."
+          - generic [ref=e538]:
+            - button "Запросить демо" [ref=e539]
+            - 'link "Или написать напрямую: sales@unica.local" [ref=e540] [cursor=pointer]':
+              - /url: mailto:sales@unica.local
+          - paragraph [ref=e541]: Ответим с вариантом пилота, контуром запуска и следующими шагами.
+      - generic [ref=e542]:
+        - generic [ref=e544]:
+          - paragraph [ref=e545]: FAQ
+          - heading "То, что обычно спрашивают до первого звонка." [level=2] [ref=e546]
+          - paragraph [ref=e547]: Коротко закрываем базовые вопросы по контуру, моделям и стоимости.
+        - generic [ref=e548]:
+          - group [ref=e549]:
+            - generic "Чем Unica отличается от корпоративного чат-бота? +" [ref=e550] [cursor=pointer]:
+              - generic [ref=e551]: Чем Unica отличается от корпоративного чат-бота?
+              - generic [ref=e552]: +
+          - group [ref=e553]:
+            - generic "Можно ли развернуть Unica on-prem? +" [ref=e554] [cursor=pointer]:
+              - generic [ref=e555]: Можно ли развернуть Unica on-prem?
+              - generic [ref=e556]: +
+          - group [ref=e557]:
+            - generic "Можно ли использовать разные модели? +" [ref=e558] [cursor=pointer]:
+              - generic [ref=e559]: Можно ли использовать разные модели?
+              - generic [ref=e560]: +
+          - group [ref=e561]:
+            - generic "Как контролируется качество ответа? +" [ref=e562] [cursor=pointer]:
+              - generic [ref=e563]: Как контролируется качество ответа?
+              - generic [ref=e564]: +
+          - group [ref=e565]:
+            - generic "Как считается стоимость? +" [ref=e566] [cursor=pointer]:
+              - generic [ref=e567]: Как считается стоимость?
+              - generic [ref=e568]: +
+          - group [ref=e569]:
+            - generic "С чего лучше начать? +" [ref=e570] [cursor=pointer]:
+              - generic [ref=e571]: С чего лучше начать?
+              - generic [ref=e572]: +

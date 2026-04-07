@@ -1,0 +1,622 @@
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="page" pagePath="page.tsx">
+      <SegmentTrieNode>
+      <Home>
+        <header>
+        <main className="relative o...">
+          <HeroSection>
+          <section>
+          <section>
+          <section>
+          <section>
+          <ClosingSection>
+            <section>
+            <section id="lead-form" className="scroll-mt-...">
+              <div className="page-shell...">
+                <Reveal>
+                <Reveal delay={0.12}>
+                  <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true, ...}} ...>
+                    <div style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <LeadForm>
+                        <form className="section-pl..." onSubmit={function onSubmit}>
+                          <div>
+                          <div className="relative">
+                            <p>
+                            <h3>
+                            <p>
+                            <div className="mt-8 grid ...">
+                              <Field label="Имя" name="name" placeholder="Например, ..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="name"
+                                    name="name"
+                                    required={true}
+                                    placeholder="Например, Антон"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <Field label="Компания" name="company" placeholder="Название к..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="company"
+                                    name="company"
+                                    required={true}
+                                    placeholder="Название компании"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <Field label="Контакт" name="contact" placeholder="Email, тел..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="contact"
+                                    name="contact"
+                                    required={true}
+                                    placeholder="Email, телефон или Telegram"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <div className="space-y-3 ...">
+                                <span>
+                                <div className="grid gap-2...">
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="cloud"
+                                      defaultChecked={true}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="on-prem"
+                                      defaultChecked={false}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="hybrid"
+                                      defaultChecked={false}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                              <div className="space-y-2 ...">
+                                <label>
+                                <textarea
+                                  id="message"
+                                  name="message"
+                                  rows={6}
+                                  className="form-field resize-none"
+                                  placeholder="Например: внутренний поиск по базе знаний, сервис-деск, документы, конт..."
+-                                 style={{caret-color:"transparent"}}
+                                >
+                            ...
+              ...
+ 
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  2 | import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pric...
+  3 | import { ClosingSection } from "@/components/landing/sections/closing-section";
+> 4 | import { HeroSection } from "@/components/landing/sections/hero-section";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-se...
+  6 | import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
+  7 | import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  2 | import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pric...
+  3 | import { ClosingSection } from "@/components/landing/sections/closing-section";
+> 4 | import { HeroSection } from "@/components/landing/sections/hero-section";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-se...
+  6 | import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
+  7 | import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  2 | import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pric...
+  3 | import { ClosingSection } from "@/components/landing/sections/closing-section";
+> 4 | import { HeroSection } from "@/components/landing/sections/hero-section";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-se...
+  6 | import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
+  7 | import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+⨯ ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  [90m2 |[0m [36mimport[0m { [33mArchitecturePricingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/architecture-pric...[0m
+  [90m3 |[0m [36mimport[0m { [33mClosingSection[0m } [36mfrom[0m [32m"@/components/landing/sections/closing-section"[0m;
+[31m[1m>[0m [90m4 |[0m [36mimport[0m { [33mHeroSection[0m } [36mfrom[0m [32m"@/components/landing/sections/hero-section"[0m;
+  [90m  |[0m [31m[1m^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^[0m
+  [90m5 |[0m [36mimport[0m { [33mPlatformSecuritySection[0m } [36mfrom[0m [32m"@/components/landing/sections/platform-security-se...[0m
+  [90m6 |[0m [36mimport[0m { [33mTrustPainSection[0m } [36mfrom[0m [32m"@/components/landing/sections/trust-pain-section"[0m;
+  [90m7 |[0m [36mimport[0m { [33mUseCasesSection[0m } [36mfrom[0m [32m"@/components/landing/sections/use-cases-section"[0m;
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+[browser] Uncaught Error: ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  2 | import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pric...
+  3 | import { ClosingSection } from "@/components/landing/sections/closing-section";
+> 4 | import { HeroSection } from "@/components/landing/sections/hero-section";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-se...
+  6 | import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
+  7 | import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+
+https://nextjs.org/docs/messages/module-not-found
+
+
+    at <unknown> (Error: ./src/app/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+    at <unknown> (Error: (./src/app/page.tsx:4:1)
+    at <unknown> (https://nextjs.org/docs/messages/module-not-found)
+[browser] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  2 | import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pric...
+  3 | import { ClosingSection } from "@/components/landing/sections/closing-section";
+> 4 | import { HeroSection } from "@/components/landing/sections/hero-section";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-se...
+  6 | import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
+  7 | import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  2 | import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pric...
+  3 | import { ClosingSection } from "@/components/landing/sections/closing-section";
+> 4 | import { HeroSection } from "@/components/landing/sections/hero-section";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-se...
+  6 | import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
+  7 | import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] ./src/app/page.tsx:4:1
+Module not found: Can't resolve '@/components/landing/sections/hero-section'
+  2 | import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pric...
+  3 | import { ClosingSection } from "@/components/landing/sections/closing-section";
+> 4 | import { HeroSection } from "@/components/landing/sections/hero-section";
+    | ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  5 | import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-se...
+  6 | import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
+  7 | import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+
+Import map: aliased to relative './src/components/landing/sections/hero-section' inside of [project]/
+
+https://nextjs.org/docs/messages/module-not-found 
+[browser] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+https://react.dev/link/hydration-mismatch
+
+  ...
+    <SegmentViewNode type="page" pagePath="page.tsx">
+      <SegmentTrieNode>
+      <Home>
+        <header>
+        <main className="relative o...">
+          <HeroSection>
+          <section>
+          <section>
+          <section>
+          <section>
+          <ClosingSection>
+            <section>
+            <section id="lead-form" className="scroll-mt-...">
+              <div className="page-shell...">
+                <Reveal>
+                <Reveal delay={0.12}>
+                  <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true, ...}} ...>
+                    <div style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <LeadForm>
+                        <form className="section-pl..." onSubmit={function onSubmit}>
+                          <div>
+                          <div className="relative">
+                            <p>
+                            <h3>
+                            <p>
+                            <div className="mt-8 grid ...">
+                              <Field label="Имя" name="name" placeholder="Например, ..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="name"
+                                    name="name"
+                                    required={true}
+                                    placeholder="Например, Антон"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <Field label="Компания" name="company" placeholder="Название к..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="company"
+                                    name="company"
+                                    required={true}
+                                    placeholder="Название компании"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <Field label="Контакт" name="contact" placeholder="Email, тел..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="contact"
+                                    name="contact"
+                                    required={true}
+                                    placeholder="Email, телефон или Telegram"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <div className="space-y-3 ...">
+                                <span>
+                                <div className="grid gap-2...">
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="cloud"
+                                      defaultChecked={true}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="on-prem"
+                                      defaultChecked={false}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="hybrid"
+                                      defaultChecked={false}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                              <div className="space-y-2 ...">
+                                <label>
+                                <textarea
+                                  id="message"
+                                  name="message"
+                                  rows={6}
+                                  className="form-field resize-none"
+                                  placeholder="Например: внутренний поиск по базе знаний, сервис-деск, документы, конт..."
+-                                 style={{caret-color:"transparent"}}
+                                >
+                            ...
+              ...
+ 

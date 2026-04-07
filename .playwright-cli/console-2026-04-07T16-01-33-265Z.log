@@ -1,0 +1,124 @@
+[     150ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     355ms] [LOG] [Fast Refresh] done in 310ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     519ms] [INFO] %cDownload the React DevTools for a better development experience: https://react.dev/link/react-devtools font-weight:bold @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     559ms] [LOG] [HMR] connected @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[     748ms] [ERROR] A tree hydrated but some attributes of the server rendered HTML didn't match the client properties. This won't be patched up. This can happen if a SSR-ed Client Component used:
+
+- A server/client branch `if (typeof window !== 'undefined')`.
+- Variable input such as `Date.now()` or `Math.random()` which changes each time it's called.
+- Date formatting in a user's locale which doesn't match the server.
+- External changing data without sending a snapshot of it along with the HTML.
+- Invalid HTML tag nesting.
+
+It can also happen if the client has a browser extension installed which messes with the HTML before React loaded.
+
+%s%s https://react.dev/link/hydration-mismatch 
+
+  ...
+    <SegmentViewNode type="page" pagePath="page.tsx">
+      <SegmentTrieNode>
+      <Home>
+        <header>
+        <main className="relative o...">
+          <HeroSection>
+          <section>
+          <section>
+          <section>
+          <section>
+          <ClosingSection>
+            <section>
+            <section id="lead-form" className="scroll-mt-...">
+              <div className="page-shell...">
+                <Reveal>
+                <Reveal delay={0.12}>
+                  <motion.div initial={{opacity:0,y:24}} whileInView={{opacity:1,y:0}} viewport={{once:true, ...}} ...>
+                    <div style={{opacity:0, ...}} ref={function useMotionRef.useCallback}>
+                      <LeadForm>
+                        <form className="section-pl..." onSubmit={function onSubmit}>
+                          <div>
+                          <div className="relative">
+                            <p>
+                            <h3>
+                            <p>
+                            <div className="mt-8 grid ...">
+                              <Field label="Имя" name="name" placeholder="Например, ..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="name"
+                                    name="name"
+                                    required={true}
+                                    placeholder="Например, Антон"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <Field label="Компания" name="company" placeholder="Название к..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="company"
+                                    name="company"
+                                    required={true}
+                                    placeholder="Название компании"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <Field label="Контакт" name="contact" placeholder="Email, тел..." required={true}>
+                                <div className="space-y-2">
+                                  <label>
+                                  <input
+                                    id="contact"
+                                    name="contact"
+                                    required={true}
+                                    placeholder="Email, телефон или Telegram"
+                                    className="form-field"
+-                                   style={{caret-color:"transparent"}}
+                                  >
+                              <div className="space-y-3 ...">
+                                <span>
+                                <div className="grid gap-2...">
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="cloud"
+                                      defaultChecked={true}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="on-prem"
+                                      defaultChecked={false}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                                  <label className="cursor-poi...">
+                                    <input
+                                      type="radio"
+                                      name="deliveryModel"
+                                      value="hybrid"
+                                      defaultChecked={false}
+                                      className="peer sr-only"
+-                                     style={{caret-color:"transparent"}}
+                                    >
+                                    ...
+                              <div className="space-y-2 ...">
+                                <label>
+                                <textarea
+                                  id="message"
+                                  name="message"
+                                  rows={6}
+                                  className="form-field resize-none"
+                                  placeholder="Например: внутренний поиск по базе знаний, сервис-деск, документы, конт..."
+-                                 style={{caret-color:"transparent"}}
+                                >
+                            ...
+              ...
+ @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:3272
+[   41909ms] [LOG] [Fast Refresh] rebuilding @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431
+[   41977ms] [LOG] [Fast Refresh] done in 132ms @ http://localhost:3000/_next/static/chunks/node_modules_next_dist_115brz8._.js:2431

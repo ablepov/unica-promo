@@ -1,0 +1,26 @@
+
+> unica-promo@0.1.0 dev
+> next dev
+
+▲ Next.js 16.2.2 (Turbopack)
+- Local:         http://localhost:3000
+- Network:       http://192.168.216.46:3000
+✓ Ready in 910ms
+Creating turbopack project { dir: 'C:\\repositories\\unica-promo', testMode: true }
+
+ GET / 200 in 946ms (next.js: 324ms, application-code: 622ms)
+ GET / 200 in 206ms (next.js: 8ms, application-code: 197ms)
+✓ Compiled in 74ms
+ GET / 200 in 339ms (next.js: 84ms, application-code: 255ms)
+✓ Compiled in 120ms
+ GET / 500 in 479ms (next.js: 254ms, application-code: 225ms)
+ GET / 500 in 31ms (next.js: 11ms, application-code: 20ms)
+ GET / 500 in 25ms (next.js: 11ms, application-code: 14ms)
+ GET / 500 in 30ms (next.js: 11ms, application-code: 19ms)
+✓ Compiled in 127ms
+ GET / 200 in 334ms (next.js: 74ms, application-code: 260ms)
+ GET / 200 in 210ms (next.js: 5ms, application-code: 205ms)
+ GET / 200 in 215ms (next.js: 4ms, application-code: 210ms)
+✓ Compiled in 87ms
+ GET / 200 in 347ms (next.js: 81ms, application-code: 267ms)
+✓ Compiled in 116ms
