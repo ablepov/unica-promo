@@ -13,10 +13,10 @@ export function ClosingSection() {
               <div className="grid gap-10 lg:grid-cols-[0.78fr_1.22fr] lg:items-end">
                 <div className="max-w-xl">
                   <p className="eyebrow">Стоимость</p>
-                  <h2 className="display-title mt-4 text-[2.7rem] leading-[0.95] sm:text-[3.35rem]">
-                    Старт не должен превращаться в отдельный проект по сборке AI.
+                  <h2 className="display-title mt-4 text-[2.3rem] leading-[0.95] sm:text-[3rem]">
+                    Старт без лишней кастомной сборки.
                   </h2>
-                  <p className="mt-5 text-base leading-8 text-[var(--muted-strong)]">
+                  <p className="mt-4 text-[0.98rem] leading-7 text-[var(--muted-strong)]">
                     {pricingNote}
                   </p>
                 </div>
@@ -46,8 +46,8 @@ export function ClosingSection() {
             <div className="lg:pr-8">
               <SectionHeading
                 label="Запросить демо"
-                title="Покажите процесс, контур и ограничения. Мы соберём следующий шаг."
-                description="Первая задача лендинга проста: быстро собрать корректный enterprise-лид без маркетингового шума и лишнего трения на входе."
+                title="Покажите процесс и ограничения. Мы соберём следующий шаг."
+                description="Нам нужен только контур запуска, ключевой сценарий и ограничения по среде."
               />
               <div className="mt-10 space-y-4">
                 {ctaPoints.map((item) => (
@@ -68,8 +68,8 @@ export function ClosingSection() {
           <Reveal>
             <SectionHeading
               label="FAQ"
-              title="Ключевые вопросы, которые обычно звучат до первого звонка."
-              description="Эта часть снимает базовые enterprise-возражения ещё до разговора с менеджером."
+              title="То, что обычно спрашивают до первого звонка."
+              description="Коротко закрываем базовые вопросы по контуру, моделям и стоимости."
             />
           </Reveal>
 

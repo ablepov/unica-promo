@@ -1,6 +1,6 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, Onest, Prata } from "next/font/google";
+import { Geologica, IBM_Plex_Mono, Onest } from "next/font/google";
 import "./globals.css";
 
 const onest = Onest({
@@ -9,10 +9,10 @@ const onest = Onest({
   weight: ["400", "500", "600", "700"],
 });
 
-const prata = Prata({
-  variable: "--font-prata",
+const geologica = Geologica({
+  variable: "--font-geologica",
   subsets: ["latin", "cyrillic"],
-  weight: "400",
+  weight: ["500", "600", "700"],
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -35,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${onest.variable} ${prata.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${onest.variable} ${geologica.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
