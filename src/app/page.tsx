@@ -42,8 +42,96 @@ const faq = [
   ["С чего лучше начать?", "Обычно — с одного или нескольких сценариев с быстрым эффектом: внутренний поиск, документы, service desk, речевая аналитика или автоматизация рутинных задач."],
 ] as const;
 
+const heroIntegrations = [
+  ["github", "GitHub"],
+  ["drive", "Google Drive"],
+  ["slack", "Slack"],
+] as const;
+
+const heroStackCards = [
+  ["active", "incident", "Data Layer", "DMS / CRM / ERP", "Документы, знания и рабочий контекст."],
+  ["muted", "target", "Governance", "RBAC / Policies / Audit", "Прозрачный путь от источника к результату."],
+  ["muted", "panel", "Orchestration", "Skills / Routing / Actions", "Сценарии и workflow между шагами процесса."],
+  ["muted", "panel", "Channels", "Search / UI / Voice / API", "Единый контур для сотрудников и сервисов."],
+] as const;
+
+const heroChecklist = [
+  "Cloud, on-prem и hybrid",
+  "RBAC, audit log и policy layer",
+  "RAG, OCR, ASR, skills и workflow",
+  "CRM, ERP, IAM, DMS, API и contact center",
+] as const;
+
 function Label({ children }: { children: string }) {
   return <p className="section-label">{children}</p>;
+}
+
+function HeroIcon({ kind }: { kind: "github" | "drive" | "slack" | "incident" | "target" | "panel" }) {
+  if (kind === "github") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M9 18c-3.5 1-3.5-2-5-2" />
+        <path d="M20 16.5v-2.3a4.1 4.1 0 0 0-1.1-2.85c1.05-3.2-.1-4.35-.1-4.35a3.4 3.4 0 0 0-2.4.95 11.8 11.8 0 0 0-6.8 0A3.4 3.4 0 0 0 7.2 7c0 .0-1.15 1.15-.1 4.35A4.1 4.1 0 0 0 6 14.2v2.3A2.5 2.5 0 0 0 8.5 19h7A2.5 2.5 0 0 0 18 16.5" />
+      </svg>
+    );
+  }
+
+  if (kind === "drive") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="m9 4 3 5.2-5.1 8.8H3.2L9 4Z" />
+        <path d="m15 4 5.8 10.1h-4.7L10.4 4H15Z" />
+        <path d="m7 18 2.3-3.9H21L18.7 18H7Z" />
+      </svg>
+    );
+  }
+
+  if (kind === "slack") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <path d="M8 4.5a2 2 0 1 1 4 0v3.25H8A2.25 2.25 0 0 1 8 4.5Z" />
+        <path d="M4.5 8a2 2 0 1 1 0 4h3.25V8A2.25 2.25 0 0 1 4.5 8Z" />
+        <path d="M16 19.5a2 2 0 1 1-4 0v-3.25h4A2.25 2.25 0 0 1 16 19.5Z" />
+        <path d="M19.5 16a2 2 0 1 1 0-4h-3.25v4A2.25 2.25 0 0 1 19.5 16Z" />
+        <path d="M16 4.5a2 2 0 1 0-4 0v3.25h4A2.25 2.25 0 0 0 16 4.5Z" />
+        <path d="M19.5 8a2 2 0 1 0 0 4h-3.25V8A2.25 2.25 0 0 0 19.5 8Z" />
+        <path d="M8 19.5a2 2 0 1 0 4 0v-3.25H8A2.25 2.25 0 0 0 8 19.5Z" />
+        <path d="M4.5 16a2 2 0 1 0 0-4h3.25v4A2.25 2.25 0 0 0 4.5 16Z" />
+      </svg>
+    );
+  }
+
+  if (kind === "incident") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="8" />
+        <path d="M12 8v4" />
+        <path d="M12 16h.01" />
+        <path d="m5.5 5.5 2.5 2.5" />
+        <path d="m16 16 2.5 2.5" />
+      </svg>
+    );
+  }
+
+  if (kind === "target") {
+    return (
+      <svg viewBox="0 0 24 24" aria-hidden="true">
+        <circle cx="12" cy="12" r="7.5" />
+        <circle cx="12" cy="12" r="3.5" />
+        <path d="M15.75 8.25 20 4" />
+        <path d="M16 4h4v4" />
+      </svg>
+    );
+  }
+
+  return (
+    <svg viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M5 6.5h14" />
+      <path d="M5 12h14" />
+      <path d="M5 17.5h9" />
+      <path d="M9 9.25v5.5" />
+    </svg>
+  );
 }
 
 export default function Home() {
@@ -82,31 +170,60 @@ export default function Home() {
           <div className="hero-layout">
             <div>
               <Label>Enterprise AI Platform</Label>
-              <p className="hero-kicker">Управляемый запуск AI в enterprise-контуре</p>
               <h1 className="hero-title">Unica — AI-платформа для управляемого запуска AI в enterprise-контуре</h1>
               <p className="hero-copy">
                 Не просто интерфейс к LLM, а единая enterprise AI-платформа, которая связывает
                 знания, документы, модели, orchestration, governance и бизнес-действия в рабочий контур.
               </p>
               <div className="hero-actions">
-                <a href="#contact" className="primary-button">Обсудить пилот</a>
-                <a href="#architecture" className="secondary-button">Посмотреть архитектуру</a>
-              </div>
-              <div className="hero-pills">
-                <span>Cloud, on-prem и hybrid</span>
-                <span>RBAC, audit log и policy layer</span>
-                <span>RAG, OCR, ASR, skills и workflow</span>
-                <span>CRM, ERP, IAM, DMS, API и contact center</span>
+                <a href="#contact" className="primary-button hero-button">
+                  <span>Запросить демо</span>
+                  <span className="button-arrow" aria-hidden="true">→</span>
+                </a>
+                <a href="#architecture" className="secondary-button hero-button">
+                  <span>Смотреть архитектуру</span>
+                </a>
               </div>
             </div>
 
             <div className="hero-visual">
-              <div className="orb orb-a" />
-              <div className="orb orb-b" />
-              <div className="orbital-card top-left"><small>Data Layer</small><strong>DMS / CRM / ERP</strong><p>Документы, знания и рабочий контекст.</p></div>
-              <div className="orbital-card top-right"><small>Governance</small><strong>RBAC / Policies / Audit</strong><p>Прозрачный путь от источника к результату.</p></div>
-              <div className="orbital-card bottom-left"><small>Orchestration</small><strong>Skills / Routing / Actions</strong><p>Сценарии и workflow между шагами процесса.</p></div>
-              <div className="orbital-card bottom-right"><small>Channels</small><strong>Search / UI / Voice / API</strong><p>Единый контур для сотрудников и сервисов.</p></div>
+              <div className="hero-visual-shell">
+                <div className="hero-orbit" />
+                <div className="hero-node-cluster">
+                  {heroIntegrations.map(([icon, label], index) => (
+                    <div key={label} className={`hero-node hero-node-${index + 1}`}>
+                      <div className="hero-node-icon">
+                        <HeroIcon kind={icon} />
+                      </div>
+                      <span className="sr-only">{label}</span>
+                    </div>
+                  ))}
+                </div>
+                <div className="hero-stack">
+                  {heroStackCards.map(([tone, icon, eyebrow, title, text], index) => (
+                    <article key={title} className={`hero-stack-card ${tone} card-${index + 1}`}>
+                      <div className="hero-stack-icon">
+                        <HeroIcon kind={icon} />
+                      </div>
+                      <div className="hero-stack-copy">
+                        <small>{eyebrow}</small>
+                        <strong>{title}</strong>
+                        <p>{text}</p>
+                      </div>
+                    </article>
+                  ))}
+                </div>
+                <article className="hero-query-card">
+                  <ul className="hero-query-list">
+                    {heroChecklist.map((item) => (
+                      <li key={item}>
+                        <span className="hero-check">✓</span>
+                        <span>{item}</span>
+                      </li>
+                    ))}
+                  </ul>
+                </article>
+              </div>
             </div>
           </div>
         </div>
