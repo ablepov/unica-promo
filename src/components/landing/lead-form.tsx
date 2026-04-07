@@ -69,7 +69,8 @@ export function LeadForm() {
             form.reset();
             setState({
               kind: "success",
-              message: "Заявка отправлена. Вернёмся с вариантом пилота и следующими шагами.",
+              message:
+                "Заявка отправлена. Вернёмся с вариантом пилота и следующими шагами.",
             });
           } catch (error) {
             setState({
@@ -85,16 +86,14 @@ export function LeadForm() {
         });
       }}
     >
-      <div className="absolute inset-0 bg-[radial-gradient(circle_at_88%_14%,rgba(115,179,255,0.16),transparent_22%),radial-gradient(circle_at_14%_88%,rgba(76,239,214,0.08),transparent_24%)]" />
+      <div className="absolute inset-0 bg-[radial-gradient(circle_at_86%_14%,rgba(200,146,62,0.12),transparent_22%),radial-gradient(circle_at_12%_86%,rgba(19,35,58,0.28),transparent_24%)]" />
 
       <div className="relative">
-        <p className="font-mono text-[11px] uppercase tracking-[0.3em] text-[var(--muted)]">
-          Request demo
-        </p>
-        <h3 className="mt-4 text-3xl leading-tight font-semibold tracking-[-0.04em] text-white">
-          Расскажите про процесс, контур и ограничения.
+        <p className="eyebrow">Запрос на демо</p>
+        <h3 className="display-title mt-4 text-[2.1rem] leading-[0.96] sm:text-[2.5rem]">
+          Покажите процесс, контур и ограничения.
         </h3>
-        <p className="mt-3 max-w-xl text-sm leading-7 text-[var(--muted-strong)]">
+        <p className="mt-4 max-w-xl text-sm leading-7 text-[var(--muted-strong)]">
           Этого достаточно, чтобы предложить формат пилота, набор интеграций и
           следующий шаг без длинного брифа.
         </p>
@@ -115,7 +114,7 @@ export function LeadForm() {
           />
 
           <div className="space-y-3 sm:col-span-2">
-            <span className="text-sm font-medium text-slate-100">
+            <span className="text-sm font-medium text-[var(--foreground)]">
               Контур запуска
             </span>
             <div className="grid gap-2 sm:grid-cols-3">
@@ -128,9 +127,9 @@ export function LeadForm() {
                     defaultChecked={index === 0}
                     className="peer sr-only"
                   />
-                  <span className="flex h-full rounded-[1.4rem] border border-white/10 bg-white/[0.025] px-4 py-4 text-left transition peer-checked:border-cyan-300/40 peer-checked:bg-cyan-400/[0.08] peer-checked:text-white hover:border-white/18">
+                  <span className="flex h-full rounded-[1.2rem] border border-[var(--line)] bg-[rgba(240,235,223,0.02)] px-4 py-4 text-left transition peer-checked:border-[var(--line-strong)] peer-checked:bg-[var(--accent-soft)] hover:border-[rgba(240,235,223,0.2)]">
                     <span>
-                      <span className="block text-sm font-semibold text-slate-100">
+                      <span className="block text-sm font-semibold text-[var(--foreground)]">
                         {option.label}
                       </span>
                       <span className="mt-1 block text-xs leading-5 text-[var(--muted)]">
@@ -144,7 +143,7 @@ export function LeadForm() {
           </div>
 
           <div className="space-y-2 sm:col-span-2">
-            <label htmlFor="message" className="text-sm font-medium text-slate-100">
+            <label htmlFor="message" className="text-sm font-medium text-[var(--foreground)]">
               Сценарий или задача
             </label>
             <textarea
@@ -163,7 +162,7 @@ export function LeadForm() {
           </button>
           <a
             href="mailto:sales@unica.local"
-            className="text-sm text-[var(--muted-strong)] underline decoration-white/10 underline-offset-4 hover:text-white"
+            className="text-sm text-[var(--muted-strong)] underline decoration-[rgba(240,235,223,0.2)] underline-offset-4 hover:text-[var(--foreground)]"
           >
             Или написать напрямую: sales@unica.local
           </a>
@@ -172,9 +171,9 @@ export function LeadForm() {
         <p
           className={`mt-5 text-sm leading-6 ${
             state.kind === "success"
-              ? "text-emerald-300"
+              ? "text-[var(--success)]"
               : state.kind === "error"
-                ? "text-rose-300"
+                ? "text-[var(--danger)]"
                 : "text-[var(--muted)]"
           }`}
           aria-live="polite"
@@ -199,7 +198,7 @@ function Field({
 }) {
   return (
     <div className="space-y-2">
-      <label htmlFor={name} className="text-sm font-medium text-slate-100">
+      <label htmlFor={name} className="text-sm font-medium text-[var(--foreground)]">
         {label}
       </label>
       <input

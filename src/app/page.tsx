@@ -13,9 +13,9 @@ export default function Home() {
       <main className="relative overflow-hidden">
         <HeroSection />
         <TrustPainSection />
+        <ArchitecturePricingSection />
         <UseCasesSection />
         <PlatformSecuritySection />
-        <ArchitecturePricingSection />
         <ClosingSection />
       </main>
     </>

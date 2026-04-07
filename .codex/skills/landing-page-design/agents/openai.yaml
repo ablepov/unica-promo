@@ -1,0 +1,4 @@
+interface:
+  display_name: "Landing Page Design"
+  short_description: "Distinctive, conversion-focused landing pages"
+  default_prompt: "Use $landing-page-design to create a distinctive, conversion-focused landing page for my product."

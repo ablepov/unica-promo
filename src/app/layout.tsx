@@ -1,12 +1,18 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { IBM_Plex_Mono, IBM_Plex_Sans } from "next/font/google";
+import { IBM_Plex_Mono, Onest, Prata } from "next/font/google";
 import "./globals.css";
 
-const ibmPlexSans = IBM_Plex_Sans({
-  variable: "--font-ibm-plex-sans",
+const onest = Onest({
+  variable: "--font-onest",
   subsets: ["latin", "cyrillic"],
   weight: ["400", "500", "600", "700"],
+});
+
+const prata = Prata({
+  variable: "--font-prata",
+  subsets: ["latin", "cyrillic"],
+  weight: "400",
 });
 
 const ibmPlexMono = IBM_Plex_Mono({
@@ -16,9 +22,9 @@ const ibmPlexMono = IBM_Plex_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Unica AI | Корпоративная AI-платформа для управляемого запуска AI",
+  title: "Unica AI | Управляемый запуск AI в enterprise-контуре",
   description:
-    "Unica — корпоративная AI-платформа для запуска AI в защищённом контуре: cloud, on-prem, аудит, роли, оркестрация, документы, знания и интеграции.",
+    "Unica — enterprise AI-платформа для управляемого запуска AI-сценариев: cloud, on-prem, роли, аудит, оркестрация, документы, знания и интеграции.",
 };
 
 export default function RootLayout({
@@ -29,7 +35,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${ibmPlexSans.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${onest.variable} ${prata.variable} ${ibmPlexMono.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>
