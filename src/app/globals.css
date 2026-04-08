@@ -43,6 +43,10 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+body.obsidian-route {
+  background: #050404;
+}
+
 body::before {
   content: "";
   position: fixed;
@@ -71,6 +75,11 @@ body::after {
     ),
     radial-gradient(circle at 76% 22%, rgba(142, 165, 255, 0.1), transparent 22%);
   opacity: 0.72;
+}
+
+body.obsidian-route::before,
+body.obsidian-route::after {
+  display: none;
 }
 
 a,
