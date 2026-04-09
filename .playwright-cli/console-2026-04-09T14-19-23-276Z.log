@@ -1,0 +1,2 @@
+[      46ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3001/_next/static/chunks/13hy1npg1csgh.css:0
+[     157ms] [ERROR] Failed to load resource: the server responded with a status of 500 (Internal Server Error) @ http://127.0.0.1:3001/_next/static/chunks/0ji6ex15h3cly.js:0

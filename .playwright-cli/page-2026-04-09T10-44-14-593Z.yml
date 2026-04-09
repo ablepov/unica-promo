@@ -1,0 +1,491 @@
+- generic [active] [ref=e1]:
+  - generic [ref=e3]:
+    - banner [ref=e4]:
+      - generic [ref=e5]:
+        - link "U Unica" [ref=e6] [cursor=pointer]:
+          - /url: "#top"
+          - generic [ref=e7]: U
+          - strong [ref=e9]: Unica
+        - navigation "Section navigation" [ref=e10]:
+          - link "Что умеет" [ref=e11] [cursor=pointer]:
+            - /url: "#platform"
+            - text: Что умеет
+            - img [ref=e12]
+          - link "Для кого" [ref=e14] [cursor=pointer]:
+            - /url: "#scenarios"
+            - text: Для кого
+            - img [ref=e15]
+          - link "Стоимость" [ref=e17] [cursor=pointer]:
+            - /url: "#roi"
+          - link "О продукте" [ref=e18] [cursor=pointer]:
+            - /url: "#architecture"
+        - link "Заказать демо" [ref=e19] [cursor=pointer]:
+          - /url: "#contact"
+    - main [ref=e20]:
+      - generic [ref=e22]:
+        - generic [ref=e23]:
+          - heading "Единая AI-платформа для корпоративных команд" [level=1] [ref=e24]:
+            - text: Единая AI-платформа
+            - text: для корпоративных команд
+          - paragraph [ref=e25]: Модели, корпоративные знания, документы, речь, агенты и интеграции в одной управляемой среде для cloud, on-prem и hybrid.
+          - link "Заказать демо" [ref=e27] [cursor=pointer]:
+            - /url: "#contact"
+        - generic [ref=e31]:
+          - complementary [ref=e32]:
+            - generic [ref=e33]:
+              - generic [ref=e34]:
+                - img [ref=e37]
+                - generic [ref=e40]:
+                  - generic [ref=e41]: Unica AI
+                  - generic [ref=e42]: Enterprise
+              - img [ref=e45]
+            - generic [ref=e47]:
+              - generic [ref=e48]:
+                - generic [ref=e49]:
+                  - img [ref=e52]
+                  - generic [ref=e53]: Новый чат
+                - generic [ref=e54]:
+                  - img [ref=e57]
+                  - generic [ref=e60]: Ассистенты
+                - generic [ref=e61]:
+                  - img [ref=e64]
+                  - generic [ref=e68]: База знаний
+                  - generic [ref=e69]: "12"
+              - generic [ref=e70]:
+                - generic [ref=e71]:
+                  - generic [ref=e72]: История чатов
+                  - img [ref=e74]
+                - generic [ref=e75]:
+                  - generic [ref=e76]:
+                    - img [ref=e79]
+                    - generic [ref=e83]: Unica AI
+                    - generic [ref=e84]: "3"
+                  - generic [ref=e85]:
+                    - img [ref=e88]
+                    - generic [ref=e92]: Стенограммы
+                    - generic [ref=e93]: "4"
+                  - generic [ref=e94]:
+                    - img [ref=e97]
+                    - generic [ref=e101]: 1. Предложения
+                    - generic [ref=e102]: "2"
+                  - generic [ref=e103]:
+                    - img [ref=e106]
+                    - generic [ref=e110]: Unica AI
+                    - generic [ref=e111]: "1"
+                  - generic [ref=e112]:
+                    - img [ref=e115]
+                    - generic [ref=e119]: Судебная практика
+                    - generic [ref=e120]: "0"
+                  - generic [ref=e121]:
+                    - img [ref=e124]
+                    - generic [ref=e128]: HR-Роспартнер
+                    - generic [ref=e129]: "0"
+                  - generic [ref=e130]:
+                    - img [ref=e133]
+                    - generic [ref=e137]: РЖД
+                    - generic [ref=e138]: "0"
+                  - generic [ref=e139]:
+                    - img [ref=e142]
+                    - generic [ref=e146]: ДИПЛОМ
+                    - generic [ref=e147]: "0"
+                  - generic [ref=e148]:
+                    - img [ref=e151]
+                    - generic [ref=e155]: 2. User Stories
+                    - generic [ref=e156]: "0"
+                  - generic [ref=e157]:
+                    - img [ref=e160]
+                    - generic [ref=e164]: Монк Документация
+                    - generic [ref=e165]: "0"
+                  - generic [ref=e166]:
+                    - img [ref=e169]
+                    - generic [ref=e173]: тест монк
+                    - generic [ref=e174]: "0"
+                  - generic [ref=e175]:
+                    - img [ref=e178]
+                    - generic [ref=e182]: тест Мелехин
+                    - generic [ref=e183]: "0"
+                  - generic [ref=e184]:
+                    - img [ref=e187]
+                    - generic [ref=e191]: Qwen3.5-4B
+                    - generic [ref=e192]: "0"
+                  - generic [ref=e193]:
+                    - img [ref=e196]
+                    - generic [ref=e200]: СТЕНО_НЬЮ
+                    - generic [ref=e201]: "0"
+                  - generic [ref=e202]:
+                    - img [ref=e205]
+                    - generic [ref=e209]: Стенограммы_2
+                    - generic [ref=e210]: "0"
+              - generic [ref=e211]:
+                - generic [ref=e213]:
+                  - generic [ref=e214]: Антон
+                  - generic [ref=e215]: ablepov@gmail.com
+                - img [ref=e218]
+          - generic [ref=e219]:
+            - generic [ref=e220]:
+              - img [ref=e223]
+              - img [ref=e226]
+              - generic [ref=e228]: audio 2026-03-01 21-06-39
+            - generic [ref=e229]:
+              - generic [ref=e231]:
+                - img [ref=e234]
+                - generic [ref=e239]:
+                  - generic [ref=e240]: audio_2026-03-01_21-06-39.ogg
+                  - generic [ref=e241]: ogg
+                - generic [ref=e242]: 11:14
+              - generic [ref=e245]:
+                - generic [ref=e246]: Привет! Чем помочь?
+                - generic [ref=e247]:
+                  - generic [ref=e248]:
+                    - img [ref=e251]
+                    - img [ref=e256]
+                  - generic [ref=e258]: 12:27
+              - generic [ref=e261]:
+                - generic [ref=e262]: Спросите что угодно
+                - generic [ref=e263]:
+                  - generic [ref=e264]:
+                    - img [ref=e266]
+                    - img [ref=e269]
+                  - generic [ref=e271]:
+                    - img [ref=e273]
+                    - generic [ref=e275]: "@ audio_2026-03-..."
+                    - img [ref=e277]
+                  - img [ref=e282]
+          - img [ref=e288]
+          - complementary [ref=e289]:
+            - generic [ref=e290]:
+              - generic [ref=e291]: audio_2026-03-01_21-06-39.ogg
+              - generic [ref=e292]:
+                - generic [ref=e293]:
+                  - img [ref=e295]
+                  - generic [ref=e297]: Действия
+                  - img [ref=e299]
+                - generic [ref=e301]:
+                  - img [ref=e303]
+                  - generic [ref=e305]: Скачать
+                - img [ref=e308]
+            - generic [ref=e311]:
+              - generic [ref=e312]:
+                - img [ref=e314]
+                - generic [ref=e316]: Транскрипция
+              - img [ref=e319]
+            - generic [ref=e320]:
+              - generic [ref=e321]:
+                - paragraph [ref=e322]: "[SPEAKER_00, 00:00:00-00:00:29]: Мысль была в том, чтобы как-то самолётик на обычное"
+                - paragraph [ref=e323]: сообщение, а на сообщение-транскребация сделать что-то с эквалайзером. Анимашка была,
+                - paragraph [ref=e324]: потому что там в момент... Хотя нет, анимашка там, по-моему, всегда Там сначала
+                - paragraph [ref=e325]: блокируется отправка типа в момент, когда он в меню грузится. После того, как в меню
+                - paragraph [ref=e326]: загрузился, он становится активным. Ну, может, саму анимацию имеет смысл убрать, не
+                - paragraph [ref=e327]: знаю, короче.
+              - generic [ref=e328]: Введите текст или нажмите «/», чтобы открыть команды
+      - generic [ref=e330]:
+        - generic [ref=e331]: Нам доверяют команды из enterprise и госсектора
+        - generic [ref=e332]:
+          - generic [ref=e333]:
+            - img "Суды России" [ref=e334]
+            - generic [ref=e335]: Суды России
+          - img "МТС" [ref=e337]
+          - generic [ref=e338]:
+            - img "Правительство Татарстана" [ref=e339]
+            - generic [ref=e340]: Правительство Татарстана
+          - img "ПРОМОМЕД" [ref=e342]
+          - img "Нефтиса" [ref=e344]
+      - generic [ref=e345]:
+        - generic [ref=e346]:
+          - heading "Запускайте AI в реальных процессах" [level=2] [ref=e348]:
+            - text: Запускайте AI
+            - text: в реальных
+            - text: процессах
+          - generic [ref=e349]:
+            - article [ref=e350]:
+              - img "Практические AI-сценарии уже сейчас" [ref=e352]
+              - generic [ref=e353]:
+                - generic [ref=e354]: Сценарии для сотрудников
+                - heading "Практические AI-сценарии уже сейчас" [level=3] [ref=e355]
+                - paragraph [ref=e356]: Поиск по регламентам, сервис-деск, протоколы встреч, документы и речевая аналитика собираются в одном рабочем контуре.
+                - link "Смотреть сценарии" [ref=e357] [cursor=pointer]:
+                  - /url: "#scenarios"
+            - article [ref=e358]:
+              - img "AI под контролем ИТ, ИБ и бизнеса" [ref=e360]
+              - generic [ref=e361]:
+                - generic [ref=e362]: Governance и контроль
+                - heading "AI под контролем ИТ, ИБ и бизнеса" [level=3] [ref=e363]
+                - paragraph [ref=e364]: RBAC, аудит, роли, контроль источников и прозрачность использования встроены в платформу, а не добавлены поверх.
+                - link "Смотреть архитектуру" [ref=e365] [cursor=pointer]:
+                  - /url: "#architecture"
+          - generic [ref=e366]:
+            - generic [ref=e367]:
+              - generic [ref=e368]: "01"
+              - generic [ref=e369]: Умный поиск по внутренней базе знаний
+            - generic [ref=e370]:
+              - generic [ref=e371]: "02"
+              - generic [ref=e372]: Ассистенты техподдержки и сервис-деска
+            - generic [ref=e373]:
+              - generic [ref=e374]: "03"
+              - generic [ref=e375]: Извлечение данных из документов
+            - generic [ref=e376]:
+              - generic [ref=e377]: "04"
+              - generic [ref=e378]: Речевая аналитика контакт-центра
+            - generic [ref=e379]:
+              - generic [ref=e380]: "05"
+              - generic [ref=e381]: Протоколы встреч и совещаний
+            - generic [ref=e382]:
+              - generic [ref=e383]: "06"
+              - generic [ref=e384]: Автоматизация рутинных задач
+        - generic [ref=e386]:
+          - generic [ref=e387]:
+            - generic [ref=e388]: Платформа, которая масштабирует AI-контур
+            - heading "От пилотов к рабочему enterprise-инструменту" [level=2] [ref=e389]
+          - generic [ref=e390]:
+            - generic [ref=e391]: Unica не живёт отдельно от бизнеса. Она собирает контекст, сценарии, действия и контроль в единый центр управления.
+            - generic [ref=e392]:
+              - article [ref=e393]:
+                - heading "Knowledge layer" [level=3] [ref=e394]
+                - paragraph [ref=e395]: Поднимает документы, базы знаний, звонки и CRM в один слой контекста.
+              - article [ref=e396]:
+                - heading "Сервис-деск и ассистенты" [level=3] [ref=e397]
+                - paragraph [ref=e398]: Ускоряют первую линию и маршрутизацию без потери правил.
+              - article [ref=e399]:
+                - heading "Документы и OCR" [level=3] [ref=e400]
+                - paragraph [ref=e401]: Извлекают поля, классифицируют и запускают следующие шаги.
+              - article [ref=e402]:
+                - heading "Речевая аналитика" [level=3] [ref=e403]
+                - paragraph [ref=e404]: Делает управленческие сигналы и контроль качества видимыми.
+              - article [ref=e405]:
+                - heading "Workflow и actions" [level=3] [ref=e406]
+                - paragraph [ref=e407]: Выполняют задачи по правилам компании, а не по импровизации.
+        - generic [ref=e409]:
+          - generic [ref=e410]:
+            - generic [ref=e411]: Цифровая рабочая сила
+            - heading "Запускайте AI не как витрину, а как рабочую систему" [level=2] [ref=e412]
+          - generic [ref=e413]:
+            - generic [ref=e414]: Платформа помогает подключать модели, инструменты и корпоративные системы без зоопарка отдельных продуктов.
+            - generic [ref=e415]:
+              - article [ref=e416]:
+                - heading "Гибкость по моделям" [level=3] [ref=e417]
+                - paragraph [ref=e418]: Подключение разных LLM без жёсткой зависимости от одного поставщика.
+              - article [ref=e419]:
+                - heading "Skills и orchestration" [level=3] [ref=e420]
+                - paragraph [ref=e421]: Когнитивный роутер и инструментальные действия в одном контуре.
+              - article [ref=e422]:
+                - heading "Интеграции с вашим стеком" [level=3] [ref=e423]
+                - paragraph [ref=e424]: CRM, ERP, DMS, IAM, телефония, API и внешние сервисы.
+              - article [ref=e425]:
+                - heading "Прозрачное потребление" [level=3] [ref=e426]
+                - paragraph [ref=e427]: Видно, какие сценарии работают и как расходуются ресурсы.
+            - generic [ref=e428]:
+              - generic [ref=e429]:
+                - generic [ref=e430]: LLM и AI-модели
+                - generic [ref=e431]:
+                  - generic [ref=e432]: Open-source LLM
+                  - generic [ref=e433]: On-prem
+                  - generic [ref=e434]: Отечественные модели
+                  - generic [ref=e435]: Внешние API
+              - generic [ref=e436]:
+                - generic [ref=e437]: Базы знаний и хранилища
+                - generic [ref=e438]:
+                  - generic [ref=e439]: DMS
+                  - generic [ref=e440]: SharePoint
+                  - generic [ref=e441]: Confluence
+                  - generic [ref=e442]: NAS / S3
+              - generic [ref=e443]:
+                - generic [ref=e444]: CRM / ERP / корпоративные системы
+                - generic [ref=e445]:
+                  - generic [ref=e446]: CRM
+                  - generic [ref=e447]: ERP
+                  - generic [ref=e448]: Service Desk
+                  - generic [ref=e449]: ECM
+                  - generic [ref=e450]: BI
+              - generic [ref=e451]:
+                - generic [ref=e452]: Телефония и каналы
+                - generic [ref=e453]:
+                  - generic [ref=e454]: Call center
+                  - generic [ref=e455]: Email
+                  - generic [ref=e456]: Web chat
+                  - generic [ref=e457]: Messaging
+              - generic [ref=e458]:
+                - generic [ref=e459]: IAM / SSO / безопасность
+                - generic [ref=e460]:
+                  - generic [ref=e461]: IAM
+                  - generic [ref=e462]: SSO
+                  - generic [ref=e463]: RBAC
+                  - generic [ref=e464]: Policy layer
+              - generic [ref=e465]:
+                - generic [ref=e466]: API / HTTP / MCP
+                - generic [ref=e467]:
+                  - generic [ref=e468]: REST
+                  - generic [ref=e469]: HTTP
+                  - generic [ref=e470]: MCP
+                  - generic [ref=e471]: Внешние сервисы
+        - generic [ref=e472]:
+          - heading "Создано для защищённых контуров" [level=2] [ref=e474]:
+            - text: Создано для
+            - text: защищённых
+            - text: контуров
+          - generic [ref=e475]:
+            - article [ref=e476]:
+              - heading "Построено под защищённые контуры" [level=3] [ref=e477]
+              - paragraph [ref=e478]: Подходит для компаний и организаций, где критичны контроль данных, ролей и инфраструктуры.
+            - article [ref=e479]:
+              - heading "Security by default" [level=3] [ref=e480]
+              - paragraph [ref=e481]: RBAC, аудит действий, журнал запросов и policy layer встроены в каждую рабочую схему.
+            - article [ref=e482]:
+              - heading "Прозрачность без визуального шума" [level=3] [ref=e483]
+              - paragraph [ref=e484]: Решения, источники и расход ресурсов видимы для ИТ, ИБ и бизнес-заказчика.
+          - generic [ref=e485]:
+            - generic [ref=e486]:
+              - generic [ref=e487]: Инфраструктура и модели
+              - generic [ref=e488]:
+                - generic [ref=e489]: LLM
+                - generic [ref=e490]: On-prem модели
+                - generic [ref=e491]: Отечественные модели
+                - generic [ref=e492]: Векторные базы
+                - generic [ref=e493]: Файловые хранилища
+                - generic [ref=e494]: Корпоративные API
+            - generic [ref=e495]:
+              - generic [ref=e496]: Сервисы Unica
+              - generic [ref=e497]:
+                - generic [ref=e498]: RAG
+                - generic [ref=e499]: OCR
+                - generic [ref=e500]: ASR
+                - generic [ref=e501]: Knowledge layer
+                - generic [ref=e502]: Orchestration
+                - generic [ref=e503]: Skills
+                - generic [ref=e504]: Agents
+                - generic [ref=e505]: Routing
+            - generic [ref=e506]:
+              - generic [ref=e507]: Бизнес-логика и контроль
+              - generic [ref=e508]:
+                - generic [ref=e509]: Workflow
+                - generic [ref=e510]: Автоматизация
+                - generic [ref=e511]: Сценарии
+                - generic [ref=e512]: Роли
+                - generic [ref=e513]: Правила
+                - generic [ref=e514]: Мониторинг
+            - generic [ref=e515]:
+              - generic [ref=e516]: Пользователи и каналы
+              - generic [ref=e517]:
+                - generic [ref=e518]: Сотрудники
+                - generic [ref=e519]: Техподдержка
+                - generic [ref=e520]: Руководители
+                - generic [ref=e521]: Контакт-центр
+                - generic [ref=e522]: Web UI
+                - generic [ref=e523]: Чаты
+                - generic [ref=e524]: Телефония
+            - generic [ref=e525]:
+              - generic [ref=e526]: Подключаем данные, модели и системы
+              - generic [ref=e527]: Оркестрируем логику и действия
+              - generic [ref=e528]: Даём сотрудникам понятный интерфейс
+              - generic [ref=e529]: Контролируем качество, безопасность и использование
+        - generic [ref=e530]:
+          - heading "Корпоративный AI уже не дорогой" [level=2] [ref=e532]:
+            - text: Корпоративный AI
+            - text: уже не дорогой
+          - generic [ref=e533]:
+            - article [ref=e534]:
+              - generic [ref=e535]: Standard
+              - generic [ref=e536]: от 650 000 ₽ / год
+              - paragraph [ref=e537]: Для запуска базовых корпоративных AI-сценариев и первых продуктивных сценариев без долгой разработки.
+            - article [ref=e538]:
+              - generic [ref=e539]: Enterprise
+              - generic [ref=e540]: от 4,5 млн ₽ / год
+              - paragraph [ref=e541]: Для закрытых контуров, расширенных модулей, сложных интеграций и enterprise-требований к безопасности.
+          - generic [ref=e542]:
+            - article [ref=e543]:
+              - heading "Запуск без долгой разработки" [level=3] [ref=e544]
+              - paragraph [ref=e545]: Быстрее путь от задачи до пилота и первых продуктивных сценариев.
+            - article [ref=e546]:
+              - heading "Экономия времени сотрудников" [level=3] [ref=e547]
+              - paragraph [ref=e548]: AI берёт на себя поиск, обработку, извлечение и часть рутинных действий.
+            - article [ref=e549]:
+              - heading "Окупаемость за месяцы" [level=3] [ref=e550]
+              - paragraph [ref=e551]: Для типовых сценариев эффект можно увидеть уже на первых этапах внедрения.
+          - paragraph [ref=e552]: Финальная стоимость зависит от модели поставки, модулей, интеграций, требований к безопасности, поддержки и объёма использования.
+          - generic [ref=e553]:
+            - heading "Мы помогаем компаниям и государству кратно увеличивать производительность труда за счёт запуска безопасного AI." [level=3] [ref=e554]
+            - paragraph [ref=e555]: Unica создаётся как платформа, которая делает знания, документы, речь и бизнес-логику частью новой цифровой рабочей силы — управляемой, безопасной и полезной для экономики.
+        - generic [ref=e557]:
+          - generic [ref=e558]:
+            - generic [ref=e559]: FAQ
+            - heading "Частые вопросы" [level=2] [ref=e560]
+            - generic [ref=e561]:
+              - group [ref=e562]:
+                - generic "Чем Unica отличается от корпоративного чат-бота?" [ref=e563] [cursor=pointer]
+              - group [ref=e564]:
+                - generic "Можно ли развернуть Unica on-prem?" [ref=e565] [cursor=pointer]
+              - group [ref=e566]:
+                - generic "Можно ли использовать разные модели?" [ref=e567] [cursor=pointer]
+              - group [ref=e568]:
+                - generic "Как контролируется качество ответа?" [ref=e569] [cursor=pointer]
+              - group [ref=e570]:
+                - generic "Как считается стоимость?" [ref=e571] [cursor=pointer]
+              - group [ref=e572]:
+                - generic "С чего лучше начать?" [ref=e573] [cursor=pointer]
+          - generic [ref=e574]:
+            - generic [ref=e575]:
+              - generic [ref=e576]:
+                - generic [ref=e577]:
+                  - generic [ref=e578]: Presale assistant
+                  - generic [ref=e579]: Обсудить задачу с AI-ассистентом
+                - generic [ref=e580]: powered by Unica
+              - generic [ref=e581]:
+                - generic [ref=e582]: Опишите процесс, данные и контур. Я соберу вводные и предложу вариант пилота.
+                - generic [ref=e583]: Нужен внутренний поиск по регламентам и сервис-деск в закрытом контуре.
+                - generic [ref=e584]: Предварительно подходит on-prem запуск с knowledge layer, RBAC, ASR/OCR и маршрутизацией обращений.
+              - generic [ref=e585]:
+                - generic [ref=e586]:
+                  - generic [ref=e587]: Pilot scope
+                  - generic [ref=e588]: Контур запуска
+                - generic [ref=e589]:
+                  - generic [ref=e590]: Ассистента подключим на следующем этапе
+                  - generic [ref=e591]: →
+            - generic [ref=e592]:
+              - generic [ref=e593]:
+                - generic [ref=e594]: Заказать демо
+                - heading "Покажите нам вашу задачу, и мы предложим безопасный путь запуска." [level=3] [ref=e595]
+                - paragraph [ref=e596]: Опишите сценарий, и мы покажем, как он может работать в облаке или on-prem без лишней предварительной бюрократии.
+              - generic [ref=e597]:
+                - generic [ref=e598]:
+                  - generic [ref=e599]: Имя
+                  - textbox "Имя" [ref=e600]:
+                    - /placeholder: Например, Антон
+                - generic [ref=e601]:
+                  - generic [ref=e602]: Компания
+                  - textbox "Компания" [ref=e603]:
+                    - /placeholder: Название компании
+                - generic [ref=e604]:
+                  - generic [ref=e605]: Контакт
+                  - textbox "Контакт" [ref=e606]:
+                    - /placeholder: Email, телефон или Telegram
+                - generic [ref=e607]:
+                  - generic [ref=e608]: Модель поставки
+                  - generic [ref=e609]:
+                    - generic [ref=e610] [cursor=pointer]:
+                      - radio "Облако Для быстрого старта и управляемого пилота." [checked]
+                      - generic [ref=e612]:
+                        - strong [ref=e613]: Облако
+                        - generic [ref=e614]: Для быстрого старта и управляемого пилота.
+                    - generic [ref=e615] [cursor=pointer]:
+                      - radio "On-prem Для закрытого контура и полного контроля."
+                      - generic [ref=e617]:
+                        - strong [ref=e618]: On-prem
+                        - generic [ref=e619]: Для закрытого контура и полного контроля.
+                    - generic [ref=e620] [cursor=pointer]:
+                      - radio "Hybrid Для смешанной архитектуры и поэтапного запуска."
+                      - generic [ref=e622]:
+                        - strong [ref=e623]: Hybrid
+                        - generic [ref=e624]: Для смешанной архитектуры и поэтапного запуска.
+                - generic [ref=e625]:
+                  - generic [ref=e626]: Сценарий или задача
+                  - textbox "Сценарий или задача" [ref=e627]:
+                    - /placeholder: "Например: внутренний поиск по базе знаний, сервис-деск, документы, речевая аналитика, автоматизация рутины, on-prem и требования ИБ."
+              - generic [ref=e628]:
+                - button "Заказать демо" [ref=e629]
+                - 'link "Или написать напрямую: sales@unica.local" [ref=e630] [cursor=pointer]':
+                  - /url: mailto:sales@unica.local
+              - paragraph [ref=e631]: Опишите сценарий, контур и ограничения. Этого достаточно, чтобы предложить формат пилота и следующий шаг.
+    - contentinfo [ref=e632]:
+      - generic [ref=e633]:
+        - generic [ref=e634]: Unica AI
+        - generic [ref=e635]: Enterprise AI platform for Russian teams
+  - alert [ref=e636]

@@ -1,23 +1,23 @@
-import { SiteHeader } from "@/components/landing/site-header";
-import { ArchitecturePricingSection } from "@/components/landing/sections/architecture-pricing-section";
-import { ClosingSection } from "@/components/landing/sections/closing-section";
-import { HeroSection } from "@/components/landing/sections/hero-section";
-import { PlatformSecuritySection } from "@/components/landing/sections/platform-security-section";
-import { TrustPainSection } from "@/components/landing/sections/trust-pain-section";
-import { UseCasesSection } from "@/components/landing/sections/use-cases-section";
+import { Cormorant_Garamond, Manrope } from "next/font/google";
+
+import { ObsidianLanding } from "@/components/designs/obsidian/landing";
+
+const display = Cormorant_Garamond({
+  variable: "--font-obsidian-display",
+  subsets: ["latin", "cyrillic"],
+  weight: ["500", "600", "700"],
+});
+
+const sans = Manrope({
+  variable: "--font-obsidian-sans",
+  subsets: ["latin", "cyrillic"],
+  weight: ["400", "500", "600", "700"],
+});
 
 export default function Home() {
   return (
-    <>
-      <SiteHeader />
-      <main className="relative overflow-hidden">
-        <HeroSection />
-        <TrustPainSection />
-        <ArchitecturePricingSection />
-        <UseCasesSection />
-        <PlatformSecuritySection />
-        <ClosingSection />
-      </main>
-    </>
+    <div className={`${display.variable} ${sans.variable}`}>
+      <ObsidianLanding />
+    </div>
   );
 }

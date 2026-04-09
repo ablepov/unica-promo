@@ -1,45 +1,67 @@
-export const navItems = [
-  { label: "Что умеет", href: "#platform", hasCaret: true },
-  { label: "Для кого", href: "#scenarios", hasCaret: true },
+export const navItems: ReadonlyArray<{
+  label: string;
+  href: string;
+  hasCaret?: boolean;
+}> = [
+  { label: "Что умеет", href: "#platform" },
+  { label: "Для кого", href: "#scenarios" },
   { label: "Стоимость", href: "#roi" },
   { label: "О продукте", href: "#architecture" },
 ];
 
 export const trustLogos = [
   {
-    label: "Верховный Суд РФ",
-    src: "/designs/obsidian/logos/supreme-court.svg",
-    width: 3,
-    ratio: "1 / 1",
-    variant: "emblem",
+    label: "Суды России",
+    caption: "Суды России",
+    src: "/designs/obsidian/logos/courts-russia-color.svg",
+    height: 2.85,
+    imageWidth: 366.943,
+    imageHeight: 401.991,
+    filter: "grayscale(1) brightness(1.1) contrast(1.08)",
+    opacity: 0.96,
+    variant: "icon-label",
   },
   {
     label: "МТС",
-    src: "/designs/obsidian/logos/mts-wordmark.svg",
-    width: 8.2,
-    ratio: "418.52 / 150",
-    variant: "wordmark",
+    src: "/designs/obsidian/logos/mts-color.svg",
+    height: 2.7,
+    imageWidth: 850.4,
+    imageHeight: 850.4,
+    filter: "grayscale(1) brightness(0.94) contrast(1.14)",
+    opacity: 0.95,
+    variant: "logo",
   },
   {
-    label: "mos.ru",
-    src: "/designs/obsidian/logos/mosru.svg",
-    width: 6.8,
-    ratio: "116 / 28",
-    variant: "wordmark",
-  },
-  {
-    label: "Республика Татарстан",
-    src: "/designs/obsidian/logos/tatarstan.svg",
-    width: 3,
-    ratio: "1 / 1",
-    variant: "emblem",
+    label: "Правительство Татарстана",
+    caption: "Правительство Татарстана",
+    src: "/designs/obsidian/logos/tatarstan-government-color.svg",
+    height: 2.55,
+    imageWidth: 32,
+    imageHeight: 32,
+    filter: "grayscale(1) brightness(1.1) contrast(1.08)",
+    opacity: 0.96,
+    captionWidth: 6.2,
+    variant: "icon-label",
   },
   {
     label: "ПРОМОМЕД",
-    src: "/designs/obsidian/logos/promomed-wordmark.svg",
-    width: 9.5,
-    ratio: "349 / 95.5",
-    variant: "wordmark",
+    src: "/designs/obsidian/logos/promomed-color.svg",
+    height: 2.7,
+    imageWidth: 240,
+    imageHeight: 67,
+    filter: "grayscale(1) brightness(1.16) contrast(1.1)",
+    opacity: 0.99,
+    variant: "logo",
+  },
+  {
+    label: "Нефтиса",
+    src: "/designs/obsidian/logos/neftisa-color.svg",
+    height: 2.7,
+    imageWidth: 193,
+    imageHeight: 64,
+    filter: "grayscale(1) brightness(1.14) contrast(1.1)",
+    opacity: 0.99,
+    variant: "logo",
   },
 ] as const;
 
@@ -64,62 +86,26 @@ export const featureCards = [
   },
 ];
 
-export const scaleRail = {
-  eyebrow: "Платформа, которая масштабирует AI-контур",
-  title: "От пилотов к рабочему enterprise-инструменту",
-  description:
-    "Unica не живёт отдельно от бизнеса. Она собирает контекст, сценарии, действия и контроль в единый центр управления.",
-  items: [
-    {
-      title: "Knowledge layer",
-      description:
-        "Поднимает документы, базы знаний, звонки и CRM в один слой контекста.",
-      active: true,
-    },
-    {
-      title: "Сервис-деск и ассистенты",
-      description: "Ускоряют первую линию и маршрутизацию без потери правил.",
-    },
-    {
-      title: "Документы и OCR",
-      description: "Извлекают поля, классифицируют и запускают следующие шаги.",
-    },
-    {
-      title: "Речевая аналитика",
-      description: "Делает управленческие сигналы и контроль качества видимыми.",
-    },
-    {
-      title: "Workflow и actions",
-      description: "Выполняют задачи по правилам компании, а не по импровизации.",
-    },
-  ],
-};
-
-export const growthRail = {
-  eyebrow: "Цифровая рабочая сила",
-  title: "Запускайте AI не как витрину, а как рабочую систему",
-  description:
-    "Платформа помогает подключать модели, инструменты и корпоративные системы без зоопарка отдельных продуктов.",
-  items: [
-    {
-      title: "Гибкость по моделям",
-      description: "Подключение разных LLM без жёсткой зависимости от одного поставщика.",
-      active: true,
-    },
-    {
-      title: "Skills и orchestration",
-      description: "Когнитивный роутер и инструментальные действия в одном контуре.",
-    },
-    {
-      title: "Интеграции с вашим стеком",
-      description: "CRM, ERP, DMS, IAM, телефония, API и внешние сервисы.",
-    },
-    {
-      title: "Прозрачное потребление",
-      description: "Видно, какие сценарии работают и как расходуются ресурсы.",
-    },
-  ],
-};
+export const orchestratorHighlights = [
+  {
+    title: "Подключайте разные LLM",
+    description:
+      "Объединяйте облачные, on-prem и отечественные модели в одном контуре. Без жёсткой привязки к одному провайдеру.",
+    icon: "models",
+  },
+  {
+    title: "Управляйте логикой",
+    description:
+      "Собирайте сценарии из правил, ассистентов и действий. Меняйте логику без пересборки платформы.",
+    icon: "workflows",
+  },
+  {
+    title: "Контролируйте роли",
+    description:
+      "Разводите доступы по ролям и зонам ответственности. Сохраняйте контроль для ИТ, ИБ и бизнеса.",
+    icon: "roles",
+  },
+] as const;
 
 export const securityHighlights = [
   {
@@ -139,28 +125,47 @@ export const securityHighlights = [
   },
 ];
 
+export const painSection = {
+  title: "Почему корпоративный AI часто не доходит до результата",
+  titleLines: ["Почему корпоративный AI", "часто не доходит", "до результата"],
+  description:
+    "Во многих компаниях AI уже интересен бизнесу, но не становится промышленным инструментом. Данные и знания разрознены, документы и коммуникации живут в разных системах, пилоты не переходят в масштаб, а отдельные AI-инструменты не собираются в единую управляемую архитектуру.",
+} as const;
+
 export const painPoints = [
   {
     title: "Разрозненные данные и знания",
     description:
       "Документы, базы знаний, переписки, звонки и внутренние системы не соединены в единый AI-контур.",
+    imageSrc: "/designs/obsidian/pain/pain-point-1.png",
+    imageAlt: "Disconnected systems layered over a rocky landscape.",
+    imagePosition: "50% 50%",
   },
   {
     title: "Пилоты без выхода в продуктив",
     description:
-      "Команды пробуют AI точечно, но не получают масштабируемый рабочий инструмент для бизнеса.",
+      "Команды пробуют AI точечно, но не получают масштабируемый рабочий инструмент.",
+    imageSrc: "/designs/obsidian/pain/pain-point-2.png",
+    imageAlt: "A dashboard floating over a waterfall landscape.",
+    imagePosition: "50% 50%",
   },
   {
     title: "Нет контроля и прозрачности",
     description:
       "Сложно понять, кто к чему имеет доступ, на чём основан ответ и как расходуются ресурсы.",
+    imageSrc: "/designs/obsidian/pain/pain-point-3.png",
+    imageAlt: "A dark analytics card with a green line chart in front of a stone backdrop.",
+    imagePosition: "50% 42%",
   },
   {
     title: "Зоопарк решений вместо платформы",
     description:
       "Разные инструменты для поиска, документов, речи и автоматизации не дают единого результата.",
+    imageSrc: "/designs/obsidian/pain/pain-point-4.png",
+    imageAlt: "Multiple interface fragments split around a stone background.",
+    imagePosition: "50% 32%",
   },
-];
+] as const;
 
 export const useCases = [
   {
@@ -320,33 +325,6 @@ export const workforceSteps = [
   "Работа с источниками",
   "Действие в системе",
   "Результат",
-];
-
-export const integrationGroups = [
-  {
-    title: "LLM и AI-модели",
-    items: ["Open-source LLM", "On-prem", "Отечественные модели", "Внешние API"],
-  },
-  {
-    title: "Базы знаний и хранилища",
-    items: ["DMS", "SharePoint", "Confluence", "NAS / S3"],
-  },
-  {
-    title: "CRM / ERP / корпоративные системы",
-    items: ["CRM", "ERP", "Service Desk", "ECM", "BI"],
-  },
-  {
-    title: "Телефония и каналы",
-    items: ["Call center", "Email", "Web chat", "Messaging"],
-  },
-  {
-    title: "IAM / SSO / безопасность",
-    items: ["IAM", "SSO", "RBAC", "Policy layer"],
-  },
-  {
-    title: "API / HTTP / MCP",
-    items: ["REST", "HTTP", "MCP", "Внешние сервисы"],
-  },
 ];
 
 export const pricingPlans = [
