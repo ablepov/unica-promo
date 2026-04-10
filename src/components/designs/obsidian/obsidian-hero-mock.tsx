@@ -114,9 +114,11 @@ const SHADOW_STYLES = `
   }
 
   .frame {
+    position: relative;
     display: grid;
+    width: var(--frame-width, 100%);
     grid-template-columns:
-      274px
+      var(--sidebar-width, 274px)
       minmax(0, 1fr)
       var(--divider-width, 1px)
       var(--inspector-width, 638px);
@@ -134,6 +136,149 @@ const SHADOW_STYLES = `
     background: linear-gradient(180deg, #12161d 0%, #11151c 52%, #0f1319 100%);
     border-right: 1px solid rgba(255, 255, 255, 0.055);
     box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.02);
+  }
+
+  .sidebarUltra {
+    padding: 10px 0 18px;
+  }
+
+  .sidebarCompact {
+    padding: 12px 0 20px;
+  }
+
+  .sidebarCompact .sidebarHeader {
+    gap: 10px;
+    padding: 14px 12px 10px 13px;
+  }
+
+  .sidebarCompact .brand {
+    gap: 8px;
+  }
+
+  .sidebarCompact .brandText {
+    max-width: 74px;
+  }
+
+  .sidebarCompact .brandPlan,
+  .sidebarCompact .footerEmail,
+  .sidebarCompact .footerMenu,
+  .sidebarCompact .workspaceChevron,
+  .sidebarCompact .historyHeading span,
+  .sidebarCompact .navItemCount,
+  .sidebarCompact .historyCount {
+    display: none;
+  }
+
+  .sidebarCompact .sidebarBody {
+    padding: 4px 7px 4px 8px;
+  }
+
+  .sidebarCompact .navItem,
+  .sidebarCompact .historyItem {
+    gap: 8px;
+    min-height: 32px;
+    padding: 5px 7px;
+    font-size: 12px;
+  }
+
+  .sidebarCompact .navItemIcon,
+  .sidebarCompact .historyItemIcon {
+    width: 14px;
+    height: 14px;
+  }
+
+  .sidebarCompact .navItemCount,
+  .sidebarCompact .historyCount {
+    font-size: 11px;
+  }
+
+  .sidebarCompact .historySection {
+    margin-top: 12px;
+  }
+
+  .sidebarCompact .historyHeading {
+    justify-content: flex-end;
+    padding: 0 4px 7px 4px;
+    font-size: 11px;
+  }
+
+  .sidebarCompact .sidebarFooter {
+    justify-content: center;
+    gap: 0;
+    padding: 8px 0 5px;
+  }
+
+  .sidebarCompact .avatar {
+    width: 30px;
+    height: 30px;
+  }
+
+  .sidebarCompact .footerText {
+    display: none;
+  }
+
+  .sidebarUltra .sidebarHeader {
+    justify-content: center;
+    padding: 12px 0 10px;
+  }
+
+  .sidebarUltra .brand {
+    justify-content: center;
+  }
+
+  .sidebarUltra .brandText,
+  .sidebarUltra .workspaceChevron,
+  .sidebarUltra .historyHeading,
+  .sidebarUltra .footerText,
+  .sidebarUltra .footerMenu {
+    display: none;
+  }
+
+  .sidebarUltra .brandMark {
+    width: 28px;
+    height: 28px;
+  }
+
+  .sidebarUltra .sidebarBody {
+    padding: 4px 6px 2px;
+  }
+
+  .sidebarUltra .historySection {
+    margin-top: 10px;
+  }
+
+  .sidebarUltra .historyList {
+    gap: 3px;
+    padding-right: 0;
+  }
+
+  .sidebarUltra .navItem,
+  .sidebarUltra .historyItem {
+    justify-content: center;
+    gap: 0;
+    min-height: 34px;
+    padding: 8px 0;
+  }
+
+  .sidebarUltra .navItemLabel,
+  .sidebarUltra .historyItemLabel,
+  .sidebarUltra .navItemCount,
+  .sidebarUltra .historyCount {
+    display: none;
+  }
+
+  .sidebarUltra .historyItemIndented {
+    padding-left: 0;
+  }
+
+  .sidebarUltra .sidebarFooter {
+    justify-content: center;
+    padding: 8px 0 4px;
+  }
+
+  .sidebarUltra .avatar {
+    width: 28px;
+    height: 28px;
   }
 
   .sidebarHeader {
@@ -172,7 +317,7 @@ const SHADOW_STYLES = `
     display: grid;
     gap: 1px;
     min-width: 0;
-    max-width: 148px;
+    max-width: var(--brand-text-max-width, 148px);
   }
 
   .brandName {
@@ -403,13 +548,18 @@ const SHADOW_STYLES = `
       radial-gradient(circle at 30% 18%, rgba(44, 83, 172, 0.08), transparent 20%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0)),
       #111318;
+    z-index: 1;
   }
 
   .workspaceHeader {
     display: flex;
     align-items: center;
     height: 76px;
-    padding: 13px 24px 0 24px;
+    padding:
+      13px
+      var(--workspace-header-pad-right, 24px)
+      0
+      var(--workspace-header-pad-left, 24px);
     border-bottom: 1px solid rgba(255, 255, 255, 0.055);
     color: rgba(244, 248, 255, 0.98);
   }
@@ -470,7 +620,11 @@ const SHADOW_STYLES = `
     gap: 18px;
     height: auto;
     overflow: hidden;
-    padding: 20px 24px 26px 32px;
+    padding:
+      var(--workspace-pad-top, 20px)
+      var(--workspace-pad-right, 24px)
+      var(--workspace-pad-bottom, 26px)
+      var(--workspace-pad-left, 32px);
     min-height: 0;
   }
 
@@ -488,8 +642,8 @@ const SHADOW_STYLES = `
     position: relative;
     flex: 1;
     min-height: 0;
-    width: min(100%, 632px);
-    max-width: 632px;
+    width: min(100%, var(--chat-max-width, 632px));
+    max-width: var(--chat-max-width, 632px);
     margin-inline: auto;
     overflow: hidden;
     padding-right: 0;
@@ -516,7 +670,7 @@ const SHADOW_STYLES = `
 
   .chatMessageIdle {
     align-self: center;
-    max-width: 540px;
+    max-width: var(--idle-message-max-width, 540px);
     margin-block: auto;
     text-align: center;
   }
@@ -527,12 +681,12 @@ const SHADOW_STYLES = `
 
   .chatMessageUser {
     align-self: flex-end;
-    max-width: 336px;
+    max-width: var(--chat-user-max-width, 336px);
   }
 
   .chatMessageFile {
     align-self: flex-end;
-    max-width: 348px;
+    max-width: var(--chat-file-max-width, 348px);
   }
 
   .chatAssistantContent {
@@ -617,7 +771,7 @@ const SHADOW_STYLES = `
     flex-direction: column;
     gap: 6px;
     min-width: 0;
-    max-width: 336px;
+    max-width: var(--chat-user-max-width, 336px);
     padding: 14px 16px;
     border-radius: 18px;
     background: rgba(31, 35, 43, 0.98);
@@ -638,7 +792,7 @@ const SHADOW_STYLES = `
     align-items: center;
     gap: 12px;
     min-width: 0;
-    max-width: 348px;
+    max-width: var(--chat-file-max-width, 348px);
     padding: 12px 14px;
     border-radius: 18px;
     background: rgba(30, 34, 42, 0.98);
@@ -684,8 +838,8 @@ const SHADOW_STYLES = `
   .documentCard {
     position: relative;
     z-index: 1;
-    width: min(100%, 632px);
-    max-width: 632px;
+    width: min(100%, var(--chat-max-width, 632px));
+    max-width: var(--chat-max-width, 632px);
     margin-inline: auto;
     padding: 18px 18px 16px;
     border-radius: 18px;
@@ -855,8 +1009,8 @@ const SHADOW_STYLES = `
   .composer {
     position: relative;
     z-index: 1;
-    width: min(100%, 632px);
-    max-width: 632px;
+    width: min(100%, var(--chat-max-width, 632px));
+    max-width: var(--chat-max-width, 632px);
     margin-inline: auto;
     margin-top: auto;
     padding: 14px 16px 10px;
@@ -954,14 +1108,37 @@ const SHADOW_STYLES = `
   .inspectorShell {
     display: flex;
     flex-direction: column;
-    width: 638px;
-    min-width: 638px;
-    max-width: 638px;
+    width: var(--inspector-shell-width, 638px);
+    min-width: var(--inspector-shell-width, 638px);
+    max-width: var(--inspector-shell-width, 638px);
     min-height: 0;
     height: 100%;
     margin-left: auto;
+    background: inherit;
+    opacity: var(--inspector-shell-opacity, 1);
     transform: translate3d(calc((1 - var(--inspector-progress, 1)) * 36px), 0, 0);
     will-change: transform;
+  }
+
+  .inspectorOverlay {
+    position: relative;
+    overflow: visible;
+    background: transparent;
+    z-index: 6;
+  }
+
+  .inspectorOverlay .inspectorShell {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    z-index: 7;
+    background:
+      radial-gradient(circle at 30% 18%, rgba(44, 83, 172, 0.08), transparent 20%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0)),
+      #111318;
+    border-left: 1px solid rgba(255, 255, 255, 0.055);
+    box-shadow: -24px 0 54px rgba(6, 10, 18, 0.34);
   }
 
   .inspectorTop {
@@ -1282,23 +1459,149 @@ type MockLayout = {
   offsetY: number;
 };
 
-function getMockLayout(width: number, height: number): MockLayout {
+type VariantLayoutMetrics = {
+  frameWidth: number;
+  sidebarWidth: number;
+  chatWidth: number;
+  inspectorWidth: number;
+  workspacePadTop: number;
+  workspacePadRight: number;
+  workspacePadBottom: number;
+  workspacePadLeft: number;
+  workspaceHeaderPadLeft: number;
+  workspaceHeaderPadRight: number;
+  brandTextMaxWidth: number;
+  idleMessageMaxWidth: number;
+  chatUserMaxWidth: number;
+  chatFileMaxWidth: number;
+  overlayInspector: boolean;
+};
+
+const COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD = 920;
+
+function getMockLayout(
+  width: number,
+  height: number,
+  variant: ObsidianHeroMockScene["variant"],
+  frameWidth: number,
+): MockLayout {
   const safeWidth = width || OBSIDIAN_HERO_ARTBOARD.width;
   const safeHeight = height || OBSIDIAN_HERO_ARTBOARD.height;
+  const widthBasis =
+    variant === "desktop" ? OBSIDIAN_HERO_ARTBOARD.width : frameWidth || OBSIDIAN_HERO_ARTBOARD.width;
   const scale = Math.max(
-    safeWidth / OBSIDIAN_HERO_ARTBOARD.width,
+    safeWidth / widthBasis,
     safeHeight / OBSIDIAN_HERO_ARTBOARD.height,
   );
   const scaledWidth = OBSIDIAN_HERO_ARTBOARD.width * scale;
   const scaledHeight = OBSIDIAN_HERO_ARTBOARD.height * scale;
+  const centeredOffsetX = (safeWidth - scaledWidth) / 2;
 
   return {
     width: safeWidth,
     height: safeHeight,
     scale,
-    offsetX: (safeWidth - scaledWidth) / 2,
+    offsetX: variant === "desktop" ? centeredOffsetX : 0,
     offsetY: (safeHeight - scaledHeight) / 2,
   };
+}
+
+function clampNumber(value: number, min: number, max: number) {
+  return Math.max(min, Math.min(max, value));
+}
+
+function getVariantLayoutMetrics(
+  hostWidth: number,
+  variant: ObsidianHeroMockScene["variant"],
+): VariantLayoutMetrics {
+  const safeHostWidth = hostWidth > 0 ? hostWidth : OBSIDIAN_HERO_ARTBOARD.width;
+
+  switch (variant) {
+    case "ultra":
+      return {
+        frameWidth: 440,
+        sidebarWidth: 56,
+        chatWidth: 300,
+        inspectorWidth: 272,
+        workspacePadTop: 10,
+        workspacePadRight: 10,
+        workspacePadBottom: 14,
+        workspacePadLeft: 10,
+        workspaceHeaderPadLeft: 10,
+        workspaceHeaderPadRight: 10,
+        brandTextMaxWidth: 0,
+        idleMessageMaxWidth: 220,
+        chatUserMaxWidth: 216,
+        chatFileMaxWidth: 232,
+        overlayInspector: true,
+      };
+    case "narrow":
+      {
+        const frameWidth = clampNumber(Math.round(safeHostWidth), 620, 760);
+        const sidebarWidth = clampNumber(Math.round(frameWidth * 0.24), 148, 176);
+        const inspectorWidth = clampNumber(Math.round(frameWidth * 0.48), 320, 368);
+        const chatWidth = clampNumber(frameWidth - sidebarWidth - 42, 360, 448);
+
+        return {
+          frameWidth,
+          sidebarWidth,
+          chatWidth,
+          inspectorWidth,
+          workspacePadTop: 14,
+          workspacePadRight: 14,
+          workspacePadBottom: 18,
+          workspacePadLeft: 16,
+          workspaceHeaderPadLeft: 14,
+          workspaceHeaderPadRight: 14,
+          brandTextMaxWidth: 104,
+          idleMessageMaxWidth: 320,
+          chatUserMaxWidth: 250,
+          chatFileMaxWidth: 272,
+          overlayInspector: true,
+        };
+      }
+    case "compact":
+      {
+        const denseSidebar =
+          safeHostWidth <= COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD;
+
+        return {
+          frameWidth: clampNumber(Math.round(safeHostWidth), 1020, 1180),
+          sidebarWidth: denseSidebar ? 56 : clampNumber(Math.round(safeHostWidth * 0.19), 188, 228),
+          chatWidth: clampNumber(Math.round(safeHostWidth * 0.53), 540, 620),
+          inspectorWidth: clampNumber(Math.round(safeHostWidth * 0.46), 460, 520),
+          workspacePadTop: 18,
+          workspacePadRight: 18,
+          workspacePadBottom: 22,
+          workspacePadLeft: 22,
+          workspaceHeaderPadLeft: 18,
+          workspaceHeaderPadRight: 18,
+          brandTextMaxWidth: denseSidebar ? 0 : 132,
+          idleMessageMaxWidth: 480,
+          chatUserMaxWidth: 312,
+          chatFileMaxWidth: 328,
+          overlayInspector: true,
+        };
+      }
+    default:
+      return {
+        frameWidth: OBSIDIAN_HERO_ARTBOARD.width,
+        sidebarWidth: 274,
+        chatWidth: 632,
+        inspectorWidth: 638,
+        workspacePadTop: 20,
+        workspacePadRight: 24,
+        workspacePadBottom: 26,
+        workspacePadLeft: 32,
+        workspaceHeaderPadLeft: 24,
+        workspaceHeaderPadRight: 24,
+        brandTextMaxWidth: 148,
+        idleMessageMaxWidth: 540,
+        chatUserMaxWidth: 336,
+        chatFileMaxWidth: 348,
+        overlayInspector: false,
+      };
+  }
 }
 
 function clamp01(value: number) {
@@ -1623,7 +1926,11 @@ function getCursorState(
   return hiddenState;
 }
 
-function getDemoState(scene: ObsidianHeroMockScene, elapsedMs: number): DemoState {
+function getDemoState(
+  scene: ObsidianHeroMockScene,
+  elapsedMs: number,
+  layoutMetrics: VariantLayoutMetrics,
+): DemoState {
   const { phases, cycleDurationMs } = scene.workspace.loop;
   const currentElapsedMs = elapsedMs % cycleDurationMs;
   const resetStartMs = phases.newChatHoverEndMs;
@@ -1744,12 +2051,34 @@ function getDemoState(scene: ObsidianHeroMockScene, elapsedMs: number): DemoStat
     });
   }
 
+  const inspectorWidth = layoutMetrics.overlayInspector
+    ? 0
+    : layoutMetrics.inspectorWidth * inspectorOpenProgress;
+  const dividerWidth = layoutMetrics.overlayInspector ? 0 : inspectorOpenProgress;
+
   return {
     elapsedMs: currentElapsedMs,
     frameStyle: {
-      "--inspector-width": `${638 * inspectorOpenProgress}px`,
-      "--divider-width": `${inspectorOpenProgress}px`,
+      "--frame-width": `${layoutMetrics.frameWidth}px`,
+      "--sidebar-width": `${layoutMetrics.sidebarWidth}px`,
+      "--chat-max-width": `${layoutMetrics.chatWidth}px`,
+      "--inspector-width": `${inspectorWidth}px`,
+      "--inspector-shell-width": `${layoutMetrics.inspectorWidth}px`,
+      "--inspector-shell-opacity": `${
+        layoutMetrics.overlayInspector ? clamp01((inspectorOpenProgress - 0.02) / 0.14) : 1
+      }`,
+      "--divider-width": `${dividerWidth}px`,
       "--inspector-progress": `${inspectorOpenProgress}`,
+      "--workspace-pad-top": `${layoutMetrics.workspacePadTop}px`,
+      "--workspace-pad-right": `${layoutMetrics.workspacePadRight}px`,
+      "--workspace-pad-bottom": `${layoutMetrics.workspacePadBottom}px`,
+      "--workspace-pad-left": `${layoutMetrics.workspacePadLeft}px`,
+      "--workspace-header-pad-left": `${layoutMetrics.workspaceHeaderPadLeft}px`,
+      "--workspace-header-pad-right": `${layoutMetrics.workspaceHeaderPadRight}px`,
+      "--brand-text-max-width": `${layoutMetrics.brandTextMaxWidth}px`,
+      "--idle-message-max-width": `${layoutMetrics.idleMessageMaxWidth}px`,
+      "--chat-user-max-width": `${layoutMetrics.chatUserMaxWidth}px`,
+      "--chat-file-max-width": `${layoutMetrics.chatFileMaxWidth}px`,
     } as CSSProperties,
     inspectorOpenProgress,
     inspectorContentOpacity: clamp01((inspectorOpenProgress - 0.12) / 0.36),
@@ -2333,6 +2662,23 @@ function ShadowMarkup({
   const transcriptActionLabel = scene.workspace.fileCard.readyActions[0]?.label;
   const rawTranscriptOpacity =
     demo.rewriteProgress <= 0 ? 1 : mix(1, 0.26, easeInOutCubic(demo.rewriteProgress));
+  const useDenseSidebar =
+    scene.variant === "ultra" ||
+    (scene.variant === "compact" &&
+      layout.width <= COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD);
+  const sidebarClassName = [
+    "sidebar",
+    useDenseSidebar ? "sidebarUltra" : "",
+    scene.variant === "compact" && !useDenseSidebar ? "sidebarCompact" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+  const inspectorClassName = [
+    "inspector",
+    scene.variant !== "desktop" ? "inspectorOverlay" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
   const resolvedCursorTargets: DemoCursorTargets = {
     ...scene.workspace.loop.cursorTargets,
     ...measuredTargets,
@@ -2477,7 +2823,7 @@ function ShadowMarkup({
       <div className="root">
         <div className="artboard" style={transformStyle} ref={artboardRef}>
           <div className="frame" style={demo.frameStyle}>
-            <aside className="sidebar">
+            <aside className={sidebarClassName}>
               <div className="sidebarHeader">
                 <div className="brand">
                   <div className="brandMark">
@@ -2528,7 +2874,9 @@ function ShadowMarkup({
                   </div>
                   <div className="footerText">
                     <span className="footerName">{scene.sidebar.footer.name}</span>
-                    <span className="footerEmail">{scene.sidebar.footer.email}</span>
+                    {scene.variant === "desktop" || scene.variant === "compact" ? (
+                      <span className="footerEmail">{scene.sidebar.footer.email}</span>
+                    ) : null}
                   </div>
                   <div className="footerMenu">
                     <MockIcon name="ellipsis" />
@@ -2540,10 +2888,14 @@ function ShadowMarkup({
             <section className="workspace">
               <div className="workspaceHeader">
                 <div className="workspaceBreadcrumb">
-                  <span className="workspaceSectionLabel">Транскрипция</span>
-                  <span className="workspacePathChevron">
-                    <MockIcon name="chevron" />
-                  </span>
+                  {scene.variant !== "ultra" ? (
+                    <>
+                      <span className="workspaceSectionLabel">Транскрипция</span>
+                      <span className="workspacePathChevron">
+                        <MockIcon name="chevron" />
+                      </span>
+                    </>
+                  ) : null}
                   <span className="workspaceTitle">{scene.workspace.title}</span>
                 </div>
               </div>
@@ -2611,7 +2963,7 @@ function ShadowMarkup({
               </div>
             </div>
 
-            <aside className="inspector">
+            <aside className={inspectorClassName}>
               <div className="inspectorShell">
                 <div className="inspectorTop" style={{ opacity: demo.inspectorContentOpacity }}>
                 <div className="inspectorTitle">{scene.inspector.title}</div>
@@ -2758,8 +3110,14 @@ export function ObsidianHeroMock() {
   }, []);
 
   const scene = getObsidianHeroMockScene(hostSize.width);
-  const layout = getMockLayout(hostSize.width, hostSize.height);
-  const demo = getDemoState(scene, elapsedMs);
+  const layoutMetrics = getVariantLayoutMetrics(hostSize.width, scene.variant);
+  const layout = getMockLayout(
+    hostSize.width,
+    hostSize.height,
+    scene.variant,
+    layoutMetrics.frameWidth,
+  );
+  const demo = getDemoState(scene, elapsedMs, layoutMetrics);
 
   return (
     <div ref={handleHostRef} aria-hidden="true" style={HOST_STYLE}>

@@ -22,7 +22,7 @@ export default function ObsidianHeroPage() {
                 На главную
               </Link>
 
-              <div className={styles.heroLabStage}>
+              <div className={[styles.heroLabStage, styles.heroLabStageInteractive].join(" ")}>
                 <ObsidianHeroInterface interactive />
               </div>
             </div>

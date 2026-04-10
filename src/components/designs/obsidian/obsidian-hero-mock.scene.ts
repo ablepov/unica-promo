@@ -27,7 +27,7 @@ export type ObsidianHeroMockIcon =
   | "ellipsis"
   | "unica";
 
-export type ObsidianHeroMockVariant = "desktop" | "compact" | "narrow";
+export type ObsidianHeroMockVariant = "desktop" | "compact" | "narrow" | "ultra";
 
 export type ObsidianHeroMockTextSegment = {
   text: string;
@@ -309,9 +309,11 @@ const CURSOR_TARGETS = {
 
 export function getObsidianHeroMockScene(hostWidth: number): ObsidianHeroMockScene {
   const variant: ObsidianHeroMockVariant =
-    hostWidth > 0 && hostWidth < 540
+    hostWidth > 0 && hostWidth < 420
+      ? "ultra"
+      : hostWidth > 0 && hostWidth < 760
       ? "narrow"
-      : hostWidth > 0 && hostWidth < 820
+      : hostWidth > 0 && hostWidth < 1180
         ? "compact"
         : "desktop";
 
@@ -322,7 +324,14 @@ export function getObsidianHeroMockScene(hostWidth: number): ObsidianHeroMockSce
       workspacePlan: "Enterprise",
       primaryNav: PRIMARY_NAV,
       historyTitle: "История чатов",
-      historyItems: variant === "narrow" ? HISTORY_ITEMS.slice(0, 10) : HISTORY_ITEMS,
+      historyItems:
+        variant === "ultra"
+          ? HISTORY_ITEMS.slice(0, 6)
+          : variant === "narrow"
+          ? HISTORY_ITEMS.slice(0, 8)
+          : variant === "compact"
+            ? HISTORY_ITEMS.slice(0, 11)
+            : HISTORY_ITEMS,
       footer: {
         name: "Антон Петров",
         email: "petrov@email.ru",
@@ -379,7 +388,14 @@ export function getObsidianHeroMockScene(hostWidth: number): ObsidianHeroMockSce
     inspector: {
       title: "Транскрипция",
       actionLabel: "AI-действия",
-      rawLines: variant === "narrow" ? RAW_TRANSCRIPT_LINES.slice(0, 5) : RAW_TRANSCRIPT_LINES,
+      rawLines:
+        variant === "ultra"
+          ? RAW_TRANSCRIPT_LINES.slice(0, 4)
+          : variant === "narrow"
+          ? RAW_TRANSCRIPT_LINES.slice(0, 5)
+          : variant === "compact"
+            ? RAW_TRANSCRIPT_LINES.slice(0, 7)
+            : RAW_TRANSCRIPT_LINES,
       summarySections: SUMMARY_SECTIONS,
       menuItems: AI_ACTION_MENU_ITEMS,
       hint: "Введите текст или нажмите «/», чтобы открыть команды",
