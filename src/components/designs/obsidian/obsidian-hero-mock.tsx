@@ -3,6 +3,7 @@
 import {
   useCallback,
   useEffect,
+  useLayoutEffect,
   useRef,
   useState,
   type CSSProperties,
@@ -13,13 +14,15 @@ import { createPortal } from "react-dom";
 
 import {
   OBSIDIAN_HERO_ARTBOARD,
-  type ObsidianHeroMockChatMessage,
+  type ObsidianHeroMockAiMenuItem,
+  type ObsidianHeroMockChatBubble,
   getObsidianHeroMockScene,
   type ObsidianHeroMockHistoryItem,
   type ObsidianHeroMockIcon,
   type ObsidianHeroMockLine,
   type ObsidianHeroMockNavItem,
   type ObsidianHeroMockScene,
+  type ObsidianHeroMockSummarySection,
 } from "./obsidian-hero-mock.scene";
 
 const SIDEBAR_LOGO_SRC = "/designs/obsidian/logo.svg";
@@ -63,6 +66,7 @@ const SHADOW_STYLES = `
       #0b0d11;
     color: #f7fbff;
     user-select: none;
+    cursor: default;
     -webkit-font-smoothing: antialiased;
     text-rendering: optimizeLegibility;
   }
@@ -111,7 +115,11 @@ const SHADOW_STYLES = `
 
   .frame {
     display: grid;
-    grid-template-columns: 274px minmax(0, 1fr) 1px 638px;
+    grid-template-columns:
+      274px
+      minmax(0, 1fr)
+      var(--divider-width, 1px)
+      var(--inspector-width, 638px);
     grid-template-rows: minmax(0, 1fr);
     height: 100%;
   }
@@ -223,6 +231,24 @@ const SHADOW_STYLES = `
 
   .navItem {
     font-weight: 600;
+  }
+
+  .navItemActive {
+    background: rgba(255, 255, 255, 0.035);
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.04);
+  }
+
+  .navItemDemoHover {
+    background: rgba(55, 109, 221, 0.18);
+    box-shadow:
+      inset 0 0 0 1px rgba(93, 142, 239, 0.34),
+      0 14px 28px rgba(10, 16, 28, 0.24);
+  }
+
+  .navItemDemoPressed {
+    transform: translateY(1px);
+    background: rgba(66, 120, 232, 0.24);
+    box-shadow: inset 0 0 0 1px rgba(110, 156, 248, 0.44);
   }
 
   .navItemIcon,
@@ -488,9 +514,25 @@ const SHADOW_STYLES = `
     align-self: flex-start;
   }
 
+  .chatMessageIdle {
+    align-self: center;
+    max-width: 540px;
+    margin-block: auto;
+    text-align: center;
+  }
+
+  .chatMessageIdle .chatAssistantContent {
+    text-align: center;
+  }
+
   .chatMessageUser {
     align-self: flex-end;
     max-width: 336px;
+  }
+
+  .chatMessageFile {
+    align-self: flex-end;
+    max-width: 348px;
   }
 
   .chatAssistantContent {
@@ -591,6 +633,54 @@ const SHADOW_STYLES = `
     white-space: pre-wrap;
   }
 
+  .chatFileBubble {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    min-width: 0;
+    max-width: 348px;
+    padding: 12px 14px;
+    border-radius: 18px;
+    background: rgba(30, 34, 42, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    box-shadow: 0 16px 34px rgba(0, 0, 0, 0.24);
+  }
+
+  .chatFileIcon {
+    width: 34px;
+    height: 34px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(17, 21, 29, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(244, 247, 255, 0.96);
+    flex: none;
+  }
+
+  .chatFileText {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .chatFileTitle {
+    color: #fbfdff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .chatFileExtension {
+    color: rgba(186, 194, 209, 0.84);
+    font-size: 12px;
+    font-weight: 500;
+  }
+
   .documentCard {
     position: relative;
     z-index: 1;
@@ -602,6 +692,7 @@ const SHADOW_STYLES = `
     background: rgba(22, 25, 32, 0.98);
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.26);
+    overflow: hidden;
   }
 
   .documentTitleRow {
@@ -619,6 +710,13 @@ const SHADOW_STYLES = `
 
   .documentTitleChevron {
     color: rgba(157, 167, 184, 0.74);
+  }
+
+  .documentMeta {
+    margin-top: 8px;
+    color: rgba(174, 184, 201, 0.84);
+    font-size: 13px;
+    font-weight: 500;
   }
 
   .documentExcerpt {
@@ -655,6 +753,89 @@ const SHADOW_STYLES = `
     background: rgba(35, 40, 51, 0.98);
   }
 
+  .documentPillHover {
+    border-color: rgba(121, 150, 218, 0.54);
+    background: rgba(39, 45, 57, 0.98);
+    box-shadow: 0 10px 24px rgba(18, 28, 48, 0.2);
+  }
+
+  .documentCardProcessing .documentActions {
+    display: none;
+  }
+
+  .documentProcessing {
+    display: grid;
+    gap: 14px;
+    margin-top: 16px;
+  }
+
+  .documentProcessingStatus {
+    color: rgba(230, 236, 247, 0.96);
+    font-size: 14px;
+    font-weight: 600;
+  }
+
+  .documentProcessingSteps {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+
+  .documentProcessingStep {
+    min-height: 32px;
+    padding: 0 12px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    color: rgba(181, 190, 205, 0.78);
+    background: rgba(25, 29, 37, 0.74);
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    font-size: 12px;
+    font-weight: 600;
+    letter-spacing: 0.01em;
+  }
+
+  .documentProcessingStepDone {
+    color: rgba(235, 240, 248, 0.94);
+    border-color: rgba(98, 118, 163, 0.3);
+  }
+
+  .documentProcessingStepActive {
+    color: #ffffff;
+    border-color: rgba(100, 148, 245, 0.42);
+    background: rgba(34, 42, 58, 0.96);
+    box-shadow: 0 10px 22px rgba(28, 52, 92, 0.26);
+  }
+
+  .documentProcessingMeter {
+    position: relative;
+    height: 5px;
+    border-radius: 999px;
+    background: rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+  }
+
+  .documentProcessingMeterFill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    border-radius: inherit;
+    background:
+      linear-gradient(90deg, rgba(70, 123, 233, 0.92), rgba(123, 176, 255, 0.92)),
+      linear-gradient(90deg, rgba(255, 255, 255, 0.15), rgba(255, 255, 255, 0));
+    box-shadow: 0 0 24px rgba(73, 125, 235, 0.28);
+  }
+
+  .documentProcessingMeterFill::after {
+    content: "";
+    position: absolute;
+    top: -6px;
+    bottom: -6px;
+    right: -38px;
+    width: 72px;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.34), transparent);
+    opacity: 0.8;
+  }
+
   .documentUtilityRow {
     display: flex;
     gap: 12px;
@@ -687,11 +868,27 @@ const SHADOW_STYLES = `
       0 24px 48px rgba(0, 0, 0, 0.28);
   }
 
+  .composerDrop {
+    border-color: rgba(108, 162, 255, 0.98);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.08),
+      0 0 0 1px rgba(93, 145, 249, 0.34),
+      0 26px 56px rgba(32, 61, 114, 0.32);
+  }
+
   .composerInput {
     min-height: 24px;
     color: #ffffff;
     font-size: 15px;
     font-weight: 600;
+  }
+
+  .composerInputEmpty {
+    color: rgba(255, 255, 255, 0.01);
+  }
+
+  .composerInputDrop {
+    color: rgba(239, 245, 255, 0.96);
   }
 
   .composerBottom {
@@ -723,12 +920,27 @@ const SHADOW_STYLES = `
 
   .divider {
     position: relative;
+    overflow: hidden;
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.05));
+  }
+
+  .dividerHandle {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 16px;
+    height: 34px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(153, 163, 180, 0.62);
+    transform: translate(-50%, -50%);
   }
 
   .inspector {
     display: flex;
     flex-direction: column;
+    justify-content: stretch;
     min-width: 0;
     min-height: 0;
     height: 100%;
@@ -737,6 +949,19 @@ const SHADOW_STYLES = `
       radial-gradient(circle at 30% 18%, rgba(44, 83, 172, 0.08), transparent 20%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0)),
       #111318;
+  }
+
+  .inspectorShell {
+    display: flex;
+    flex-direction: column;
+    width: 638px;
+    min-width: 638px;
+    max-width: 638px;
+    min-height: 0;
+    height: 100%;
+    margin-left: auto;
+    transform: translate3d(calc((1 - var(--inspector-progress, 1)) * 36px), 0, 0);
+    will-change: transform;
   }
 
   .inspectorTop {
@@ -750,6 +975,10 @@ const SHADOW_STYLES = `
     box-sizing: border-box;
     padding: 13px 22px 0 36px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.055);
+  }
+
+  .inspectorTopInteractive {
+    position: relative;
   }
 
   .inspectorTitle {
@@ -775,6 +1004,11 @@ const SHADOW_STYLES = `
     color: rgba(239, 244, 251, 0.95);
   }
 
+  .actionMenuWrap {
+    position: relative;
+    display: inline-flex;
+  }
+
   .actionButton {
     display: inline-flex;
     align-items: center;
@@ -789,6 +1023,19 @@ const SHADOW_STYLES = `
     font-weight: 700;
     line-height: 1;
     box-shadow: 0 12px 30px rgba(53, 118, 232, 0.3);
+  }
+
+  .actionButtonHover {
+    box-shadow:
+      0 16px 34px rgba(53, 118, 232, 0.34),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.08);
+  }
+
+  .actionButtonPressed {
+    transform: translateY(1px);
+    box-shadow:
+      0 10px 24px rgba(53, 118, 232, 0.28),
+      inset 0 0 0 1px rgba(255, 255, 255, 0.1);
   }
 
   .topAction {
@@ -815,10 +1062,19 @@ const SHADOW_STYLES = `
     padding: 20px 36px 0;
   }
 
+  .inspectorContent {
+    display: grid;
+    gap: 16px;
+  }
+
   .transcriptBlock {
     color: #f6f9fe;
     font-size: 14px;
     line-height: 1.55;
+  }
+
+  .transcriptBlockRaw {
+    overflow: hidden;
   }
 
   .transcriptLine + .transcriptLine {
@@ -842,6 +1098,137 @@ const SHADOW_STYLES = `
     color: rgba(158, 165, 178, 0.9);
     font-size: 13px;
     font-style: italic;
+  }
+
+  .actionMenu {
+    position: absolute;
+    top: calc(100% + 12px);
+    left: 0;
+    width: 192px;
+    padding: 8px;
+    border-radius: 14px;
+    background: rgba(20, 24, 31, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.07);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.04),
+      0 24px 54px rgba(0, 0, 0, 0.34);
+    backdrop-filter: blur(12px);
+  }
+
+  .actionMenuItem {
+    min-height: 36px;
+    padding: 0 12px;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    color: rgba(239, 244, 251, 0.92);
+    font-size: 13px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+  }
+
+  .actionMenuItemActive {
+    background: rgba(54, 110, 221, 0.22);
+    color: #ffffff;
+    box-shadow: inset 0 0 0 1px rgba(103, 149, 243, 0.36);
+  }
+
+  .inspectorSummary {
+    display: grid;
+    gap: 14px;
+  }
+
+  .summarySection {
+    display: grid;
+    gap: 6px;
+  }
+
+  .summaryHeading {
+    color: #f8fbff;
+    font-size: 14px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+  }
+
+  .summaryBody {
+    color: rgba(228, 235, 245, 0.95);
+    font-size: 13px;
+    line-height: 1.6;
+  }
+
+  .cursorLayer {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+    z-index: 8;
+  }
+
+  .demoCursor {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 28px;
+    height: 28px;
+    color: #f5f8ff;
+    filter: drop-shadow(0 10px 20px rgba(0, 0, 0, 0.32));
+  }
+
+  .demoCursor svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+    fill: currentColor;
+  }
+
+  .cursorFilePill {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+    max-width: 290px;
+    padding: 11px 14px;
+    border-radius: 16px;
+    background: rgba(28, 33, 41, 0.98);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    box-shadow: 0 18px 38px rgba(0, 0, 0, 0.26);
+  }
+
+  .cursorFileIcon {
+    width: 30px;
+    height: 30px;
+    border-radius: 999px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    background: rgba(16, 20, 27, 0.9);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    color: rgba(247, 250, 255, 0.94);
+    flex: none;
+  }
+
+  .cursorFileText {
+    display: grid;
+    gap: 2px;
+    min-width: 0;
+  }
+
+  .cursorFileTitle {
+    color: #fbfdff;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+
+  .cursorFileMeta {
+    color: rgba(180, 189, 204, 0.82);
+    font-size: 12px;
+    font-weight: 500;
   }
 
   .icon {
@@ -914,30 +1301,60 @@ function getMockLayout(width: number, height: number): MockLayout {
   };
 }
 
-type AnimatedChatMessage = {
-  id: string;
-  role: ObsidianHeroMockChatMessage["role"];
-  timestamp: string;
-  content: string;
-  appearProgress: number;
-  isStreaming: boolean;
-  isComplete: boolean;
-  utilityActions: readonly ObsidianHeroMockIcon[];
-};
-
-type ChatAnimationState = {
-  messages: readonly AnimatedChatMessage[];
-  threadOpacity: number;
-  threadOffsetY: number;
-  scrollbarTop: number;
-};
-
 function clamp01(value: number) {
   return Math.max(0, Math.min(1, value));
 }
 
 function easeOutCubic(value: number) {
   return 1 - (1 - value) ** 3;
+}
+
+function easeInOutCubic(value: number) {
+  const safeValue = clamp01(value);
+
+  return safeValue < 0.5
+    ? 4 * safeValue * safeValue * safeValue
+    : 1 - Math.pow(-2 * safeValue + 2, 3) / 2;
+}
+
+function mix(from: number, to: number, progress: number) {
+  return from + (to - from) * clamp01(progress);
+}
+
+function mixPoint(
+  from: { x: number; y: number },
+  to: { x: number; y: number },
+  progress: number,
+) {
+  return {
+    x: mix(from.x, to.x, progress),
+    y: mix(from.y, to.y, progress),
+  };
+}
+
+function quadraticPoint(
+  from: { x: number; y: number },
+  control: { x: number; y: number },
+  to: { x: number; y: number },
+  progress: number,
+) {
+  const safeProgress = clamp01(progress);
+  const inverse = 1 - safeProgress;
+
+  return {
+    x:
+      inverse * inverse * from.x +
+      2 * inverse * safeProgress * control.x +
+      safeProgress * safeProgress * to.x,
+    y:
+      inverse * inverse * from.y +
+      2 * inverse * safeProgress * control.y +
+      safeProgress * safeProgress * to.y,
+  };
+}
+
+function rangeProgress(elapsedMs: number, startMs: number, endMs: number) {
+  return clamp01((elapsedMs - startMs) / Math.max(1, endMs - startMs));
 }
 
 function getStreamedText(content: string, progress: number) {
@@ -947,65 +1364,440 @@ function getStreamedText(content: string, progress: number) {
   return characters.slice(0, visibleCount).join("");
 }
 
-function getChatAnimationState(
-  messages: readonly ObsidianHeroMockChatMessage[],
-  cycleDurationMs: number,
-  fadeOutMs: number,
+type DemoChatBubbleState = {
+  bubble: ObsidianHeroMockChatBubble;
+  opacity: number;
+  translateY: number;
+};
+
+type DemoSummarySectionState = {
+  heading: string;
+  body: string;
+  opacity: number;
+  translateY: number;
+};
+
+type DemoCursorState = {
+  visible: boolean;
+  x: number;
+  y: number;
+  pressed: boolean;
+  showFile: boolean;
+  fileOpacity: number;
+};
+
+type DemoCursorTargets = ObsidianHeroMockScene["workspace"]["loop"]["cursorTargets"];
+
+type DemoState = {
+  elapsedMs: number;
+  frameStyle: CSSProperties;
+  inspectorOpenProgress: number;
+  inspectorContentOpacity: number;
+  dividerOpacity: number;
+  documentCardVisible: boolean;
+  documentCardOpacity: number;
+  documentCardTranslateY: number;
+  documentProcessingStatus: string;
+  documentProcessingStepIndex: number;
+  documentProcessingProgress: number;
+  documentActionsVisible: boolean;
+  composerText: string;
+  composerDrop: boolean;
+  chatBubbles: readonly DemoChatBubbleState[];
+  transcriptHover: boolean;
+  transcriptPressed: boolean;
+  actionButtonHover: boolean;
+  actionButtonPressed: boolean;
+  actionMenuOpen: boolean;
+  actionMenuOpacity: number;
+  hoveredMenuItemId: string | null;
+  selectedMenuItemId: string | null;
+  rewriteProgress: number;
+  summarySections: readonly DemoSummarySectionState[];
+  rawTranscriptHeight: number;
+  newChatHover: boolean;
+  newChatPressed: boolean;
+  cursor: DemoCursorState;
+};
+
+function getBubbleVisibility(
   elapsedMs: number,
-): ChatAnimationState {
-  const revealWindowMs = 240;
-  const visibleMessages: AnimatedChatMessage[] = [];
+  appearAtMs: number,
+  resetStartMs: number,
+  resetEndMs: number,
+  appearDurationMs = 260,
+) {
+  const appearProgress = easeOutCubic(rangeProgress(elapsedMs, appearAtMs, appearAtMs + appearDurationMs));
+  const hideProgress =
+    elapsedMs < resetStartMs
+      ? 1
+      : 1 - easeInOutCubic(rangeProgress(elapsedMs, resetStartMs, resetEndMs));
 
-  for (const message of messages) {
-    if (elapsedMs < message.startMs) {
-      continue;
+  return clamp01(appearProgress * hideProgress);
+}
+
+function getSummarySectionStates(
+  sections: readonly ObsidianHeroMockSummarySection[],
+  rewriteProgress: number,
+): readonly DemoSummarySectionState[] {
+  if (rewriteProgress <= 0) {
+    return [];
+  }
+
+  return sections
+    .map((section, index) => {
+      const sectionStart = index / sections.length;
+      const sectionEnd = (index + 1) / sections.length;
+      const localProgress = rangeProgress(rewriteProgress, sectionStart, sectionEnd);
+
+      if (localProgress <= 0) {
+        return null;
+      }
+
+      const bodyProgress = easeOutCubic(rangeProgress(localProgress, 0.14, 1));
+
+      return {
+        heading: section.heading,
+        body: getStreamedText(section.body, bodyProgress),
+        opacity: easeOutCubic(rangeProgress(localProgress, 0.02, 0.18)),
+        translateY: (1 - easeOutCubic(rangeProgress(localProgress, 0, 0.18))) * 8,
+      };
+    })
+    .filter((value): value is DemoSummarySectionState => Boolean(value));
+}
+
+function areCursorTargetsEqual(
+  current: Partial<DemoCursorTargets>,
+  next: Partial<DemoCursorTargets>,
+) {
+  const keys = Object.keys({ ...current, ...next }) as (keyof DemoCursorTargets)[];
+
+  return keys.every((key) => {
+    const currentPoint = current[key];
+    const nextPoint = next[key];
+
+    if (!currentPoint && !nextPoint) {
+      return true;
     }
 
-    const appearProgress = easeOutCubic(clamp01((elapsedMs - message.startMs) / revealWindowMs));
-
-    if (message.streamDurationMs) {
-      const streamProgress = clamp01((elapsedMs - message.startMs) / message.streamDurationMs);
-      visibleMessages.push({
-        id: message.id,
-        role: message.role,
-        timestamp: message.timestamp,
-        content: getStreamedText(message.content, streamProgress),
-        appearProgress,
-        isStreaming: streamProgress > 0 && streamProgress < 1,
-        isComplete: streamProgress >= 1,
-        utilityActions: message.utilityActions ?? [],
-      });
-      continue;
+    if (!currentPoint || !nextPoint) {
+      return false;
     }
 
-    visibleMessages.push({
-      id: message.id,
-      role: message.role,
-      timestamp: message.timestamp,
-      content: message.content,
-      appearProgress,
-      isStreaming: false,
-      isComplete: true,
-      utilityActions: message.utilityActions ?? [],
+    return currentPoint.x === nextPoint.x && currentPoint.y === nextPoint.y;
+  });
+}
+
+function getCursorState(
+  scene: ObsidianHeroMockScene,
+  elapsedMs: number,
+  cursorTargets: DemoCursorTargets = scene.workspace.loop.cursorTargets,
+): DemoCursorState {
+  const { phases } = scene.workspace.loop;
+  const hiddenState: DemoCursorState = {
+    visible: false,
+    x: 0,
+    y: 0,
+    pressed: false,
+    showFile: false,
+    fileOpacity: 0,
+  };
+
+  if (elapsedMs >= phases.idleEndMs && elapsedMs < phases.dragEndMs + 140) {
+    const dragProgress = easeInOutCubic(rangeProgress(elapsedMs, phases.idleEndMs, phases.dragEndMs));
+    const cursorPoint =
+      elapsedMs < phases.dragEndMs
+        ? quadraticPoint(
+            cursorTargets.fileStart,
+            { x: 1168, y: 358 },
+            cursorTargets.composerDrop,
+            dragProgress,
+          )
+        : cursorTargets.composerDrop;
+
+    return {
+      visible: true,
+      x: cursorPoint.x,
+      y: cursorPoint.y,
+      pressed: elapsedMs >= phases.dragEndMs - 90,
+      showFile: elapsedMs < phases.dragEndMs + 80,
+      fileOpacity:
+        elapsedMs < phases.dragEndMs
+          ? 1
+          : 1 - rangeProgress(elapsedMs, phases.dragEndMs, phases.dragEndMs + 140),
+    };
+  }
+
+  if (elapsedMs >= phases.readyEndMs && elapsedMs < phases.inspectorOpenEndMs) {
+    const transcriptMoveProgress = easeInOutCubic(
+      rangeProgress(elapsedMs, phases.readyEndMs, phases.transcriptHoverEndMs),
+    );
+    const transcriptPoint =
+      elapsedMs < phases.transcriptHoverEndMs
+        ? quadraticPoint(
+            cursorTargets.composerDrop,
+            {
+              x: mix(cursorTargets.composerDrop.x, cursorTargets.transcriptAction.x, 0.46),
+              y: Math.min(cursorTargets.composerDrop.y, cursorTargets.transcriptAction.y) - 86,
+            },
+            cursorTargets.transcriptAction,
+            transcriptMoveProgress,
+          )
+        : cursorTargets.transcriptAction;
+
+    return {
+      visible: true,
+      x: transcriptPoint.x,
+      y: transcriptPoint.y,
+      pressed: elapsedMs >= phases.transcriptHoverEndMs - 90,
+      showFile: false,
+      fileOpacity: 0,
+    };
+  }
+
+  if (elapsedMs >= phases.inspectorOpenEndMs && elapsedMs < phases.actionButtonEndMs) {
+    const actionButtonStart = cursorTargets.transcriptAction;
+    const actionButtonPoint = quadraticPoint(
+      actionButtonStart,
+      {
+        x: mix(actionButtonStart.x, cursorTargets.aiActionButton.x, 0.52),
+        y: Math.min(actionButtonStart.y, cursorTargets.aiActionButton.y) - 44,
+      },
+      cursorTargets.aiActionButton,
+      easeInOutCubic(rangeProgress(elapsedMs, phases.inspectorOpenEndMs, phases.actionButtonEndMs)),
+    );
+
+    return {
+      visible: true,
+      x: actionButtonPoint.x,
+      y: actionButtonPoint.y,
+      pressed: elapsedMs >= phases.actionButtonEndMs - 90,
+      showFile: false,
+      fileOpacity: 0,
+    };
+  }
+
+  if (elapsedMs >= phases.actionButtonEndMs && elapsedMs < phases.actionPickEndMs) {
+    const menuTravelProgress = rangeProgress(elapsedMs, phases.actionButtonEndMs, phases.actionPickEndMs);
+    const actionMenuPoint =
+      menuTravelProgress < 0.34
+        ? cursorTargets.aiActionButton
+        : mixPoint(
+            cursorTargets.aiActionButton,
+            cursorTargets.aiActionMenuItem,
+            easeInOutCubic(rangeProgress(menuTravelProgress, 0.34, 1)),
+          );
+
+    return {
+      visible: true,
+      x: actionMenuPoint.x,
+      y: actionMenuPoint.y,
+      pressed: elapsedMs >= phases.actionPickEndMs - 95,
+      showFile: false,
+      fileOpacity: 0,
+    };
+  }
+
+  if (elapsedMs >= phases.pauseEndMs && elapsedMs < phases.newChatHoverEndMs) {
+    const newChatStart = cursorTargets.aiActionButton;
+    const newChatPoint = quadraticPoint(
+      newChatStart,
+      {
+        x: mix(newChatStart.x, cursorTargets.newChat.x, 0.42),
+        y: Math.min(newChatStart.y, cursorTargets.newChat.y) - 34,
+      },
+      cursorTargets.newChat,
+      easeInOutCubic(rangeProgress(elapsedMs, phases.pauseEndMs, phases.newChatHoverEndMs)),
+    );
+
+    return {
+      visible: true,
+      x: newChatPoint.x,
+      y: newChatPoint.y,
+      pressed: elapsedMs >= phases.newChatHoverEndMs - 95,
+      showFile: false,
+      fileOpacity: 0,
+    };
+  }
+
+  return hiddenState;
+}
+
+function getDemoState(scene: ObsidianHeroMockScene, elapsedMs: number): DemoState {
+  const { phases, cycleDurationMs } = scene.workspace.loop;
+  const currentElapsedMs = elapsedMs % cycleDurationMs;
+  const resetStartMs = phases.newChatHoverEndMs;
+  const resetEndMs = phases.resetEndMs;
+  const processingSteps = scene.workspace.fileCard.processingSteps;
+  const idleAssistantOpacity =
+    currentElapsedMs < phases.dragEndMs + 40
+      ? 1 - easeInOutCubic(rangeProgress(currentElapsedMs, phases.dragEndMs - 180, phases.dragEndMs + 40))
+      : 0;
+  const documentCardOpacity =
+    currentElapsedMs < phases.dragEndMs
+      ? 0
+      : getBubbleVisibility(currentElapsedMs, phases.dragEndMs + 40, resetStartMs, resetEndMs, 220);
+  const fileBubbleOpacity = getBubbleVisibility(
+    currentElapsedMs,
+    phases.dragEndMs + 70,
+    resetStartMs,
+    resetEndMs,
+    220,
+  );
+  const readyAssistantOpacity = getBubbleVisibility(
+    currentElapsedMs,
+    phases.processingEndMs + 60,
+    resetStartMs,
+    resetEndMs,
+    240,
+  );
+  const summaryAssistantOpacity = getBubbleVisibility(
+    currentElapsedMs,
+    phases.rewriteEndMs + 60,
+    resetStartMs,
+    resetEndMs,
+    240,
+  );
+  const processingProgress = rangeProgress(currentElapsedMs, phases.dragEndMs, phases.processingEndMs);
+  const rawStepIndex = Math.floor(processingProgress * processingSteps.length);
+  const documentProcessingStepIndex =
+    currentElapsedMs < phases.dragEndMs
+      ? 0
+      : currentElapsedMs < phases.processingEndMs
+        ? Math.min(processingSteps.length - 1, rawStepIndex)
+        : processingSteps.length - 1;
+  const transcriptHoverStart = phases.readyEndMs + 180;
+  const transcriptPressedStart = phases.transcriptHoverEndMs - 110;
+  const actionButtonHoverStart = phases.inspectorOpenEndMs + 180;
+  const actionButtonPressedStart = phases.actionButtonEndMs - 110;
+  const menuOpenStart = phases.inspectorOpenEndMs + 360;
+  const menuCloseStart = phases.actionPickEndMs - 120;
+  const menuHoverStart = phases.actionButtonEndMs + 160;
+  const newChatHoverStart = phases.pauseEndMs + 720;
+  const newChatPressedStart = phases.newChatHoverEndMs - 110;
+  let inspectorOpenProgress = 0;
+
+  if (currentElapsedMs >= phases.transcriptHoverEndMs && currentElapsedMs < phases.inspectorOpenEndMs) {
+    inspectorOpenProgress = easeInOutCubic(
+      rangeProgress(currentElapsedMs, phases.transcriptHoverEndMs, phases.inspectorOpenEndMs),
+    );
+  } else if (currentElapsedMs >= phases.inspectorOpenEndMs && currentElapsedMs < resetStartMs) {
+    inspectorOpenProgress = 1;
+  } else if (currentElapsedMs >= resetStartMs && currentElapsedMs < resetEndMs) {
+    inspectorOpenProgress =
+      1 - easeInOutCubic(rangeProgress(currentElapsedMs, resetStartMs, resetEndMs));
+  }
+
+  const actionMenuOpacity =
+    currentElapsedMs < menuOpenStart
+      ? 0
+      : currentElapsedMs < menuOpenStart + 140
+        ? easeOutCubic(rangeProgress(currentElapsedMs, menuOpenStart, menuOpenStart + 140))
+        : currentElapsedMs < menuCloseStart
+          ? 1
+          : currentElapsedMs < phases.actionPickEndMs
+            ? 1 - easeInOutCubic(rangeProgress(currentElapsedMs, menuCloseStart, phases.actionPickEndMs))
+            : 0;
+  const rewriteProgress =
+    currentElapsedMs < phases.actionPickEndMs
+      ? 0
+      : currentElapsedMs < phases.rewriteEndMs
+        ? easeOutCubic(rangeProgress(currentElapsedMs, phases.actionPickEndMs, phases.rewriteEndMs))
+        : 1;
+  const summarySections = getSummarySectionStates(scene.inspector.summarySections, rewriteProgress);
+  const rawTranscriptHeight =
+    rewriteProgress <= 0
+      ? 320
+      : Math.max(0, 320 * (1 - easeInOutCubic(clamp01(rewriteProgress * 1.05))));
+
+  const chatBubbles: DemoChatBubbleState[] = [];
+
+  if (idleAssistantOpacity > 0.01) {
+    chatBubbles.push({
+      bubble: scene.workspace.chat.idleAssistant,
+      opacity: idleAssistantOpacity,
+      translateY: (1 - idleAssistantOpacity) * 12,
     });
   }
 
-  const fadeStartMs = Math.max(0, cycleDurationMs - fadeOutMs);
-  const fadeProgress =
-    elapsedMs > fadeStartMs ? 1 - clamp01((elapsedMs - fadeStartMs) / Math.max(1, fadeOutMs)) : 1;
-  const firstAnimatedStart = messages[1]?.startMs ?? messages[0]?.startMs ?? 0;
-  const lastMessage = messages[messages.length - 1];
-  const lastAnimatedEnd =
-    (lastMessage?.startMs ?? 0) + (lastMessage?.streamDurationMs ?? revealWindowMs) + 420;
-  const scrollProgress = clamp01(
-    (elapsedMs - firstAnimatedStart) / Math.max(1, lastAnimatedEnd - firstAnimatedStart),
-  );
+  if (fileBubbleOpacity > 0.01) {
+    chatBubbles.push({
+      bubble: scene.workspace.chat.fileBubble,
+      opacity: fileBubbleOpacity,
+      translateY: (1 - fileBubbleOpacity) * 18,
+    });
+  }
+
+  if (readyAssistantOpacity > 0.01) {
+    chatBubbles.push({
+      bubble: scene.workspace.chat.readyAssistant,
+      opacity: readyAssistantOpacity,
+      translateY: (1 - readyAssistantOpacity) * 18,
+    });
+  }
+
+  if (summaryAssistantOpacity > 0.01) {
+    chatBubbles.push({
+      bubble: scene.workspace.chat.summaryAssistant,
+      opacity: summaryAssistantOpacity,
+      translateY: (1 - summaryAssistantOpacity) * 18,
+    });
+  }
 
   return {
-    messages: visibleMessages,
-    threadOpacity: fadeProgress,
-    threadOffsetY: -76 * scrollProgress,
-    scrollbarTop: 10 + 108 * scrollProgress,
+    elapsedMs: currentElapsedMs,
+    frameStyle: {
+      "--inspector-width": `${638 * inspectorOpenProgress}px`,
+      "--divider-width": `${inspectorOpenProgress}px`,
+      "--inspector-progress": `${inspectorOpenProgress}`,
+    } as CSSProperties,
+    inspectorOpenProgress,
+    inspectorContentOpacity: clamp01((inspectorOpenProgress - 0.12) / 0.36),
+    dividerOpacity: inspectorOpenProgress,
+    documentCardVisible: documentCardOpacity > 0.01,
+    documentCardOpacity,
+    documentCardTranslateY: (1 - documentCardOpacity) * 16,
+    documentProcessingStatus:
+      currentElapsedMs < phases.dragEndMs
+        ? processingSteps[0]
+        : currentElapsedMs < phases.processingEndMs
+          ? processingSteps[documentProcessingStepIndex]
+          : processingSteps[processingSteps.length - 1],
+    documentProcessingStepIndex,
+    documentProcessingProgress: processingProgress,
+    documentActionsVisible: currentElapsedMs >= phases.processingEndMs && currentElapsedMs < resetStartMs,
+    composerText:
+      currentElapsedMs >= phases.idleEndMs &&
+      currentElapsedMs < phases.dragEndMs &&
+      rangeProgress(currentElapsedMs, phases.idleEndMs, phases.dragEndMs) > 0.74
+        ? scene.workspace.composer.dropText
+        : scene.workspace.composer.idleText,
+    composerDrop:
+      currentElapsedMs >= phases.idleEndMs &&
+      currentElapsedMs < phases.dragEndMs &&
+      rangeProgress(currentElapsedMs, phases.idleEndMs, phases.dragEndMs) > 0.74,
+    chatBubbles,
+    transcriptHover:
+      currentElapsedMs >= transcriptHoverStart && currentElapsedMs < phases.transcriptHoverEndMs + 40,
+    transcriptPressed:
+      currentElapsedMs >= transcriptPressedStart && currentElapsedMs < phases.transcriptHoverEndMs + 40,
+    actionButtonHover:
+      currentElapsedMs >= actionButtonHoverStart && currentElapsedMs < phases.actionPickEndMs,
+    actionButtonPressed:
+      currentElapsedMs >= actionButtonPressedStart && currentElapsedMs < menuOpenStart,
+    actionMenuOpen: actionMenuOpacity > 0.02,
+    actionMenuOpacity,
+    hoveredMenuItemId:
+      currentElapsedMs >= menuHoverStart && currentElapsedMs < phases.actionPickEndMs ? "summary" : null,
+    selectedMenuItemId: currentElapsedMs >= phases.actionPickEndMs ? "summary" : null,
+    rewriteProgress,
+    summarySections,
+    rawTranscriptHeight,
+    newChatHover:
+      currentElapsedMs >= newChatHoverStart && currentElapsedMs < phases.newChatHoverEndMs + 40,
+    newChatPressed:
+      currentElapsedMs >= newChatPressedStart && currentElapsedMs < resetStartMs + 40,
+    cursor: getCursorState(scene, currentElapsedMs),
   };
 }
 
@@ -1251,9 +2043,33 @@ function MockIcon({ name }: { name: ObsidianHeroMockIcon }) {
   }
 }
 
-function SidebarNavItem({ item }: { item: ObsidianHeroMockNavItem }) {
+function getBubbleStyle(opacity: number, translateY: number): CSSProperties {
+  return {
+    opacity,
+    transform: `translate3d(0, ${translateY}px, 0)`,
+  };
+}
+
+function SidebarNavItem({
+  item,
+  hovered = false,
+  pressed = false,
+}: {
+  item: ObsidianHeroMockNavItem;
+  hovered?: boolean;
+  pressed?: boolean;
+}) {
+  const className = [
+    "navItem",
+    item.active ? "navItemActive" : "",
+    hovered ? "navItemDemoHover" : "",
+    pressed ? "navItemDemoPressed" : "",
+  ]
+    .filter(Boolean)
+    .join(" ");
+
   return (
-    <div className="navItem">
+    <div className={className}>
       <span className="navItemIcon">
         <MockIcon name={item.icon} />
       </span>
@@ -1356,23 +2172,311 @@ function renderAssistantContent(content: string): ReactNode {
   );
 }
 
+function ChatBubbleView({
+  state,
+  idleAssistantId,
+}: {
+  state: DemoChatBubbleState;
+  idleAssistantId: string;
+}) {
+  const { bubble, opacity, translateY } = state;
+
+  if (bubble.kind === "userFile") {
+    return (
+      <div
+        className="chatMessage chatMessageUser chatMessageFile"
+        style={getBubbleStyle(opacity, translateY)}
+      >
+        <div className="chatFileBubble">
+          <span className="chatFileIcon">
+            <MockIcon name={bubble.icon ?? "audio"} />
+          </span>
+          <span className="chatFileText">
+            <span className="chatFileTitle">{bubble.title}</span>
+            <span className="chatFileExtension">{bubble.extension}</span>
+          </span>
+        </div>
+      </div>
+    );
+  }
+
+  const assistantClassName = [
+    "chatMessage",
+    "chatMessageAssistant",
+    bubble.id === idleAssistantId ? "chatMessageIdle" : "",
+    bubble.id === idleAssistantId ? "chatAssistantGreeting" : "chatAssistantResponse",
+  ].join(" ");
+
+  return (
+    <div className={assistantClassName} style={getBubbleStyle(opacity, translateY)}>
+      <div className="chatAssistantContent">{renderAssistantContent(bubble.content ?? "")}</div>
+    </div>
+  );
+}
+
+function SummarySectionView({ section }: { section: DemoSummarySectionState }) {
+  return (
+    <div className="summarySection" style={getBubbleStyle(section.opacity, section.translateY)}>
+      <div className="summaryHeading">{section.heading}</div>
+      <div className="summaryBody">{section.body}</div>
+    </div>
+  );
+}
+
+function ActionMenu({
+  items,
+  hoveredItemId,
+  selectedItemId,
+  opacity,
+  summaryItemRef,
+}: {
+  items: readonly ObsidianHeroMockAiMenuItem[];
+  hoveredItemId: string | null;
+  selectedItemId: string | null;
+  opacity: number;
+  summaryItemRef?: { current: HTMLDivElement | null };
+}) {
+  return (
+    <div
+      className="actionMenu"
+      style={{
+        opacity,
+        transform: `translate3d(0, ${mix(10, 0, opacity)}px, 0)`,
+      }}
+    >
+      {items.map((item) => {
+        const isActive = hoveredItemId === item.id || selectedItemId === item.id;
+
+        return (
+          <div
+            key={item.id}
+            className={`actionMenuItem ${isActive ? "actionMenuItemActive" : ""}`}
+            ref={item.id === "summary" ? summaryItemRef : undefined}
+          >
+            {item.label}
+          </div>
+        );
+      })}
+    </div>
+  );
+}
+
+function CursorOverlay({
+  cursor,
+  fileBubble,
+}: {
+  cursor: DemoCursorState;
+  fileBubble: ObsidianHeroMockChatBubble;
+}) {
+  if (!cursor.visible) {
+    return null;
+  }
+
+  return (
+    <div className="cursorLayer">
+      <div
+        className="demoCursor"
+        style={{
+          transform: `translate3d(${cursor.x - 3}px, ${cursor.y - 2}px, 0) scale(${cursor.pressed ? 0.97 : 1})`,
+        }}
+      >
+        <svg viewBox="0 0 28 28" aria-hidden="true">
+          <path
+            d="M3 1.5 22.4 13 13.8 15.3 18.4 25.8 14.5 27 10 16.6 4.6 22.3 3 1.5Z"
+            fill="currentColor"
+            stroke="rgba(8, 11, 16, 0.72)"
+            strokeWidth="1"
+            strokeLinejoin="round"
+          />
+        </svg>
+      </div>
+      {cursor.showFile ? (
+        <div
+          className="cursorFilePill"
+          style={{
+            opacity: cursor.fileOpacity,
+            transform: `translate3d(${cursor.x + 14}px, ${cursor.y - 10}px, 0)`,
+          }}
+        >
+          <span className="cursorFileIcon">
+            <MockIcon name={fileBubble.icon ?? "audio"} />
+          </span>
+          <span className="cursorFileText">
+            <span className="cursorFileTitle">{fileBubble.title}</span>
+            <span className="cursorFileMeta">{fileBubble.extension}</span>
+          </span>
+        </div>
+      ) : null}
+    </div>
+  );
+}
+
 function ShadowMarkup({
   layout,
   scene,
+  demo,
 }: {
   layout: MockLayout;
   scene: ObsidianHeroMockScene;
+  demo: DemoState;
 }) {
+  const artboardRef = useRef<HTMLDivElement | null>(null);
+  const composerRef = useRef<HTMLDivElement | null>(null);
+  const newChatRef = useRef<HTMLDivElement | null>(null);
+  const transcriptActionRef = useRef<HTMLDivElement | null>(null);
+  const actionButtonRef = useRef<HTMLDivElement | null>(null);
+  const summaryMenuItemRef = useRef<HTMLDivElement | null>(null);
+  const [measuredTargets, setMeasuredTargets] = useState<Partial<DemoCursorTargets>>({});
   const transformStyle = {
     transform: `translate3d(${layout.offsetX}px, ${layout.offsetY}px, 0) scale(${layout.scale})`,
   } as CSSProperties;
+  const transcriptActionLabel = scene.workspace.fileCard.readyActions[0]?.label;
+  const rawTranscriptOpacity =
+    demo.rewriteProgress <= 0 ? 1 : mix(1, 0.26, easeInOutCubic(demo.rewriteProgress));
+  const resolvedCursorTargets: DemoCursorTargets = {
+    ...scene.workspace.loop.cursorTargets,
+    ...measuredTargets,
+  };
+  const resolvedCursor = getCursorState(scene, demo.elapsedMs, resolvedCursorTargets);
+  const idleBubbleState = demo.chatBubbles.find(
+    (state) => state.bubble.id === scene.workspace.chat.idleAssistant.id,
+  );
+  const fileBubbleState = demo.chatBubbles.find(
+    (state) => state.bubble.id === scene.workspace.chat.fileBubble.id,
+  );
+  const remainingBubbleStates = demo.chatBubbles.filter(
+    (state) =>
+      state.bubble.id !== scene.workspace.chat.idleAssistant.id &&
+      state.bubble.id !== scene.workspace.chat.fileBubble.id,
+  );
+
+  useLayoutEffect(() => {
+    const artboardNode = artboardRef.current;
+
+    if (!artboardNode) {
+      return;
+    }
+
+    const artboardRect = artboardNode.getBoundingClientRect();
+    const scale = layout.scale || 1;
+    const nextTargets: Partial<DemoCursorTargets> = {};
+    const measureTarget = (
+      node: HTMLDivElement | null,
+      key: keyof DemoCursorTargets,
+      hotspot: { x: number; y: number } = { x: 0.5, y: 0.5 },
+    ) => {
+      if (!node) {
+        return;
+      }
+
+      const rect = node.getBoundingClientRect();
+
+      nextTargets[key] = {
+        x: Math.round((rect.left - artboardRect.left + rect.width * hotspot.x) / scale),
+        y: Math.round((rect.top - artboardRect.top + rect.height * hotspot.y) / scale),
+      };
+    };
+
+    measureTarget(newChatRef.current, "newChat", { x: 0.32, y: 0.5 });
+    measureTarget(composerRef.current, "composerDrop", { x: 0.54, y: 0.34 });
+    measureTarget(transcriptActionRef.current, "transcriptAction");
+    measureTarget(actionButtonRef.current, "aiActionButton");
+    measureTarget(summaryMenuItemRef.current, "aiActionMenuItem");
+
+    setMeasuredTargets((current) => {
+      const mergedTargets = { ...current, ...nextTargets };
+
+      return areCursorTargetsEqual(current, mergedTargets) ? current : mergedTargets;
+    });
+  }, [layout.scale, demo.documentActionsVisible, demo.actionMenuOpen, demo.inspectorOpenProgress]);
+
+  const documentCardMarkup = demo.documentCardVisible ? (
+    <div
+      className={`documentCard ${demo.documentActionsVisible ? "" : "documentCardProcessing"}`}
+      style={{
+        opacity: demo.documentCardOpacity,
+        transform: `translate3d(0, ${demo.documentCardTranslateY}px, 0)`,
+      }}
+    >
+      <div className="documentTitleRow">
+        <span className="documentTitle">{scene.workspace.fileCard.title}</span>
+        <span className="documentTitleChevron">
+          <MockIcon name="chevron" />
+        </span>
+      </div>
+      <div className="documentMeta">{scene.workspace.fileCard.extension}</div>
+
+      {!demo.documentActionsVisible ? (
+        <div className="documentProcessing">
+          <div className="documentProcessingStatus">{demo.documentProcessingStatus}</div>
+          <div className="documentProcessingMeter">
+            <div
+              className="documentProcessingMeterFill"
+              style={{ width: `${demo.documentProcessingProgress * 100}%` }}
+            />
+          </div>
+          <div className="documentProcessingSteps">
+            {scene.workspace.fileCard.processingSteps.map((step, index) => {
+              const isDone = index < demo.documentProcessingStepIndex;
+              const isActive = index === demo.documentProcessingStepIndex;
+
+              return (
+                <div
+                  key={step}
+                  className={[
+                    "documentProcessingStep",
+                    isDone ? "documentProcessingStepDone" : "",
+                    isActive ? "documentProcessingStepActive" : "",
+                  ]
+                    .filter(Boolean)
+                    .join(" ")}
+                >
+                  {step}
+                </div>
+              );
+            })}
+          </div>
+        </div>
+      ) : (
+        <div className="documentActions">
+          {scene.workspace.fileCard.readyActions.map((action) => {
+            const isTranscriptAction = action.label === transcriptActionLabel;
+            const className = [
+              "documentPill",
+              action.active ? "documentPillActive" : "",
+              demo.transcriptHover && isTranscriptAction ? "documentPillHover" : "",
+            ]
+              .filter(Boolean)
+              .join(" ");
+
+            return (
+                            <div
+                              key={action.label}
+                              className={className}
+                              ref={isTranscriptAction ? transcriptActionRef : undefined}
+                              style={
+                                demo.transcriptPressed && isTranscriptAction
+                                  ? { transform: "translateY(1px)" }
+                    : undefined
+                }
+              >
+                <MockIcon name="file" />
+                <span>{action.label}</span>
+                {action.active ? <MockIcon name="chevron" /> : null}
+              </div>
+            );
+          })}
+        </div>
+      )}
+    </div>
+  ) : null;
 
   return (
     <>
       <style>{SHADOW_STYLES}</style>
       <div className="root">
-        <div className="artboard" style={transformStyle}>
-          <div className="frame">
+        <div className="artboard" style={transformStyle} ref={artboardRef}>
+          <div className="frame" style={demo.frameStyle}>
             <aside className="sidebar">
               <div className="sidebarHeader">
                 <div className="brand">
@@ -1391,8 +2495,14 @@ function ShadowMarkup({
 
               <div className="sidebarBody">
                 <div className="navGroup">
-                  {scene.sidebar.primaryNav.map((item) => (
-                    <SidebarNavItem key={item.label} item={item} />
+                  {scene.sidebar.primaryNav.map((item, index) => (
+                    <div key={item.label} ref={index === 0 ? newChatRef : undefined}>
+                      <SidebarNavItem
+                        item={item}
+                        hovered={index === 0 && demo.newChatHover}
+                        pressed={index === 0 && demo.newChatPressed}
+                      />
+                    </div>
                   ))}
                 </div>
 
@@ -1404,7 +2514,10 @@ function ShadowMarkup({
 
                   <div className="historyList">
                     {scene.sidebar.historyItems.map((item, index) => (
-                      <SidebarHistoryItem key={`${item.label}-${item.count ?? "none"}-${index}`} item={item} />
+                      <SidebarHistoryItem
+                        key={`${item.label}-${item.count ?? "none"}-${index}`}
+                        item={item}
+                      />
                     ))}
                   </div>
                 </div>
@@ -1415,6 +2528,7 @@ function ShadowMarkup({
                   </div>
                   <div className="footerText">
                     <span className="footerName">{scene.sidebar.footer.name}</span>
+                    <span className="footerEmail">{scene.sidebar.footer.email}</span>
                   </div>
                   <div className="footerMenu">
                     <MockIcon name="ellipsis" />
@@ -1426,7 +2540,7 @@ function ShadowMarkup({
             <section className="workspace">
               <div className="workspaceHeader">
                 <div className="workspaceBreadcrumb">
-                  <span className="workspaceSectionLabel">Стенограмма</span>
+                  <span className="workspaceSectionLabel">Транскрипция</span>
                   <span className="workspacePathChevron">
                     <MockIcon name="chevron" />
                   </span>
@@ -1435,60 +2549,48 @@ function ShadowMarkup({
               </div>
 
               <div className="workspaceCanvas">
-                <div className="documentCard">
-                  <div className="documentTitleRow">
-                    <span className="documentTitle">{scene.workspace.contextCard.title}</span>
-                    <span className="documentTitleChevron">
-                      <MockIcon name="chevron" />
-                    </span>
-                  </div>
-                  {scene.workspace.contextCard.excerpt ? (
-                    <p className="documentExcerpt">{scene.workspace.contextCard.excerpt}</p>
-                  ) : null}
-                  <div className="documentActions">
-                    {scene.workspace.contextCard.actions.map((action) => (
-                      <div
-                        key={action.label}
-                        className={`documentPill ${action.active ? "documentPillActive" : ""}`}
-                      >
-                        <MockIcon name="file" />
-                        <span>{action.label}</span>
-                        {action.active ? <MockIcon name="chevron" /> : null}
-                      </div>
+                <div className="chatViewport">
+                  <div className="chatRail">
+                    {idleBubbleState ? (
+                      <ChatBubbleView
+                        key={idleBubbleState.bubble.id}
+                        state={idleBubbleState}
+                        idleAssistantId={scene.workspace.chat.idleAssistant.id}
+                      />
+                    ) : null}
+                    {fileBubbleState ? (
+                      <ChatBubbleView
+                        key={fileBubbleState.bubble.id}
+                        state={fileBubbleState}
+                        idleAssistantId={scene.workspace.chat.idleAssistant.id}
+                      />
+                    ) : null}
+                    {documentCardMarkup}
+                    {remainingBubbleStates.map((bubbleState) => (
+                      <ChatBubbleView
+                        key={bubbleState.bubble.id}
+                        state={bubbleState}
+                        idleAssistantId={scene.workspace.chat.idleAssistant.id}
+                      />
                     ))}
                   </div>
                 </div>
 
-                <div className="chatViewport">
-                  <div className="chatRail">
-                    {scene.workspace.chat.messages.map((message) => {
-                      if (message.role === "user") {
-                        return (
-                          <div key={message.id} className="chatMessage chatMessageUser">
-                            <div className="chatUserBubble">
-                              <span className="chatUserText">{message.content}</span>
-                            </div>
-                          </div>
-                        );
-                      }
-
-                      const assistantClassName = [
-                        "chatMessage",
-                        "chatMessageAssistant",
-                        message.id === "greeting" ? "chatAssistantGreeting" : "chatAssistantResponse",
-                      ].join(" ");
-
-                      return (
-                        <div key={message.id} className={assistantClassName}>
-                          <div className="chatAssistantContent">{renderAssistantContent(message.content)}</div>
-                        </div>
-                      );
-                    })}
+                <div
+                  className={`composer ${demo.composerDrop ? "composerDrop" : ""}`}
+                  ref={composerRef}
+                >
+                  <div
+                    className={[
+                      "composerInput",
+                      !demo.composerText ? "composerInputEmpty" : "",
+                      demo.composerDrop ? "composerInputDrop" : "",
+                    ]
+                      .filter(Boolean)
+                      .join(" ")}
+                  >
+                    {demo.composerText || "\u00A0"}
                   </div>
-                </div>
-
-                <div className="composer">
-                  <div className="composerInput">{scene.workspace.composer.draft}</div>
                   <div className="composerBottom">
                     <div className="composerTools">
                       <MockIcon name="paperclip" />
@@ -1503,21 +2605,42 @@ function ShadowMarkup({
               </div>
             </section>
 
-            <div className="divider">
-              <div className="ndle">
+            <div className="divider" style={{ opacity: demo.dividerOpacity }}>
+              <div className="dividerHandle">
                 <MockIcon name="bars" />
               </div>
             </div>
 
             <aside className="inspector">
-              <div className="inspectorTop">
+              <div className="inspectorShell">
+                <div className="inspectorTop" style={{ opacity: demo.inspectorContentOpacity }}>
                 <div className="inspectorTitle">{scene.inspector.title}</div>
                 <div className="inspectorActions">
-                  <div className="actionButton">
-                    <MockIcon name="lightning" />
-                    <span>{scene.inspector.actionLabel}</span>
-                    <MockIcon name="chevronDown" />
-                  </div>
+                  <div className="actionMenuWrap">
+                      <div
+                        ref={actionButtonRef}
+                        className={[
+                          "actionButton",
+                          demo.actionButtonHover ? "actionButtonHover" : "",
+                        demo.actionButtonPressed ? "actionButtonPressed" : "",
+                      ]
+                        .filter(Boolean)
+                        .join(" ")}
+                    >
+                      <MockIcon name="lightning" />
+                      <span>{scene.inspector.actionLabel}</span>
+                      <MockIcon name="chevronDown" />
+                    </div>
+                    {demo.actionMenuOpen ? (
+                        <ActionMenu
+                          items={scene.inspector.menuItems}
+                          hoveredItemId={demo.hoveredMenuItemId}
+                          selectedItemId={demo.selectedMenuItemId}
+                          opacity={demo.actionMenuOpacity}
+                          summaryItemRef={summaryMenuItemRef}
+                        />
+                      ) : null}
+                    </div>
                   {scene.inspector.showDownload ? (
                     <div className="topAction">
                       <MockIcon name="download" />
@@ -1532,16 +2655,36 @@ function ShadowMarkup({
                 </div>
               </div>
 
-              <div className="inspectorBody">
-                <div className="transcriptBlock">
-                  {scene.inspector.lines.map((line, index) => (
-                    <TranscriptLine key={index} line={line} />
-                  ))}
+                <div className="inspectorBody" style={{ opacity: demo.inspectorContentOpacity }}>
+                <div className="inspectorContent">
+                  {demo.summarySections.length > 0 ? (
+                    <div className="inspectorSummary">
+                      {demo.summarySections.map((section) => (
+                        <SummarySectionView key={section.heading} section={section} />
+                      ))}
+                    </div>
+                  ) : null}
+
+                  <div
+                    className="transcriptBlock transcriptBlockRaw"
+                    style={{
+                      maxHeight: `${demo.rawTranscriptHeight}px`,
+                      opacity: rawTranscriptOpacity,
+                    }}
+                  >
+                    {scene.inspector.rawLines.map((line, index) => (
+                      <TranscriptLine key={index} line={line} />
+                    ))}
+                  </div>
+
+                  <div className="hint">{scene.inspector.hint}</div>
                 </div>
-                <div className="hint">{scene.inspector.hint}</div>
+                </div>
               </div>
             </aside>
           </div>
+
+          <CursorOverlay cursor={resolvedCursor} fileBubble={scene.workspace.chat.fileBubble} />
         </div>
       </div>
     </>
@@ -1552,6 +2695,7 @@ export function ObsidianHeroMock() {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [hostElement, setHostElement] = useState<HTMLDivElement | null>(null);
   const [hostSize, setHostSize] = useState({ width: 0, height: 0 });
+  const [elapsedMs, setElapsedMs] = useState(0);
   const shadowRoot = hostElement?.shadowRoot ?? null;
 
   const handleHostRef = useCallback((node: HTMLDivElement | null) => {
@@ -1599,13 +2743,28 @@ export function ObsidianHeroMock() {
     return () => resizeObserver.disconnect();
   }, []);
 
+  useEffect(() => {
+    let frameId = 0;
+    const startTime = performance.now();
+
+    const tick = (now: number) => {
+      setElapsedMs(now - startTime);
+      frameId = window.requestAnimationFrame(tick);
+    };
+
+    frameId = window.requestAnimationFrame(tick);
+
+    return () => window.cancelAnimationFrame(frameId);
+  }, []);
+
   const scene = getObsidianHeroMockScene(hostSize.width);
   const layout = getMockLayout(hostSize.width, hostSize.height);
+  const demo = getDemoState(scene, elapsedMs);
 
   return (
     <div ref={handleHostRef} aria-hidden="true" style={HOST_STYLE}>
       {shadowRoot
-        ? createPortal(<ShadowMarkup layout={layout} scene={scene} />, shadowRoot)
+        ? createPortal(<ShadowMarkup layout={layout} scene={scene} demo={demo} />, shadowRoot)
         : null}
     </div>
   );
