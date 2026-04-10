@@ -18,7 +18,7 @@ import {
   trustLogos,
   useCases,
 } from "./content";
-import { ObsidianHeroMock } from "./obsidian-hero-mock";
+import { ObsidianHeroInterface } from "./obsidian-hero-interface";
 import { ObsidianLeadForm } from "./lead-form";
 import styles from "./obsidian.module.css";
 
@@ -101,11 +101,6 @@ export function ObsidianLanding() {
   const [isScrolled, setIsScrolled] = useState(false);
   const [activePainIndex, setActivePainIndex] = useState(0);
   const [painCycleKey, setPainCycleKey] = useState(0);
-
-  useEffect(() => {
-    document.body.classList.add("obsidian-route");
-    return () => document.body.classList.remove("obsidian-route");
-  }, []);
 
   useEffect(() => {
     const updateScrollState = () => setIsScrolled(window.scrollY > 18);
@@ -223,11 +218,7 @@ export function ObsidianLanding() {
           </div>
 
           <div className={styles.heroStage}>
-            <div className={styles.heroPanel}>
-              <div className={styles.heroShot}>
-                <ObsidianHeroMock />
-              </div>
-            </div>
+            <ObsidianHeroInterface />
           </div>
           </div>
         </section>

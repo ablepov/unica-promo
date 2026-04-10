@@ -6,6 +6,7 @@ import {
   useRef,
   useState,
   type CSSProperties,
+  type ReactNode,
   type SVGProps,
 } from "react";
 import { createPortal } from "react-dom";
@@ -20,6 +21,9 @@ import {
   type ObsidianHeroMockNavItem,
   type ObsidianHeroMockScene,
 } from "./obsidian-hero-mock.scene";
+
+const SIDEBAR_LOGO_SRC = "/designs/obsidian/logo.svg";
+const SIDEBAR_AVATAR_SRC = "/designs/obsidian/avatar.png";
 
 const HOST_STYLE = {
   display: "block",
@@ -107,71 +111,88 @@ const SHADOW_STYLES = `
 
   .frame {
     display: grid;
-    grid-template-columns: 255px minmax(0, 1fr) 1px 656px;
+    grid-template-columns: 274px minmax(0, 1fr) 1px 638px;
+    grid-template-rows: minmax(0, 1fr);
     height: 100%;
   }
 
   .sidebar {
     position: relative;
     display: flex;
+    min-height: 0;
     flex-direction: column;
-    background: linear-gradient(180deg, rgba(11, 13, 17, 0.98), rgba(12, 14, 18, 0.96));
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    overflow: hidden;
+    padding: 14px 0 24px;
+    background: linear-gradient(180deg, #12161d 0%, #11151c 52%, #0f1319 100%);
+    border-right: 1px solid rgba(255, 255, 255, 0.055);
+    box-shadow: inset -1px 0 0 rgba(255, 255, 255, 0.02);
   }
 
   .sidebarHeader {
     display: flex;
     align-items: center;
     justify-content: space-between;
-    gap: 16px;
-    padding: 18px 18px 14px;
+    gap: 14px;
+    padding: 16px 15px 12px 16px;
   }
 
   .brand {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     min-width: 0;
   }
 
   .brandMark {
     flex: none;
-    width: 28px;
-    height: 28px;
-    border-radius: 999px;
+    width: 31px;
+    height: 31px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background:
-      radial-gradient(circle at 50% 50%, rgba(160, 255, 46, 0.18), rgba(160, 255, 46, 0)),
-      rgba(6, 10, 6, 0.9);
-    border: 1px solid rgba(181, 255, 71, 0.28);
-    color: #b6ff39;
-    box-shadow: 0 0 0 4px rgba(153, 255, 0, 0.04);
+  }
+
+  .brandMarkImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    filter: drop-shadow(0 10px 22px rgba(0, 0, 0, 0.24));
   }
 
   .brandText {
     display: grid;
-    gap: 2px;
+    gap: 1px;
     min-width: 0;
+    max-width: 148px;
   }
 
   .brandName {
-    color: #f4f8ff;
-    font-size: 15px;
+    color: #f5f8ff;
+    font-size: 14px;
     font-weight: 700;
     letter-spacing: -0.02em;
+    line-height: 1.14;
     white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .brandPlan {
-    color: rgba(229, 236, 248, 0.85);
+    color: rgba(245, 248, 255, 0.94);
     font-size: 12px;
     font-weight: 500;
+    line-height: 1.08;
   }
 
   .workspaceChevron {
-    color: rgba(166, 175, 194, 0.7);
+    width: 16px;
+    height: 16px;
+    flex: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(151, 159, 174, 0.8);
   }
 
   .sidebarBody {
@@ -179,12 +200,12 @@ const SHADOW_STYLES = `
     flex: 1;
     min-height: 0;
     flex-direction: column;
-    padding: 6px 10px 14px;
+    padding: 6px 8px 4px 10px;
   }
 
   .navGroup {
     display: grid;
-    gap: 4px;
+    gap: 2px;
   }
 
   .navItem,
@@ -192,26 +213,46 @@ const SHADOW_STYLES = `
     display: flex;
     align-items: center;
     gap: 10px;
-    min-height: 34px;
-    padding: 7px 8px;
-    border-radius: 10px;
+    min-height: 35px;
+    padding: 6px 8px;
+    border-radius: 9px;
     color: rgba(243, 247, 252, 0.96);
     font-size: 13px;
-    line-height: 1.2;
+    line-height: 1.25;
+  }
+
+  .navItem {
+    font-weight: 600;
   }
 
   .navItemIcon,
   .historyItemIcon {
-    color: rgba(209, 216, 230, 0.88);
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    color: rgba(209, 216, 230, 0.86);
     flex: none;
+  }
+
+  .navItemLabel,
+  .historyItemLabel {
+    min-width: 0;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
   }
 
   .navItemCount,
   .historyCount {
     margin-left: auto;
-    color: #7ba9ff;
+    min-width: 16px;
+    text-align: right;
+    color: rgba(164, 172, 185, 0.92);
     font-size: 12px;
     font-weight: 500;
+    letter-spacing: 0.01em;
   }
 
   .historySection {
@@ -219,7 +260,8 @@ const SHADOW_STYLES = `
     flex: 1;
     min-height: 0;
     flex-direction: column;
-    margin-top: 16px;
+    overflow: hidden;
+    margin-top: 18px;
   }
 
   .historyHeading {
@@ -227,8 +269,8 @@ const SHADOW_STYLES = `
     align-items: center;
     justify-content: space-between;
     gap: 10px;
-    padding: 0 8px 10px;
-    color: rgba(177, 186, 201, 0.72);
+    padding: 0 6px 10px 8px;
+    color: rgba(163, 174, 192, 0.74);
     font-size: 12px;
     font-weight: 700;
     letter-spacing: -0.01em;
@@ -236,73 +278,101 @@ const SHADOW_STYLES = `
 
   .historyList {
     display: grid;
-    gap: 2px;
+    gap: 1px;
+    flex: 1;
     min-height: 0;
     overflow: hidden;
+    align-content: start;
+    padding-right: 4px;
   }
 
   .historyItem {
-    color: rgba(226, 232, 241, 0.9);
+    color: rgba(229, 234, 241, 0.92);
   }
 
   .historyItemActive {
-    background: rgba(255, 255, 255, 0.03);
-    color: #f8fbff;
+    color: #fafcff;
     font-weight: 700;
   }
 
+  .historyItemActive .historyCount {
+    color: rgba(194, 201, 212, 0.94);
+  }
+
   .historyItemIndented {
-    padding-left: 26px;
+    padding-left: 18px;
   }
 
   .historyItemMuted {
-    color: rgba(194, 202, 214, 0.86);
+    color: rgba(218, 225, 236, 0.9);
   }
 
   .sidebarFooter {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     margin-top: auto;
-    padding: 12px 8px 8px;
+    padding: 10px 8px 8px;
+    border-top: 1px solid rgba(255, 255, 255, 0.055);
   }
 
   .avatar {
-    width: 30px;
-    height: 30px;
+    width: 32px;
+    height: 32px;
     border-radius: 999px;
-    background: linear-gradient(180deg, #f3e0d5, #d6b9a3);
-    box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.35);
+    overflow: hidden;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    background: rgba(255, 255, 255, 0.04);
+    box-shadow:
+      inset 0 1px 0 rgba(255, 255, 255, 0.18),
+      0 1px 8px rgba(0, 0, 0, 0.2);
+  }
+
+  .avatarImage {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
   }
 
   .footerText {
     display: grid;
-    gap: 2px;
+    gap: 0;
     min-width: 0;
   }
 
   .footerName {
     color: #fafcff;
-    font-size: 12px;
+    font-size: 13px;
     font-weight: 700;
   }
 
   .footerEmail {
-    color: rgba(241, 245, 252, 0.9);
-    font-size: 11px;
+    color: rgba(244, 248, 255, 0.92);
+    font-size: 12px;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
 
   .footerMenu {
+    width: 16px;
+    height: 16px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
     margin-left: auto;
-    color: rgba(161, 170, 184, 0.74);
+    color: rgba(154, 163, 178, 0.76);
   }
 
   .workspace {
     position: relative;
+    display: flex;
+    flex-direction: column;
     min-width: 0;
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
     background:
       radial-gradient(circle at 30% 18%, rgba(44, 83, 172, 0.08), transparent 20%),
       linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0)),
@@ -312,31 +382,70 @@ const SHADOW_STYLES = `
   .workspaceHeader {
     display: flex;
     align-items: center;
-    gap: 14px;
-    height: 62px;
-    padding: 0 22px 0 24px;
+    height: 76px;
+    padding: 13px 24px 0 24px;
     border-bottom: 1px solid rgba(255, 255, 255, 0.055);
     color: rgba(244, 248, 255, 0.98);
   }
 
-  .workspaceTitle {
+  .workspaceBreadcrumb {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    min-width: 0;
+  }
+
+  .workspaceSectionLabel {
+    display: inline-flex;
+    align-items: center;
+    flex: none;
+    color: rgba(244, 248, 255, 0.98);
     font-size: 17px;
     font-weight: 700;
+    line-height: 1;
     letter-spacing: -0.03em;
   }
 
-  .workspacePathIcon {
-    color: rgba(151, 162, 181, 0.7);
+  .workspacePathChevron {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex: none;
+    width: 14px;
+    height: 14px;
+    color: rgba(164, 173, 188, 0.56);
   }
 
-  .workspacePathChevron {
-    color: rgba(164, 173, 188, 0.56);
+  .workspacePathChevron .icon {
+    width: 14px;
+    height: 14px;
+    transform: translateY(1px);
+  }
+
+  .workspaceTitle {
+    display: inline-flex;
+    align-items: center;
+    min-width: 0;
+    color: rgba(244, 248, 255, 0.98);
+    font-size: 17px;
+    font-weight: 700;
+    line-height: 1;
+    letter-spacing: -0.03em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 
   .workspaceCanvas {
     position: relative;
-    height: calc(100% - 62px);
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    gap: 18px;
+    height: auto;
     overflow: hidden;
+    padding: 20px 24px 26px 32px;
+    min-height: 0;
   }
 
   .workspaceCanvas::after {
@@ -349,90 +458,30 @@ const SHADOW_STYLES = `
     pointer-events: none;
   }
 
-  .floatingAudio {
-    position: absolute;
-    top: 28px;
-    left: 56%;
-    transform: translateX(-50%);
-    width: 324px;
-    padding: 12px 16px;
-    border-radius: 16px;
-    display: grid;
-    gap: 4px;
-    background: rgba(31, 35, 44, 0.9);
-    border: 1px solid rgba(255, 255, 255, 0.05);
-    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.24);
-  }
-
-  .floatingAudioRow {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    min-width: 0;
-  }
-
-  .floatingAudioIcon {
-    width: 34px;
-    height: 34px;
-    border-radius: 999px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    color: rgba(243, 247, 255, 0.92);
-    background: rgba(16, 18, 24, 0.84);
-    flex: none;
-  }
-
-  .floatingAudioText {
-    display: grid;
-    gap: 2px;
-    min-width: 0;
-    flex: 1;
-  }
-
-  .floatingAudioTitle {
-    color: #fbfdff;
-    font-size: 15px;
-    font-weight: 700;
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
-  }
-
-  .floatingAudioMeta {
-    color: rgba(200, 208, 224, 0.84);
-    font-size: 13px;
-  }
-
-  .floatingAudioDuration {
-    justify-self: end;
-    color: #8ba4d8;
-    font-size: 12px;
-    font-weight: 500;
-  }
-
   .chatViewport {
-    position: absolute;
-    top: 88px;
-    left: 48px;
-    right: 18px;
-    bottom: 108px;
+    position: relative;
+    flex: 1;
+    min-height: 0;
+    width: min(100%, 632px);
+    max-width: 632px;
+    margin-inline: auto;
     overflow: hidden;
+    padding-right: 0;
+    z-index: 1;
   }
 
   .chatRail {
     position: relative;
     display: flex;
     flex-direction: column;
-    gap: 22px;
-    padding: 12px 18px 0 0;
-    will-change: transform, opacity;
+    gap: 18px;
+    min-height: 100%;
+    padding: 4px 0 0;
+    z-index: 1;
   }
 
   .chatMessage {
-    max-width: 640px;
-    will-change: transform, opacity;
+    max-width: min(100%, 696px);
   }
 
   .chatMessageAssistant {
@@ -441,24 +490,61 @@ const SHADOW_STYLES = `
 
   .chatMessageUser {
     align-self: flex-end;
-    max-width: 360px;
+    max-width: 336px;
   }
 
   .chatAssistantContent {
     color: #f4f7ff;
     font-size: 15px;
-    line-height: 1.66;
+    line-height: 1.68;
     letter-spacing: -0.015em;
-    white-space: pre-wrap;
   }
 
-  .chatAssistantGreeting .chatAssistantContent {
-    font-size: 15px;
+  .assistantBlocks {
+    display: grid;
+    gap: 14px;
+  }
+
+  .assistantParagraph {
+    margin: 0;
+  }
+
+  .chatAssistantGreeting .assistantParagraph {
     font-weight: 650;
   }
 
+  .assistantQuote {
+    margin: 0;
+    padding: 12px 0 12px 16px;
+    border-left: 3px solid rgba(110, 119, 136, 0.58);
+    color: rgba(197, 204, 217, 0.94);
+    font-style: italic;
+  }
+
+  .assistantQuoteLine {
+    margin: 0;
+  }
+
+  .assistantQuoteLine + .assistantQuoteLine {
+    margin-top: 4px;
+  }
+
+  .assistantList {
+    margin: 0;
+    padding-left: 20px;
+    color: #f4f7ff;
+  }
+
+  .assistantList li + li {
+    margin-top: 8px;
+  }
+
+  .assistantListOrdered {
+    padding-left: 24px;
+  }
+
   .chatAssistantResponse {
-    max-width: 620px;
+    max-width: min(100%, 720px);
   }
 
   .chatAssistantToolbar {
@@ -488,9 +574,9 @@ const SHADOW_STYLES = `
     display: inline-flex;
     flex-direction: column;
     gap: 6px;
-    min-width: 228px;
-    max-width: 360px;
-    padding: 14px 16px 12px;
+    min-width: 0;
+    max-width: 336px;
+    padding: 14px 16px;
     border-radius: 18px;
     background: rgba(31, 35, 43, 0.98);
     border: 1px solid rgba(255, 255, 255, 0.04);
@@ -505,76 +591,14 @@ const SHADOW_STYLES = `
     white-space: pre-wrap;
   }
 
-  .chatUserTime {
-    align-self: flex-end;
-    color: #9fb0d8;
-    font-size: 12px;
-    font-weight: 500;
-  }
-
-  .chatTyping {
-    display: inline-flex;
-    align-items: center;
-    gap: 5px;
-    min-height: 24px;
-    padding-top: 2px;
-  }
-
-  .chatTypingDot {
-    width: 6px;
-    height: 6px;
-    border-radius: 999px;
-    background: rgba(154, 165, 184, 0.88);
-    animation: chatTypingPulse 1.2s ease-in-out infinite;
-  }
-
-  .chatTypingDot:nth-child(2) {
-    animation-delay: 0.18s;
-  }
-
-  .chatTypingDot:nth-child(3) {
-    animation-delay: 0.36s;
-  }
-
-  .chatStreamCursor {
-    display: inline-block;
-    width: 8px;
-    height: 1.1em;
-    margin-left: 2px;
-    vertical-align: text-bottom;
-    border-radius: 2px;
-    background: linear-gradient(180deg, rgba(120, 153, 255, 0.95), rgba(95, 132, 247, 0.86));
-    animation: chatCursorBlink 0.9s step-end infinite;
-  }
-
-  .chatScrollbar {
-    position: absolute;
-    top: 2px;
-    right: 2px;
-    bottom: 8px;
-    width: 3px;
-    border-radius: 999px;
-    background: rgba(255, 255, 255, 0.06);
-    overflow: hidden;
-  }
-
-  .chatScrollbarThumb {
-    position: absolute;
-    left: 0;
-    width: 100%;
-    height: 84px;
-    border-radius: 999px;
-    background: linear-gradient(180deg, rgba(137, 163, 255, 0.42), rgba(95, 120, 214, 0.72));
-    box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.06);
-  }
-
   .documentCard {
-    position: absolute;
-    top: 130px;
-    left: 48px;
-    width: 770px;
-    padding: 18px 18px 12px;
-    border-radius: 16px;
+    position: relative;
+    z-index: 1;
+    width: min(100%, 632px);
+    max-width: 632px;
+    margin-inline: auto;
+    padding: 18px 18px 16px;
+    border-radius: 18px;
     background: rgba(22, 25, 32, 0.98);
     border: 1px solid rgba(255, 255, 255, 0.05);
     box-shadow: 0 24px 48px rgba(0, 0, 0, 0.26);
@@ -601,7 +625,7 @@ const SHADOW_STYLES = `
     margin: 14px 0 16px;
     color: #f3f7fc;
     font-size: 14px;
-    line-height: 1.62;
+    line-height: 1.6;
     letter-spacing: -0.01em;
   }
 
@@ -609,6 +633,7 @@ const SHADOW_STYLES = `
     display: flex;
     flex-wrap: wrap;
     gap: 10px;
+    margin-top: 14px;
   }
 
   .documentPill {
@@ -623,6 +648,11 @@ const SHADOW_STYLES = `
     color: rgba(250, 252, 255, 0.98);
     font-size: 13px;
     font-weight: 600;
+  }
+
+  .documentPillActive {
+    border-color: rgba(114, 145, 219, 0.42);
+    background: rgba(35, 40, 51, 0.98);
   }
 
   .documentUtilityRow {
@@ -642,69 +672,51 @@ const SHADOW_STYLES = `
   }
 
   .composer {
-    position: absolute;
-    left: 48px;
-    right: 48px;
-    bottom: 20px;
-    max-width: 770px;
-    padding: 14px 14px 10px;
+    position: relative;
+    z-index: 1;
+    width: min(100%, 632px);
+    max-width: 632px;
+    margin-inline: auto;
+    margin-top: auto;
+    padding: 14px 16px 10px;
     border-radius: 18px;
-    background: rgba(27, 31, 39, 0.98);
-    border: 1px solid rgba(130, 142, 165, 0.36);
+    background: rgba(30, 33, 41, 0.98);
+    border: 2px solid rgba(66, 120, 232, 0.9);
     box-shadow:
       inset 0 1px 0 rgba(255, 255, 255, 0.05),
-      0 24px 48px rgba(0, 0, 0, 0.25);
+      0 24px 48px rgba(0, 0, 0, 0.28);
   }
 
-  .composerPlaceholder {
-    color: #7e8ca5;
-    font-size: 13px;
+  .composerInput {
+    min-height: 24px;
+    color: #ffffff;
+    font-size: 15px;
+    font-weight: 600;
   }
 
   .composerBottom {
     display: flex;
     align-items: center;
     gap: 12px;
-    margin-top: 18px;
+    margin-top: 16px;
   }
 
   .composerTools {
     display: flex;
     align-items: center;
     gap: 14px;
-    color: rgba(196, 204, 218, 0.8);
-  }
-
-  .composerChip {
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    min-height: 32px;
-    margin-left: 4px;
-    padding: 0 12px;
-    border-radius: 999px;
-    background: rgba(38, 43, 53, 0.98);
-    color: #f8fbff;
-    font-size: 13px;
-    font-weight: 600;
-    max-width: 220px;
-  }
-
-  .composerChipText {
-    white-space: nowrap;
-    overflow: hidden;
-    text-overflow: ellipsis;
+    color: rgba(196, 204, 218, 0.74);
   }
 
   .composerSend {
     margin-left: auto;
-    width: 32px;
-    height: 32px;
+    width: 34px;
+    height: 34px;
     border-radius: 999px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    background: linear-gradient(180deg, #376fcf, #315fc0);
+    background: linear-gradient(180deg, #3d80f6, #2f6fe2);
     color: white;
     box-shadow: 0 10px 24px rgba(52, 100, 198, 0.32);
   }
@@ -714,42 +726,40 @@ const SHADOW_STYLES = `
     background: linear-gradient(180deg, rgba(255, 255, 255, 0.09), rgba(255, 255, 255, 0.05));
   }
 
-  .dividerHandle {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 14px;
-    height: 30px;
-    border-radius: 7px;
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    background: rgba(43, 46, 54, 0.98);
-    color: rgba(192, 201, 214, 0.6);
-    box-shadow: 0 10px 24px rgba(0, 0, 0, 0.28);
-  }
-
   .inspector {
     display: flex;
     flex-direction: column;
     min-width: 0;
-    background: linear-gradient(180deg, rgba(14, 16, 21, 0.98), rgba(11, 13, 18, 0.98));
+    min-height: 0;
+    height: 100%;
+    overflow: hidden;
+    background:
+      radial-gradient(circle at 30% 18%, rgba(44, 83, 172, 0.08), transparent 20%),
+      linear-gradient(180deg, rgba(255, 255, 255, 0.012), rgba(255, 255, 255, 0)),
+      #111318;
   }
 
   .inspectorTop {
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 16px;
-    padding: 18px 22px;
-    min-height: 62px;
+    flex: 0 0 76px;
+    height: 76px;
+    min-height: 76px;
+    box-sizing: border-box;
+    padding: 13px 22px 0 36px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.055);
   }
 
   .inspectorTitle {
+    display: inline-flex;
+    align-items: center;
     min-width: 0;
     color: #ffffff;
-    font-size: 18px;
+    font-size: 17px;
     font-weight: 700;
+    line-height: 1;
     letter-spacing: -0.03em;
     white-space: nowrap;
     overflow: hidden;
@@ -757,72 +767,51 @@ const SHADOW_STYLES = `
   }
 
   .inspectorActions {
-    display: flex;
+    display: inline-flex;
     align-items: center;
-    gap: 18px;
+    gap: 14px;
     margin-left: auto;
+    min-height: 36px;
     color: rgba(239, 244, 251, 0.95);
   }
 
   .actionButton {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
-    min-height: 36px;
+    height: 36px;
     padding: 0 14px;
     border-radius: 999px;
     background: linear-gradient(180deg, #3e86fb, #3479eb);
     color: #ffffff;
     font-size: 13px;
     font-weight: 700;
+    line-height: 1;
     box-shadow: 0 12px 30px rgba(53, 118, 232, 0.3);
   }
 
   .topAction {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 8px;
+    height: 36px;
     color: rgba(247, 250, 255, 0.95);
     font-size: 13px;
     font-weight: 600;
+    line-height: 1;
   }
 
-  .tabs {
-    display: flex;
-    align-items: center;
-    gap: 24px;
-    padding: 0 36px;
-    min-height: 42px;
-    border-top: 1px solid rgba(255, 255, 255, 0.05);
-    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-  }
-
-  .tabActive {
-    position: relative;
-    display: inline-flex;
-    align-items: center;
-    gap: 10px;
-    height: 42px;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 700;
-  }
-
-  .tabActive::after {
-    content: "";
-    position: absolute;
-    left: 0;
-    right: 0;
-    bottom: -1px;
-    height: 2px;
-    background: #4387fb;
-  }
-
-  .tabAction {
-    color: rgba(245, 249, 255, 0.96);
+  .actionButton .icon,
+  .topAction .icon {
+    width: 16px;
+    height: 16px;
   }
 
   .inspectorBody {
+    flex: 1;
+    min-height: 0;
     padding: 20px 36px 0;
   }
 
@@ -842,6 +831,10 @@ const SHADOW_STYLES = `
     text-decoration-color: #ef7d49;
     text-decoration-thickness: 2px;
     text-underline-offset: 2px;
+  }
+
+  .transcriptMeta {
+    color: rgba(156, 166, 182, 0.88);
   }
 
   .hint {
@@ -1037,6 +1030,7 @@ function MockIcon({ name }: { name: ObsidianHeroMockIcon }) {
         <span className="icon">
           <svg {...svgProps}>
             <path d="m12 3 1.4 3.6L17 8l-3.6 1.4L12 13l-1.4-3.6L7 8l3.6-1.4L12 3Z" />
+            <path d="m5 15.5.8 2.1 2.1.8-2.1.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8.8-2.1Z" />
             <path d="m18.5 14 .8 2.1 2.2.8-2.2.8-.8 2.1-.8-2.1-2.1-.8 2.1-.8.8-2.1Z" />
           </svg>
         </span>
@@ -1075,6 +1069,17 @@ function MockIcon({ name }: { name: ObsidianHeroMockIcon }) {
           </svg>
         </span>
       );
+    case "wand":
+      return (
+        <span className="icon">
+          <svg {...svgProps}>
+            <path d="m14.5 4.5 5 5" />
+            <path d="M5 19 16 8" />
+            <path d="m12 3 .7 1.8L14.5 5.5l-1.8.7L12 8l-.7-1.8-1.8-.7 1.8-.7L12 3Z" />
+            <path d="m4 20 1.5-1.5" />
+          </svg>
+        </span>
+      );
     case "sliders":
       return (
         <span className="icon">
@@ -1085,6 +1090,22 @@ function MockIcon({ name }: { name: ObsidianHeroMockIcon }) {
             <path d="M4 9h4" />
             <path d="M10 15h4" />
             <path d="M16 11h4" />
+          </svg>
+        </span>
+      );
+    case "slidersHorizontal":
+      return (
+        <span className="icon">
+          <svg {...svgProps}>
+            <path d="M3 4h7" />
+            <path d="M14 4h7" />
+            <path d="M3 12h5" />
+            <path d="M12 12h9" />
+            <path d="M3 20h9" />
+            <path d="M16 20h5" />
+            <path d="M14 2v4" />
+            <path d="M8 10v4" />
+            <path d="M16 18v4" />
           </svg>
         </span>
       );
@@ -1103,6 +1124,23 @@ function MockIcon({ name }: { name: ObsidianHeroMockIcon }) {
         <span className="icon">
           <svg {...svgProps}>
             <path d="m9 6 6 6-6 6" />
+          </svg>
+        </span>
+      );
+    case "chevronDown":
+      return (
+        <span className="icon">
+          <svg {...svgProps}>
+            <path d="m6 9 6 6 6-6" />
+          </svg>
+        </span>
+      );
+    case "chevronsUpDown":
+      return (
+        <span className="icon">
+          <svg {...svgProps}>
+            <path d="m7 15 5 5 5-5" />
+            <path d="m7 9 5-5 5 5" />
           </svg>
         </span>
       );
@@ -1178,6 +1216,36 @@ function MockIcon({ name }: { name: ObsidianHeroMockIcon }) {
           </svg>
         </span>
       );
+    case "ellipsis":
+      return (
+        <span className="icon">
+          <svg {...svgProps}>
+            <path d="M12 5v.01" />
+            <path d="M12 12v.01" />
+            <path d="M12 19v.01" />
+          </svg>
+        </span>
+      );
+    case "unica":
+      return (
+        <span className="icon">
+          <svg {...svgProps}>
+            <path d="M12 3v4" />
+            <path d="m12 3 1.8 1.8" />
+            <path d="M12 3 10.2 4.8" />
+            <path d="M12 21v-4" />
+            <path d="m12 21 1.8-1.8" />
+            <path d="M12 21 10.2 19.2" />
+            <path d="M3 12h4" />
+            <path d="m3 12 1.8-1.8" />
+            <path d="M3 12 4.8 13.8" />
+            <path d="M21 12h-4" />
+            <path d="m21 12-1.8-1.8" />
+            <path d="M21 12 19.2 13.8" />
+            <circle cx="12" cy="12" r="1.4" />
+          </svg>
+        </span>
+      );
     default:
       return null;
   }
@@ -1189,7 +1257,7 @@ function SidebarNavItem({ item }: { item: ObsidianHeroMockNavItem }) {
       <span className="navItemIcon">
         <MockIcon name={item.icon} />
       </span>
-      <span>{item.label}</span>
+      <span className="navItemLabel">{item.label}</span>
       {item.count ? <span className="navItemCount">{item.count}</span> : null}
     </div>
   );
@@ -1207,9 +1275,9 @@ function SidebarHistoryItem({ item }: { item: ObsidianHeroMockHistoryItem }) {
   return (
     <div className={className}>
       <span className="historyItemIcon">
-        <MockIcon name="chain" />
+        <MockIcon name={item.icon ?? "wand"} />
       </span>
-      <span>{item.label}</span>
+      <span className="historyItemLabel">{item.label}</span>
       {item.count ? <span className="historyCount">{item.count}</span> : null}
     </div>
   );
@@ -1219,7 +1287,12 @@ function TranscriptLine({ line }: { line: ObsidianHeroMockLine }) {
   return (
     <p className="transcriptLine">
       {line.segments.map((segment, index) => (
-        <span key={`${segment.text}-${index}`} className={segment.highlight ? "highlight" : undefined}>
+        <span
+          key={`${segment.text}-${index}`}
+          className={
+            segment.metadata ? "transcriptMeta" : segment.highlight ? "highlight" : undefined
+          }
+        >
           {segment.text}
         </span>
       ))}
@@ -1227,48 +1300,71 @@ function TranscriptLine({ line }: { line: ObsidianHeroMockLine }) {
   );
 }
 
-function getMessageTransform(role: AnimatedChatMessage["role"], progress: number) {
-  const translateX = role === "user" ? (1 - progress) * 14 : -(1 - progress) * 6;
-  const translateY = (1 - progress) * 14;
+function renderAssistantContent(content: string): ReactNode {
+  const blocks = content
+    .split(/\n{2,}/)
+    .map((block) => block.trim())
+    .filter(Boolean);
 
-  return `translate3d(${translateX}px, ${translateY}px, 0)`;
-}
-
-function TypingDots() {
   return (
-    <span className="chatTyping" aria-hidden="true">
-      <span className="chatTypingDot" />
-      <span className="chatTypingDot" />
-      <span className="chatTypingDot" />
-    </span>
+    <div className="assistantBlocks">
+      {blocks.map((block, index) => {
+        const lines = block
+          .split("\n")
+          .map((line) => line.trim())
+          .filter(Boolean);
+
+        if (lines.every((line) => line.startsWith(">"))) {
+          return (
+            <blockquote key={`quote-${index}`} className="assistantQuote">
+              {lines.map((line, lineIndex) => (
+                <p key={`quote-line-${lineIndex}`} className="assistantQuoteLine">
+                  {line.replace(/^>\s?/, "")}
+                </p>
+              ))}
+            </blockquote>
+          );
+        }
+
+        if (lines.every((line) => /^\d+\.\s/.test(line))) {
+          return (
+            <ol key={`list-ordered-${index}`} className="assistantList assistantListOrdered">
+              {lines.map((line, lineIndex) => (
+                <li key={`ordered-item-${lineIndex}`}>{line.replace(/^\d+\.\s/, "")}</li>
+              ))}
+            </ol>
+          );
+        }
+
+        if (lines.every((line) => /^[-•]\s/.test(line))) {
+          return (
+            <ul key={`list-${index}`} className="assistantList">
+              {lines.map((line, lineIndex) => (
+                <li key={`list-item-${lineIndex}`}>{line.replace(/^[-•]\s/, "")}</li>
+              ))}
+            </ul>
+          );
+        }
+
+        return (
+          <p key={`paragraph-${index}`} className="assistantParagraph">
+            {lines.join(" ")}
+          </p>
+        );
+      })}
+    </div>
   );
 }
 
 function ShadowMarkup({
   layout,
   scene,
-  elapsedMs,
 }: {
   layout: MockLayout;
   scene: ObsidianHeroMockScene;
-  elapsedMs: number;
 }) {
   const transformStyle = {
     transform: `translate3d(${layout.offsetX}px, ${layout.offsetY}px, 0) scale(${layout.scale})`,
-  } as CSSProperties;
-  const chatAnimation = getChatAnimationState(
-    scene.workspace.chat.messages,
-    scene.workspace.chat.cycleDurationMs,
-    scene.workspace.chat.fadeOutMs,
-    elapsedMs,
-  );
-  const chatRailStyle = {
-    opacity: chatAnimation.threadOpacity,
-    transform: `translate3d(0, ${chatAnimation.threadOffsetY}px, 0)`,
-  } as CSSProperties;
-  const scrollbarThumbStyle = {
-    top: `${chatAnimation.scrollbarTop}px`,
-    opacity: chatAnimation.threadOpacity,
   } as CSSProperties;
 
   return (
@@ -1281,7 +1377,7 @@ function ShadowMarkup({
               <div className="sidebarHeader">
                 <div className="brand">
                   <div className="brandMark">
-                    <MockIcon name="sparkles" />
+                    <img src={SIDEBAR_LOGO_SRC} alt="" className="brandMarkImage" />
                   </div>
                   <div className="brandText">
                     <span className="brandName">{scene.sidebar.workspaceName}</span>
@@ -1289,7 +1385,7 @@ function ShadowMarkup({
                   </div>
                 </div>
                 <div className="workspaceChevron">
-                  <MockIcon name="chevron" />
+                  <MockIcon name="chevronsUpDown" />
                 </div>
               </div>
 
@@ -1303,7 +1399,7 @@ function ShadowMarkup({
                 <div className="historySection">
                   <div className="historyHeading">
                     <span>{scene.sidebar.historyTitle}</span>
-                    <MockIcon name="sliders" />
+                    <MockIcon name="slidersHorizontal" />
                   </div>
 
                   <div className="historyList">
@@ -1314,13 +1410,14 @@ function ShadowMarkup({
                 </div>
 
                 <div className="sidebarFooter">
-                  <div className="avatar" />
+                  <div className="avatar">
+                    <img src={SIDEBAR_AVATAR_SRC} alt="" className="avatarImage" />
+                  </div>
                   <div className="footerText">
                     <span className="footerName">{scene.sidebar.footer.name}</span>
-                    <span className="footerEmail">{scene.sidebar.footer.email}</span>
                   </div>
                   <div className="footerMenu">
-                    <MockIcon name="sliders" />
+                    <MockIcon name="ellipsis" />
                   </div>
                 </div>
               </div>
@@ -1328,49 +1425,48 @@ function ShadowMarkup({
 
             <section className="workspace">
               <div className="workspaceHeader">
-                <span className="workspacePathIcon">
-                  <MockIcon name="bars" />
-                </span>
-                <span className="workspacePathChevron">
-                  <MockIcon name="chevron" />
-                </span>
-                <span className="workspaceTitle">{scene.workspace.title}</span>
+                <div className="workspaceBreadcrumb">
+                  <span className="workspaceSectionLabel">Стенограмма</span>
+                  <span className="workspacePathChevron">
+                    <MockIcon name="chevron" />
+                  </span>
+                  <span className="workspaceTitle">{scene.workspace.title}</span>
+                </div>
               </div>
 
               <div className="workspaceCanvas">
-                <div className="floatingAudio">
-                  <div className="floatingAudioRow">
-                    <span className="floatingAudioIcon">
-                      <MockIcon name="audio" />
+                <div className="documentCard">
+                  <div className="documentTitleRow">
+                    <span className="documentTitle">{scene.workspace.contextCard.title}</span>
+                    <span className="documentTitleChevron">
+                      <MockIcon name="chevron" />
                     </span>
-                    <div className="floatingAudioText">
-                      <span className="floatingAudioTitle">{scene.workspace.floatingAudio.title}</span>
-                      <span className="floatingAudioMeta">{scene.workspace.floatingAudio.extension}</span>
-                    </div>
-                    <span className="floatingAudioDuration">
-                      {scene.workspace.floatingAudio.duration}
-                    </span>
+                  </div>
+                  {scene.workspace.contextCard.excerpt ? (
+                    <p className="documentExcerpt">{scene.workspace.contextCard.excerpt}</p>
+                  ) : null}
+                  <div className="documentActions">
+                    {scene.workspace.contextCard.actions.map((action) => (
+                      <div
+                        key={action.label}
+                        className={`documentPill ${action.active ? "documentPillActive" : ""}`}
+                      >
+                        <MockIcon name="file" />
+                        <span>{action.label}</span>
+                        {action.active ? <MockIcon name="chevron" /> : null}
+                      </div>
+                    ))}
                   </div>
                 </div>
 
                 <div className="chatViewport">
-                  <div className="chatRail" style={chatRailStyle}>
-                    {chatAnimation.messages.map((message) => {
-                      const messageStyle = {
-                        opacity: message.appearProgress,
-                        transform: getMessageTransform(message.role, message.appearProgress),
-                      } as CSSProperties;
-
+                  <div className="chatRail">
+                    {scene.workspace.chat.messages.map((message) => {
                       if (message.role === "user") {
                         return (
-                          <div
-                            key={message.id}
-                            className="chatMessage chatMessageUser"
-                            style={messageStyle}
-                          >
+                          <div key={message.id} className="chatMessage chatMessageUser">
                             <div className="chatUserBubble">
                               <span className="chatUserText">{message.content}</span>
-                              <span className="chatUserTime">{message.timestamp}</span>
                             </div>
                           </div>
                         );
@@ -1383,49 +1479,20 @@ function ShadowMarkup({
                       ].join(" ");
 
                       return (
-                        <div key={message.id} className={assistantClassName} style={messageStyle}>
-                          <div className="chatAssistantContent">
-                            {message.content.length > 0 ? message.content : <TypingDots />}
-                            {message.isStreaming && message.content.length > 0 ? (
-                              <span className="chatStreamCursor" aria-hidden="true" />
-                            ) : null}
-                          </div>
-
-                          <div className="chatAssistantMeta">
-                            <div
-                              className="chatAssistantToolbar"
-                              style={{ opacity: message.isComplete ? 1 : 0.32 }}
-                            >
-                              {message.utilityActions.map((iconName, index) => (
-                                <span key={`${message.id}-${iconName}-${index}`} className="utilityIcon">
-                                  <MockIcon name={iconName} />
-                                </span>
-                              ))}
-                            </div>
-                            <span className="chatAssistantTime">{message.timestamp}</span>
-                          </div>
+                        <div key={message.id} className={assistantClassName}>
+                          <div className="chatAssistantContent">{renderAssistantContent(message.content)}</div>
                         </div>
                       );
                     })}
                   </div>
-
-                  <div className="chatScrollbar" aria-hidden="true">
-                    <div className="chatScrollbarThumb" style={scrollbarThumbStyle} />
-                  </div>
                 </div>
 
                 <div className="composer">
-                  <div className="composerPlaceholder">{scene.workspace.composer.placeholder}</div>
+                  <div className="composerInput">{scene.workspace.composer.draft}</div>
                   <div className="composerBottom">
                     <div className="composerTools">
                       <MockIcon name="paperclip" />
                       <MockIcon name="at" />
-                    </div>
-
-                    <div className="composerChip">
-                      <MockIcon name="at" />
-                      <span className="composerChipText">{scene.workspace.composer.chip}</span>
-                      <MockIcon name="close" />
                     </div>
 
                     <div className="composerSend">
@@ -1437,7 +1504,7 @@ function ShadowMarkup({
             </section>
 
             <div className="divider">
-              <div className="dividerHandle">
+              <div className="ndle">
                 <MockIcon name="bars" />
               </div>
             </div>
@@ -1449,7 +1516,7 @@ function ShadowMarkup({
                   <div className="actionButton">
                     <MockIcon name="lightning" />
                     <span>{scene.inspector.actionLabel}</span>
-                    <MockIcon name="chevron" />
+                    <MockIcon name="chevronDown" />
                   </div>
                   {scene.inspector.showDownload ? (
                     <div className="topAction">
@@ -1462,16 +1529,6 @@ function ShadowMarkup({
                       <MockIcon name="close" />
                     </div>
                   ) : null}
-                </div>
-              </div>
-
-              <div className="tabs">
-                <div className="tabActive">
-                  <MockIcon name="at" />
-                  <span>{scene.inspector.tabs.primary}</span>
-                </div>
-                <div className="tabAction">
-                  <MockIcon name={scene.inspector.tabs.secondaryIcon} />
                 </div>
               </div>
 
@@ -1495,7 +1552,6 @@ export function ObsidianHeroMock() {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [hostElement, setHostElement] = useState<HTMLDivElement | null>(null);
   const [hostSize, setHostSize] = useState({ width: 0, height: 0 });
-  const [elapsedMs, setElapsedMs] = useState(0);
   const shadowRoot = hostElement?.shadowRoot ?? null;
 
   const handleHostRef = useCallback((node: HTMLDivElement | null) => {
@@ -1546,20 +1602,10 @@ export function ObsidianHeroMock() {
   const scene = getObsidianHeroMockScene(hostSize.width);
   const layout = getMockLayout(hostSize.width, hostSize.height);
 
-  useEffect(() => {
-    const cycleDurationMs = scene.workspace.chat.cycleDurationMs;
-    const animationStart = performance.now();
-    const intervalId = window.setInterval(() => {
-      setElapsedMs((performance.now() - animationStart) % cycleDurationMs);
-    }, 72);
-
-    return () => window.clearInterval(intervalId);
-  }, [scene.variant, scene.workspace.chat.cycleDurationMs, scene.workspace.chat.messages.length]);
-
   return (
     <div ref={handleHostRef} aria-hidden="true" style={HOST_STYLE}>
       {shadowRoot
-        ? createPortal(<ShadowMarkup layout={layout} scene={scene} elapsedMs={elapsedMs} />, shadowRoot)
+        ? createPortal(<ShadowMarkup layout={layout} scene={scene} />, shadowRoot)
         : null}
     </div>
   );
