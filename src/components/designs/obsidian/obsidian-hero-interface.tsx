@@ -15,6 +15,12 @@ function clampNumber(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
 
+const MOBILE_PANEL_CONTENT_PADDING_PX = 18;
+const MOBILE_PANEL_HEIGHT_RATIO = 0.46;
+const MOBILE_PANEL_MIN_HEIGHT_PX = 188;
+const MOBILE_PANEL_MAX_HEIGHT_PX = 304;
+const STATIC_MOBILE_LAYOUT_MAX_WIDTH_PX = 640;
+
 function getInteractiveFrameWidth(width: number) {
   if (width < 420) {
     return 440;
@@ -46,7 +52,15 @@ function getStaticMobilePanelHeight(width: number) {
     return null;
   }
 
-  return clampNumber(Math.round(width * 0.54), 188, 220);
+  const contentWidth = Math.max(0, width - MOBILE_PANEL_CONTENT_PADDING_PX);
+  const proportionalHeight =
+    contentWidth * MOBILE_PANEL_HEIGHT_RATIO + MOBILE_PANEL_CONTENT_PADDING_PX;
+
+  return clampNumber(
+    Math.round(proportionalHeight),
+    MOBILE_PANEL_MIN_HEIGHT_PX,
+    MOBILE_PANEL_MAX_HEIGHT_PX,
+  );
 }
 
 export function ObsidianHeroInterface({
@@ -77,7 +91,7 @@ export function ObsidianHeroInterface({
         return;
       }
 
-      updateWidth(entry.contentRect.width);
+      updateWidth(panelElement.clientWidth);
     });
 
     resizeObserver.observe(panelElement);
@@ -92,7 +106,11 @@ export function ObsidianHeroInterface({
   ]
     .filter(Boolean)
     .join(" ");
-  const useStaticMobileLayout = !interactive && panelWidth > 0 && panelWidth < 560;
+  const useStaticMobileLayout =
+    !interactive &&
+    panelWidth > 0 &&
+    panelWidth <= STATIC_MOBILE_LAYOUT_MAX_WIDTH_PX;
+  const forcedVariant = !interactive && !useStaticMobileLayout ? "desktop" : undefined;
   const panelHeight = interactive
     ? getInteractivePanelHeight(panelWidth)
     : useStaticMobileLayout
@@ -105,13 +123,21 @@ export function ObsidianHeroInterface({
           minHeight: `${panelHeight}px`,
         } as CSSProperties)
       : undefined;
+  const shotStyle = useStaticMobileLayout
+    ? ({
+        height: "100%",
+        aspectRatio: "auto",
+      } as CSSProperties)
+    : undefined;
 
   return (
     <div ref={handlePanelRef} className={panelClassName} style={panelStyle}>
-      <div className={styles.heroShot}>
+      <div className={styles.heroShot} style={shotStyle}>
         <ObsidianHeroMock
-          forcedVariant={interactive ? undefined : "desktop"}
-          layoutMode={interactive || useStaticMobileLayout ? "cover" : "contain"}
+          forcedVariant={forcedVariant}
+          layoutMode={
+            interactive ? "cover" : useStaticMobileLayout ? "coverTop" : "contain"
+          }
         />
       </div>
     </div>

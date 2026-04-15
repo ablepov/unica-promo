@@ -1478,7 +1478,7 @@ type VariantLayoutMetrics = {
   overlayInspector: boolean;
 };
 
-type MockLayoutMode = "contain" | "cover";
+type MockLayoutMode = "contain" | "cover" | "coverTop";
 
 const COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD = 920;
 
@@ -1502,18 +1502,20 @@ function getMockLayout(
 ): MockLayout {
   const safeWidth = width || OBSIDIAN_HERO_ARTBOARD.width;
   const safeHeight = height || OBSIDIAN_HERO_ARTBOARD.height;
+  const isContainLayout = layoutMode === "contain";
+  const isTopAlignedCoverLayout = layoutMode === "coverTop";
   const visibleWidth =
     variant === "desktop" ? OBSIDIAN_HERO_ARTBOARD.width : frameWidth || OBSIDIAN_HERO_ARTBOARD.width;
   const widthScale = safeWidth / visibleWidth;
   const heightScale = safeHeight / OBSIDIAN_HERO_ARTBOARD.height;
   const scale =
-    layoutMode === "contain"
+    isContainLayout
       ? Math.min(widthScale, heightScale)
       : Math.max(widthScale, heightScale);
   const scaledWidth = OBSIDIAN_HERO_ARTBOARD.width * scale;
   const scaledHeight = OBSIDIAN_HERO_ARTBOARD.height * scale;
   const visibleOffsetX =
-    layoutMode === "contain" && variant !== "desktop"
+    isContainLayout && variant !== "desktop"
       ? (safeWidth - visibleWidth * scale) / 2
       : (safeWidth - scaledWidth) / 2;
 
@@ -1521,8 +1523,8 @@ function getMockLayout(
     width: safeWidth,
     height: safeHeight,
     scale,
-    offsetX: layoutMode === "cover" && variant !== "desktop" ? 0 : visibleOffsetX,
-    offsetY: (safeHeight - scaledHeight) / 2,
+    offsetX: !isContainLayout && variant !== "desktop" ? 0 : visibleOffsetX,
+    offsetY: isTopAlignedCoverLayout ? 0 : (safeHeight - scaledHeight) / 2,
   };
 }
 
