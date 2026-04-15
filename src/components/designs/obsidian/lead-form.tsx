@@ -11,25 +11,24 @@ type FormState =
 
 const initialState: FormState = {
   kind: "idle",
-  message:
-    "Опишите сценарий, контур и ограничения. Этого достаточно, чтобы предложить формат пилота и следующий шаг.",
+  message: "",
 };
 
 const deliveryOptions = [
   {
     value: "cloud",
     label: "Облако",
-    note: "Для быстрого старта и управляемого пилота.",
+    note: "Быстрый старт",
   },
   {
     value: "on-prem",
     label: "On-prem",
-    note: "Для закрытого контура и полного контроля.",
+    note: "Закрытый контур",
   },
   {
     value: "hybrid",
     label: "Hybrid",
-    note: "Для смешанной архитектуры и поэтапного запуска.",
+    note: "Поэтапный запуск",
   },
 ] as const;
 
@@ -73,7 +72,7 @@ export function ObsidianLeadForm() {
             setState({
               kind: "success",
               message:
-                "Заявка отправлена. Вернёмся с вариантом пилота, контуром запуска и следующими шагами.",
+                "Заявка отправлена. Вернемся с вариантом пилота и следующим шагом.",
             });
           } catch (error) {
             setState({
@@ -81,7 +80,7 @@ export function ObsidianLeadForm() {
               message:
                 error instanceof Error
                   ? error.message
-                  : "Не удалось отправить форму. Попробуйте ещё раз.",
+                  : "Не удалось отправить форму. Попробуйте еще раз.",
             });
           } finally {
             setIsPending(false);
@@ -90,15 +89,15 @@ export function ObsidianLeadForm() {
       }}
     >
       <div className={styles.formHeader}>
-        <span className={styles.eyebrow}>Заказать демо</span>
         <h3 className={`${styles.display} ${styles.formTitle}`}>
-          Покажите нам вашу задачу, и мы предложим безопасный путь запуска.
+          Запросить демо
         </h3>
         <p className={styles.formLead}>
-          Опишите сценарий, и мы покажем, как он может работать в облаке или on-prem без
-          лишней предварительной бюрократии.
+          Оставьте контакт и пару слов о задаче
         </p>
       </div>
+
+      <div className={styles.formDivider} aria-hidden="true" />
 
       <div className={styles.fieldGrid}>
         <div className={styles.fieldBlock}>
@@ -152,11 +151,9 @@ export function ObsidianLeadForm() {
                   value={option.value}
                   defaultChecked={index === 0}
                 />
-                <span>
-                  <span>
-                    <strong className={styles.deliveryTitle}>{option.label}</strong>
-                    <span className={styles.deliveryNote}>{option.note}</span>
-                  </span>
+                <span className={styles.deliveryCard}>
+                  <strong className={styles.deliveryTitle}>{option.label}</strong>
+                  <span className={styles.deliveryNote}>{option.note}</span>
                 </span>
               </label>
             ))}
@@ -165,38 +162,46 @@ export function ObsidianLeadForm() {
 
         <div className={`${styles.fieldBlock} ${styles.fieldBlockFull}`}>
           <label className={styles.fieldLabel} htmlFor="obsidian-message">
-            Сценарий или задача
+            Сценарий
           </label>
           <textarea
             id="obsidian-message"
             name="message"
             className={styles.textarea}
-            placeholder="Например: внутренний поиск по базе знаний, сервис-деск, документы, речевая аналитика, автоматизация рутины, on-prem и требования ИБ."
+            placeholder="Задача, данные, ограничения, контур."
           />
         </div>
       </div>
 
-      <div className={styles.formActions}>
-        <button type="submit" className={styles.primaryButton} disabled={isPending}>
-          {isPending ? "Отправляем..." : "Заказать демо"}
-        </button>
-        <a href="mailto:sales@unica.local" className={styles.directLink}>
-          Или написать напрямую: sales@unica.local
-        </a>
-      </div>
+      <div className={styles.formFooter}>
+        <div className={styles.formActions}>
+          <button
+            type="submit"
+            className={`${styles.primaryButton} ${styles.submitButton}`}
+            disabled={isPending}
+          >
+            {isPending ? "Отправляем..." : "Заказать демо"}
+          </button>
+          <a href="mailto:sales@unica.local" className={styles.directLink}>
+            sales@unica.local
+          </a>
+        </div>
 
-      <p
-        className={`${styles.status} ${
-          state.kind === "success"
-            ? styles.statusSuccess
-            : state.kind === "error"
-              ? styles.statusError
-              : styles.statusIdle
-        }`}
-        aria-live="polite"
-      >
-        {state.message}
-      </p>
+        {state.message ? (
+          <p
+            className={`${styles.status} ${
+              state.kind === "success"
+                ? styles.statusSuccess
+                : state.kind === "error"
+                  ? styles.statusError
+                  : styles.statusIdle
+            }`}
+            aria-live="polite"
+          >
+            {state.message}
+          </p>
+        ) : null}
+      </div>
     </form>
   );
 }

@@ -307,15 +307,19 @@ const CURSOR_TARGETS = {
   newChat: { x: 96, y: 138 },
 } as const;
 
-export function getObsidianHeroMockScene(hostWidth: number): ObsidianHeroMockScene {
+export function getObsidianHeroMockScene(
+  hostWidth: number,
+  forcedVariant?: ObsidianHeroMockVariant,
+): ObsidianHeroMockScene {
   const variant: ObsidianHeroMockVariant =
-    hostWidth > 0 && hostWidth < 420
+    forcedVariant ??
+    (hostWidth > 0 && hostWidth < 420
       ? "ultra"
       : hostWidth > 0 && hostWidth < 760
       ? "narrow"
       : hostWidth > 0 && hostWidth < 1180
         ? "compact"
-        : "desktop";
+        : "desktop");
 
   return {
     variant,

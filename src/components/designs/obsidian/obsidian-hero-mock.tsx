@@ -22,6 +22,7 @@ import {
   type ObsidianHeroMockLine,
   type ObsidianHeroMockNavItem,
   type ObsidianHeroMockScene,
+  type ObsidianHeroMockVariant,
   type ObsidianHeroMockSummarySection,
 } from "./obsidian-hero-mock.scene";
 
@@ -1477,31 +1478,50 @@ type VariantLayoutMetrics = {
   overlayInspector: boolean;
 };
 
+type MockLayoutMode = "contain" | "cover";
+
 const COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD = 920;
+
+function shouldUseDenseSidebar(
+  hostWidth: number,
+  variant: ObsidianHeroMockScene["variant"],
+) {
+  if (variant === "ultra" || variant === "narrow") {
+    return true;
+  }
+
+  return variant === "compact" && hostWidth > 0 && hostWidth <= COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD;
+}
 
 function getMockLayout(
   width: number,
   height: number,
   variant: ObsidianHeroMockScene["variant"],
   frameWidth: number,
+  layoutMode: MockLayoutMode,
 ): MockLayout {
   const safeWidth = width || OBSIDIAN_HERO_ARTBOARD.width;
   const safeHeight = height || OBSIDIAN_HERO_ARTBOARD.height;
-  const widthBasis =
+  const visibleWidth =
     variant === "desktop" ? OBSIDIAN_HERO_ARTBOARD.width : frameWidth || OBSIDIAN_HERO_ARTBOARD.width;
-  const scale = Math.max(
-    safeWidth / widthBasis,
-    safeHeight / OBSIDIAN_HERO_ARTBOARD.height,
-  );
+  const widthScale = safeWidth / visibleWidth;
+  const heightScale = safeHeight / OBSIDIAN_HERO_ARTBOARD.height;
+  const scale =
+    layoutMode === "contain"
+      ? Math.min(widthScale, heightScale)
+      : Math.max(widthScale, heightScale);
   const scaledWidth = OBSIDIAN_HERO_ARTBOARD.width * scale;
   const scaledHeight = OBSIDIAN_HERO_ARTBOARD.height * scale;
-  const centeredOffsetX = (safeWidth - scaledWidth) / 2;
+  const visibleOffsetX =
+    layoutMode === "contain" && variant !== "desktop"
+      ? (safeWidth - visibleWidth * scale) / 2
+      : (safeWidth - scaledWidth) / 2;
 
   return {
     width: safeWidth,
     height: safeHeight,
     scale,
-    offsetX: variant === "desktop" ? centeredOffsetX : 0,
+    offsetX: layoutMode === "cover" && variant !== "desktop" ? 0 : visibleOffsetX,
     offsetY: (safeHeight - scaledHeight) / 2,
   };
 }
@@ -1538,7 +1558,10 @@ function getVariantLayoutMetrics(
     case "narrow":
       {
         const frameWidth = clampNumber(Math.round(safeHostWidth), 620, 760);
-        const sidebarWidth = clampNumber(Math.round(frameWidth * 0.24), 148, 176);
+        const denseSidebar = shouldUseDenseSidebar(safeHostWidth, variant);
+        const sidebarWidth = denseSidebar
+          ? 56
+          : clampNumber(Math.round(frameWidth * 0.24), 148, 176);
         const inspectorWidth = clampNumber(Math.round(frameWidth * 0.48), 320, 368);
         const chatWidth = clampNumber(frameWidth - sidebarWidth - 42, 360, 448);
 
@@ -1553,7 +1576,7 @@ function getVariantLayoutMetrics(
           workspacePadLeft: 16,
           workspaceHeaderPadLeft: 14,
           workspaceHeaderPadRight: 14,
-          brandTextMaxWidth: 104,
+          brandTextMaxWidth: denseSidebar ? 0 : 104,
           idleMessageMaxWidth: 320,
           chatUserMaxWidth: 250,
           chatFileMaxWidth: 272,
@@ -1562,8 +1585,7 @@ function getVariantLayoutMetrics(
       }
     case "compact":
       {
-        const denseSidebar =
-          safeHostWidth <= COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD;
+        const denseSidebar = shouldUseDenseSidebar(safeHostWidth, variant);
 
         return {
           frameWidth: clampNumber(Math.round(safeHostWidth), 1020, 1180),
@@ -2662,10 +2684,7 @@ function ShadowMarkup({
   const transcriptActionLabel = scene.workspace.fileCard.readyActions[0]?.label;
   const rawTranscriptOpacity =
     demo.rewriteProgress <= 0 ? 1 : mix(1, 0.26, easeInOutCubic(demo.rewriteProgress));
-  const useDenseSidebar =
-    scene.variant === "ultra" ||
-    (scene.variant === "compact" &&
-      layout.width <= COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD);
+  const useDenseSidebar = shouldUseDenseSidebar(layout.width, scene.variant);
   const sidebarClassName = [
     "sidebar",
     useDenseSidebar ? "sidebarUltra" : "",
@@ -3043,7 +3062,13 @@ function ShadowMarkup({
   );
 }
 
-export function ObsidianHeroMock() {
+export function ObsidianHeroMock({
+  forcedVariant,
+  layoutMode = "cover",
+}: {
+  forcedVariant?: ObsidianHeroMockVariant;
+  layoutMode?: MockLayoutMode;
+}) {
   const hostRef = useRef<HTMLDivElement | null>(null);
   const [hostElement, setHostElement] = useState<HTMLDivElement | null>(null);
   const [hostSize, setHostSize] = useState({ width: 0, height: 0 });
@@ -3109,13 +3134,14 @@ export function ObsidianHeroMock() {
     return () => window.cancelAnimationFrame(frameId);
   }, []);
 
-  const scene = getObsidianHeroMockScene(hostSize.width);
+  const scene = getObsidianHeroMockScene(hostSize.width, forcedVariant);
   const layoutMetrics = getVariantLayoutMetrics(hostSize.width, scene.variant);
   const layout = getMockLayout(
     hostSize.width,
     hostSize.height,
     scene.variant,
     layoutMetrics.frameWidth,
+    layoutMode,
   );
   const demo = getDemoState(scene, elapsedMs, layoutMetrics);
 

@@ -41,6 +41,14 @@ function getInteractivePanelHeight(width: number) {
   return Math.ceil((width * OBSIDIAN_HERO_ARTBOARD.height) / frameWidth);
 }
 
+function getStaticMobilePanelHeight(width: number) {
+  if (width <= 0) {
+    return null;
+  }
+
+  return clampNumber(Math.round(width * 0.54), 188, 220);
+}
+
 export function ObsidianHeroInterface({
   className,
   interactive = false,
@@ -52,7 +60,7 @@ export function ObsidianHeroInterface({
   }, []);
 
   useEffect(() => {
-    if (!interactive || !panelElement) {
+    if (!panelElement) {
       return;
     }
 
@@ -84,9 +92,14 @@ export function ObsidianHeroInterface({
   ]
     .filter(Boolean)
     .join(" ");
-  const panelHeight = interactive ? getInteractivePanelHeight(panelWidth) : null;
+  const useStaticMobileLayout = !interactive && panelWidth > 0 && panelWidth < 560;
+  const panelHeight = interactive
+    ? getInteractivePanelHeight(panelWidth)
+    : useStaticMobileLayout
+      ? getStaticMobilePanelHeight(panelWidth)
+      : null;
   const panelStyle =
-    interactive && panelHeight
+    panelHeight
       ? ({
           height: `${panelHeight}px`,
           minHeight: `${panelHeight}px`,
@@ -96,7 +109,10 @@ export function ObsidianHeroInterface({
   return (
     <div ref={handlePanelRef} className={panelClassName} style={panelStyle}>
       <div className={styles.heroShot}>
-        <ObsidianHeroMock />
+        <ObsidianHeroMock
+          forcedVariant={interactive ? undefined : "desktop"}
+          layoutMode={interactive || useStaticMobileLayout ? "cover" : "contain"}
+        />
       </div>
     </div>
   );
