@@ -392,12 +392,11 @@ export function ObsidianLanding() {
               <h1 className={`${styles.display} ${styles.heroTitle}`}>
                 Единая AI-платформа
                 <br />
-                для корпоративных команд
+                для корпоративных команд
               </h1>
               <p className={styles.heroLead}>
-                Модели, корпоративные знания, документы, речь, агенты и
-                интеграции в одной управляемой среде для cloud, on-prem и
-                hybrid.
+                Модели, корпоративные знания, документы, речь, агенты 
+                и интеграции в одной управляемой среде для cloud и on-prem
               </p>
 
               <div className={styles.buttonRow}>

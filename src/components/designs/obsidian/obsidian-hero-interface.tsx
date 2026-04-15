@@ -15,10 +15,9 @@ function clampNumber(value: number, min: number, max: number) {
   return Math.max(min, Math.min(max, value));
 }
 
-const MOBILE_PANEL_CONTENT_PADDING_PX = 18;
-const MOBILE_PANEL_HEIGHT_RATIO = 0.46;
-const MOBILE_PANEL_MIN_HEIGHT_PX = 188;
-const MOBILE_PANEL_MAX_HEIGHT_PX = 304;
+const MOBILE_PANEL_MIN_VIEWPORT_WIDTH_PX = 360;
+const MOBILE_PANEL_WIDE_HEIGHT_PX = 352;
+const MOBILE_PANEL_NARROW_HEIGHT_PX = 396;
 const STATIC_MOBILE_LAYOUT_MAX_WIDTH_PX = 640;
 
 function getInteractiveFrameWidth(width: number) {
@@ -52,14 +51,19 @@ function getStaticMobilePanelHeight(width: number) {
     return null;
   }
 
-  const contentWidth = Math.max(0, width - MOBILE_PANEL_CONTENT_PADDING_PX);
-  const proportionalHeight =
-    contentWidth * MOBILE_PANEL_HEIGHT_RATIO + MOBILE_PANEL_CONTENT_PADDING_PX;
+  const clampedWidth = clampNumber(
+    Math.round(width),
+    MOBILE_PANEL_MIN_VIEWPORT_WIDTH_PX,
+    STATIC_MOBILE_LAYOUT_MAX_WIDTH_PX,
+  );
+  const narrowProgress =
+    (STATIC_MOBILE_LAYOUT_MAX_WIDTH_PX - clampedWidth) /
+    (STATIC_MOBILE_LAYOUT_MAX_WIDTH_PX - MOBILE_PANEL_MIN_VIEWPORT_WIDTH_PX);
 
-  return clampNumber(
-    Math.round(proportionalHeight),
-    MOBILE_PANEL_MIN_HEIGHT_PX,
-    MOBILE_PANEL_MAX_HEIGHT_PX,
+  return Math.round(
+    MOBILE_PANEL_WIDE_HEIGHT_PX +
+      (MOBILE_PANEL_NARROW_HEIGHT_PX - MOBILE_PANEL_WIDE_HEIGHT_PX) *
+        narrowProgress,
   );
 }
 
