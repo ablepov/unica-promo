@@ -92,9 +92,6 @@ export function ObsidianLeadForm() {
         <h3 className={`${styles.display} ${styles.formTitle}`}>
           Запросить демо
         </h3>
-        <p className={styles.formLead}>
-          Оставьте контакт и пару слов о задаче
-        </p>
       </div>
 
       <div className={styles.formDivider} aria-hidden="true" />
@@ -183,7 +180,7 @@ export function ObsidianLeadForm() {
             {isPending ? "Отправляем..." : "Заказать демо"}
           </button>
           <a href="mailto:sales@unica.local" className={styles.directLink}>
-            sales@unica.local
+            или напишите на почту sales@unica.ru
           </a>
         </div>
 

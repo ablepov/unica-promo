@@ -135,34 +135,34 @@ export const painPoints = [
     title: "Единый контур данных и знаний",
     description:
       "Документы, базы знаний, переписки, звонки и внутренние системы объединены в один AI-контур.",
-    imageSrc: "/designs/obsidian/pain/pain-point-1.png",
-    imageAlt: "Disconnected systems layered over a rocky landscape.",
+    imageSrc: "/designs/obsidian/pain/pain-point-1.webp",
+    imageAlt: "Connected knowledge sources orbiting inside a glass control panel.",
     imagePosition: "50% 50%",
   },
   {
     title: "Переход от пилотов к продуктиву",
     description:
       "AI-сценарии становятся масштабируемыми рабочими инструментами для команд и бизнес-процессов.",
-    imageSrc: "/designs/obsidian/pain/pain-point-2.png",
-    imageAlt: "A dashboard floating over a waterfall landscape.",
-    imagePosition: "50% 50%",
+    imageSrc: "/designs/obsidian/pain/pain-point-2.webp",
+    imageAlt: "A rollout path that moves from pilot to workflow to production.",
+    imagePosition: "50% 42%",
   },
   {
     title: "Контроль и прозрачность по умолчанию",
     description:
       "Понятно, кто к чему имеет доступ, на чём основан ответ и как используются ресурсы.",
-    imageSrc: "/designs/obsidian/pain/pain-point-3.png",
+    imageSrc: "/designs/obsidian/pain/pain-point-3.webp",
     imageAlt:
-      "A dark analytics card with a green line chart in front of a stone backdrop.",
-    imagePosition: "50% 42%",
+      "Role-based access controls with an audit history entry for legal operations.",
+    imagePosition: "50% 46%",
   },
   {
     title: "Единая платформа вместо набора решений",
     description:
       "Поиск, документы, речь и автоматизация работают в одном управляемом контуре и дают единый результат.",
-    imageSrc: "/designs/obsidian/pain/pain-point-4.png",
-    imageAlt: "Multiple interface fragments split around a stone background.",
-    imagePosition: "50% 32%",
+    imageSrc: "/designs/obsidian/pain/pain-point-4.webp",
+    imageAlt: "A single prompt surface combining document upload and voice input.",
+    imagePosition: "50% 58%",
   },
 ] as const;
 

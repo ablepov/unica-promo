@@ -1043,6 +1043,11 @@
     );
 }
 
+.roiSection .chapterGrid {
+  grid-template-columns: minmax(21rem, 0.38fr) minmax(0, 0.62fr);
+  gap: clamp(3rem, 6vw, 6.5rem);
+}
+
 .chapterGrid {
   display: grid;
   grid-template-columns: minmax(18rem, 0.34fr) minmax(0, 0.66fr);
@@ -1494,11 +1499,11 @@
       180deg,
       rgba(4, 4, 4, 0.03),
       rgba(4, 4, 4, 0) 28%,
-      rgba(4, 4, 4, 0.18)
+      rgba(4, 4, 4, 0.12)
     ),
     radial-gradient(
       circle at 18% 24%,
-      rgba(255, 255, 255, 0.03),
+      rgba(255, 255, 255, 0.025),
       transparent 20%
     );
   pointer-events: none;
@@ -1506,7 +1511,7 @@
 
 .painVisualImage {
   object-fit: cover;
-  filter: saturate(0.84) brightness(0.88) contrast(1.02);
+  filter: saturate(0.92) brightness(0.94) contrast(1.01);
 }
 
 @keyframes painRailProgressFill {
@@ -2031,7 +2036,7 @@
 }
 
 .formHeader {
-  max-width: 20rem;
+  max-width: none;
 }
 
 .formHeaderGrid {
@@ -2057,7 +2062,7 @@
 
 .formTitle {
   margin: 0;
-  max-width: 7ch;
+  max-width: none;
   font-size: clamp(1.95rem, 3vw, 2.65rem);
   line-height: 0.98;
   text-wrap: balance;
@@ -2072,7 +2077,7 @@
 .formLead {
   margin: 0;
   margin-top: 0.55rem;
-  max-width: 16rem;
+  max-width: none;
   color: rgba(242, 238, 231, 0.62);
   line-height: 1.55;
 }
@@ -2603,7 +2608,7 @@
   }
 
   .formTitle {
-    max-width: 8ch;
+    max-width: none;
     font-size: clamp(2rem, 7.2vw, 2.8rem);
   }
 
