@@ -1,3 +1,0 @@
-- main [ref=e4]:
-  - link "На главную" [ref=e7] [cursor=pointer]:
-    - /url: /
