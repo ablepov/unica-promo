@@ -36,8 +36,9 @@ const HOST_STYLE = {
   position: "relative",
   overflow: "hidden",
   background: "#0d0f14",
-  "--mock-font-sans": 'var(--font-promo-sans), "Inter", system-ui, sans-serif',
-  "--mock-font-display": 'var(--font-promo-display), "Georgia", serif',
+  "--mock-font-sans": "var(--font-promo-sans), system-ui, sans-serif",
+  "--mock-font-display":
+    "var(--font-promo-display), var(--font-promo-sans), system-ui, sans-serif",
 } as CSSProperties;
 
 const SHADOW_STYLES = `
@@ -325,7 +326,7 @@ const SHADOW_STYLES = `
     color: #f5f8ff;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     line-height: 1.14;
     white-space: nowrap;
     overflow: hidden;
@@ -445,7 +446,7 @@ const SHADOW_STYLES = `
     color: rgba(163, 174, 192, 0.74);
     font-size: 12px;
     font-weight: 700;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
   }
 
   .historyList {
@@ -580,7 +581,7 @@ const SHADOW_STYLES = `
     font-size: 17px;
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   .workspacePathChevron {
@@ -607,7 +608,7 @@ const SHADOW_STYLES = `
     font-size: 17px;
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -694,7 +695,7 @@ const SHADOW_STYLES = `
     color: #f4f7ff;
     font-size: 15px;
     line-height: 1.68;
-    letter-spacing: -0.015em;
+    letter-spacing: 0;
   }
 
   .assistantBlocks {
@@ -824,7 +825,7 @@ const SHADOW_STYLES = `
     color: #fbfdff;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -860,7 +861,7 @@ const SHADOW_STYLES = `
     color: #ffffff;
     font-size: 17px;
     font-weight: 700;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   .documentTitleChevron {
@@ -879,7 +880,7 @@ const SHADOW_STYLES = `
     color: #f3f7fc;
     font-size: 14px;
     line-height: 1.6;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
   }
 
   .documentActions {
@@ -1167,7 +1168,7 @@ const SHADOW_STYLES = `
     font-size: 17px;
     font-weight: 700;
     line-height: 1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -1302,7 +1303,7 @@ const SHADOW_STYLES = `
     color: rgba(239, 244, 251, 0.92);
     font-size: 13px;
     font-weight: 600;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
   }
 
   .actionMenuItemActive {
@@ -1325,7 +1326,7 @@ const SHADOW_STYLES = `
     color: #f8fbff;
     font-size: 14px;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
   }
 
   .summaryBody {
@@ -1397,7 +1398,7 @@ const SHADOW_STYLES = `
     color: #fbfdff;
     font-size: 13px;
     font-weight: 700;
-    letter-spacing: -0.02em;
+    letter-spacing: 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;

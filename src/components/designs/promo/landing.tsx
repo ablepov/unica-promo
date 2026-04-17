@@ -29,13 +29,7 @@ import { PromoLeadForm } from "./lead-form";
 import styles from "./promo.module.css";
 
 const screenSrc = "/designs/promo/screen.png";
-const stoneLeftSrc = "/designs/promo/stone-left.avif";
-const stoneRightSrc = "/designs/promo/stone-right.avif";
 const headerLogoSrc = "/designs/promo/logo.svg";
-const stoneRightSizes =
-  "(min-width: 1280px) 1377px, (min-width: 810px) and (max-width: 1279.98px) 1377px, (max-width: 399.98px) 1155px, (min-width: 400px) and (max-width: 809.98px) 1155px";
-const stoneLeftSizes =
-  "(min-width: 1280px) 844px, (min-width: 810px) and (max-width: 1279.98px) 844px, (max-width: 399.98px) 640px, (min-width: 400px) and (max-width: 809.98px) 640px";
 const painAutoplayMs = 4800;
 const desktopNavigationMinWidthPx = 810;
 const mobileMenuCloseDelayMs = 160;
@@ -364,29 +358,11 @@ export function PromoLanding() {
             <div
               className={`${styles.heroRock} ${styles.heroRockLeft}`}
               aria-hidden="true"
-            >
-              <Image
-                src={stoneLeftSrc}
-                alt=""
-                fill
-                priority
-                sizes={stoneLeftSizes}
-                className={styles.heroRockImage}
-              />
-            </div>
+            />
             <div
               className={`${styles.heroRock} ${styles.heroRockRight}`}
               aria-hidden="true"
-            >
-              <Image
-                src={stoneRightSrc}
-                alt=""
-                fill
-                priority
-                sizes={stoneRightSizes}
-                className={styles.heroRockImage}
-              />
-            </div>
+            />
 
             <div className={styles.heroCenter}>
               <h1 className={`${styles.display} ${styles.heroTitle}`}>
@@ -561,7 +537,6 @@ export function PromoLanding() {
                           sizes="(max-width: 1100px) calc(100vw - 2rem), 58vw"
                           className={styles.painVisualImage}
                           style={{ objectPosition: item.imagePosition }}
-                          priority={index === 0}
                         />
                       </div>
                     );

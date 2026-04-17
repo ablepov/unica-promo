@@ -1,24 +1,20 @@
 import type { ReactNode } from "react";
 import type { Metadata } from "next";
-import { Geologica, IBM_Plex_Mono, Onest } from "next/font/google";
+import { Geologica, Wix_Madefor_Display } from "next/font/google";
 import "./globals.css";
 
-const onest = Onest({
-  variable: "--font-onest",
-  subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600", "700"],
-});
-
 const geologica = Geologica({
-  variable: "--font-geologica",
+  variable: "--font-promo-sans",
   subsets: ["latin", "cyrillic"],
-  weight: ["500", "600", "700"],
+  display: "swap",
+  weight: ["300", "400", "500", "600", "700"],
 });
 
-const ibmPlexMono = IBM_Plex_Mono({
-  variable: "--font-ibm-plex-mono",
+const display = Wix_Madefor_Display({
+  variable: "--font-promo-display",
   subsets: ["latin", "cyrillic"],
-  weight: ["400", "500", "600"],
+  display: "swap",
+  weight: ["400", "500", "600", "700"],
 });
 
 export const metadata: Metadata = {
@@ -35,7 +31,7 @@ export default function RootLayout({
   return (
     <html
       lang="ru"
-      className={`${onest.variable} ${geologica.variable} ${ibmPlexMono.variable} h-full antialiased`}
+      className={`${geologica.variable} ${display.variable} h-full antialiased`}
     >
       <body className="flex min-h-full flex-col">{children}</body>
     </html>

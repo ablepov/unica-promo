@@ -15,6 +15,7 @@
     linear-gradient(180deg, #050404 0%, #060505 42%, #030303 100%);
   color: #f2eee7;
   font-family: var(--font-promo-sans), sans-serif;
+  font-weight: 300;
 }
 
 .page::before {
@@ -116,11 +117,11 @@
 .brandWordmark {
   display: block;
   color: #efae72;
-  font-family: var(--font-promo-display), serif;
+  font-family: var(--font-promo-display), sans-serif;
   font-size: 1.4rem;
   font-weight: 500;
   line-height: 1;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .brandHint {
@@ -362,10 +363,10 @@
   gap: 0.75rem;
   padding: 0;
   color: #f5f0e8;
-  font-family: var(--font-promo-display), serif;
-  font-size: clamp(2.05rem, 9vw, 3rem);
-  line-height: 0.96;
-  letter-spacing: -0.04em;
+  font-family: var(--font-promo-display), sans-serif;
+  font-size: clamp(1.9rem, 8vw, 2.65rem);
+  line-height: 1.06;
+  letter-spacing: 0;
   text-wrap: balance;
   text-decoration: none;
 }
@@ -408,10 +409,10 @@
   right: 0;
   top: 9.4rem;
   text-align: center;
-  font-family: var(--font-promo-display), serif;
+  font-family: var(--font-promo-display), sans-serif;
   font-size: clamp(6rem, 18vw, 13rem);
   line-height: 0.82;
-  letter-spacing: -0.08em;
+  letter-spacing: 0;
   color: rgba(255, 255, 255, 0.065);
   pointer-events: none;
 }
@@ -440,13 +441,10 @@
 .heroRock {
   position: absolute;
   z-index: 2;
-  overflow: hidden;
   pointer-events: none;
-}
-
-.heroRockImage {
-  object-fit: cover;
-  object-position: center;
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
   filter: saturate(0.86) brightness(0.8) contrast(1.04);
 }
 
@@ -456,6 +454,7 @@
   width: 844px;
   height: 844px;
   opacity: 0.92;
+  background-image: url("/designs/promo/stone-left-hero.avif");
 }
 
 .heroRockRight {
@@ -464,6 +463,7 @@
   width: 1377px;
   height: 864px;
   opacity: 0.92;
+  background-image: url("/designs/promo/stone-right-hero.avif");
 }
 
 .heroCenter {
@@ -473,26 +473,26 @@
   gap: 1.45rem;
   justify-items: center;
   width: 100%;
-  max-width: 823px;
+  max-width: 960px;
   margin: 0 auto;
   padding-top: 10.075rem;
   text-align: center;
 }
 
 .display {
-  font-family: var(--font-promo-display), serif;
-  font-weight: 500;
-  letter-spacing: -0.05em;
+  font-family: var(--font-promo-display), sans-serif;
+  font-weight: 400;
+  letter-spacing: 0;
   color: #f5f1ea;
 }
 
 .heroTitle {
   width: 100%;
-  max-width: 823px;
+  max-width: 900px;
   margin: 0 auto;
   text-align: center;
-  font-size: 5rem;
-  line-height: 0.9;
+  font-size: clamp(3.25rem, 4.9vw, 4.1rem);
+  line-height: 1.08;
 }
 
 .heroLead {
@@ -766,8 +766,8 @@
 
 .heroLabTitle {
   margin: 0.9rem 0 0;
-  font-size: clamp(3rem, 5.8vw, 5rem);
-  line-height: 0.92;
+  font-size: clamp(2.55rem, 4.6vw, 4.15rem);
+  line-height: 1.06;
 }
 
 .heroLabText {
@@ -955,8 +955,8 @@
 .sectionTitle,
 .editorialTitle {
   margin: 0;
-  font-size: clamp(3rem, 6vw, 5.4rem);
-  line-height: 0.94;
+  font-size: clamp(2.45rem, 4.5vw, 4.35rem);
+  line-height: 1.06;
 }
 
 .chapterSection {
@@ -1068,7 +1068,7 @@
 }
 
 .chapterLead .sectionTitle {
-  line-height: 0.92;
+  line-height: 1.05;
 }
 
 .chapterIntro {
@@ -1112,10 +1112,10 @@
 
 .orchestratorTitle {
   margin: 0;
-  font-size: clamp(3rem, 4vw, 4.2rem);
-  line-height: 1.04;
+  font-size: clamp(2.35rem, 3.35vw, 3.55rem);
+  line-height: 1.08;
   font-weight: 400;
-  letter-spacing: -0.06em;
+  letter-spacing: 0;
   text-wrap: pretty;
 }
 
@@ -1148,7 +1148,7 @@
   font-size: 0.875rem;
   line-height: 1.2142857143;
   font-weight: 600;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .orchestratorCardText {
@@ -1157,7 +1157,7 @@
   color: rgba(242, 238, 231, 0.62);
   font-size: 0.875rem;
   line-height: 1.2142857143;
-  letter-spacing: -0.01em;
+  letter-spacing: 0;
 }
 
 .featureGrid {
@@ -1223,8 +1223,8 @@
 
 .featureCardTitle {
   margin: 0.75rem 0 0;
-  font-size: clamp(2rem, 3.5vw, 3rem);
-  line-height: 0.96;
+  font-size: clamp(1.65rem, 2.7vw, 2.35rem);
+  line-height: 1.08;
 }
 
 .featureCardText {
@@ -1378,8 +1378,8 @@
 
 .painTitle {
   margin: 0;
-  font-size: clamp(2.95rem, 5vw, 4.8rem);
-  line-height: 0.9;
+  font-size: clamp(2.4rem, 4.2vw, 4.1rem);
+  line-height: 1.07;
   max-width: none;
 }
 
@@ -1446,7 +1446,7 @@
   display: block;
   font-size: 1.48rem;
   line-height: 1.18;
-  letter-spacing: -0.03em;
+  letter-spacing: 0;
 }
 
 .painRailDescription {
@@ -1684,10 +1684,10 @@
 
 .pricingValue {
   margin-top: 0.8rem;
-  font-family: var(--font-promo-display), serif;
-  font-size: clamp(2.2rem, 4vw, 3.6rem);
-  line-height: 0.94;
-  letter-spacing: -0.05em;
+  font-family: var(--font-promo-display), sans-serif;
+  font-size: clamp(1.95rem, 3.2vw, 3.05rem);
+  line-height: 1.05;
+  letter-spacing: 0;
 }
 
 .pricingText {
@@ -1748,8 +1748,8 @@
 
 .missionTitle {
   margin: 0;
-  font-size: clamp(2.5rem, 4.8vw, 4rem);
-  line-height: 0.98;
+  font-size: clamp(2.05rem, 3.8vw, 3.35rem);
+  line-height: 1.07;
 }
 
 .missionText {
@@ -1818,9 +1818,9 @@
 
 .conversionTitle {
   margin: 0;
-  max-width: 8ch;
-  font-size: clamp(2.7rem, 4.8vw, 4rem);
-  line-height: 0.94;
+  max-width: 9.5ch;
+  font-size: clamp(2.25rem, 3.8vw, 3.3rem);
+  line-height: 1.06;
   text-wrap: balance;
 }
 
@@ -1856,7 +1856,7 @@
 
 .conversionMilestoneNumber {
   color: #efb481;
-  font-family: var(--font-promo-display), serif;
+  font-family: var(--font-promo-display), sans-serif;
   font-size: 1rem;
   line-height: 1;
 }
@@ -1935,8 +1935,8 @@
 .conversionAsideTitle {
   margin: 0.88rem 0 0;
   max-width: 11ch;
-  font-size: clamp(2rem, 3vw, 3rem);
-  line-height: 0.98;
+  font-size: clamp(1.7rem, 2.5vw, 2.45rem);
+  line-height: 1.08;
 }
 
 .conversionAsideList {
@@ -1972,8 +1972,8 @@
 
 .faqTitle {
   margin: 0;
-  font-size: clamp(1.8rem, 2.5vw, 2.45rem);
-  line-height: 1;
+  font-size: clamp(1.55rem, 2.1vw, 2.05rem);
+  line-height: 1.08;
 }
 
 .faqList {
@@ -2008,7 +2008,7 @@
   content: "+";
   flex: 0 0 auto;
   color: rgba(242, 238, 231, 0.42);
-  font-family: var(--font-promo-display), serif;
+  font-family: var(--font-promo-display), sans-serif;
   font-size: 1.4rem;
   line-height: 0.8;
 }
@@ -2063,8 +2063,8 @@
 .formTitle {
   margin: 0;
   max-width: none;
-  font-size: clamp(1.95rem, 3vw, 2.65rem);
-  line-height: 0.98;
+  font-size: clamp(1.72rem, 2.4vw, 2.2rem);
+  line-height: 1.08;
   text-wrap: balance;
 }
 
@@ -2497,35 +2497,39 @@
 
   .heroViewport {
     height: auto;
-    min-height: 688px;
-    padding-bottom: 2.5rem;
+    min-height: 780px;
+    padding-bottom: 0;
   }
 
   .heroRockLeft {
-    left: -146px;
-    bottom: -214px;
+    left: -98px;
+    top: 455px;
+    bottom: auto;
     width: 640px;
     height: 640px;
+    background-image: url("/designs/promo/stone-left-hero-mobile.avif");
   }
 
   .heroRockRight {
-    right: -574px;
-    bottom: -10px;
-    width: 1155px;
-    height: 725px;
+    top: 326px;
+    right: -510px;
+    bottom: auto;
+    width: 760px;
+    height: 477px;
+    background-image: url("/designs/promo/stone-right-hero-mobile.avif");
   }
 
   .heroCenter {
     margin: 0 auto;
     gap: 1.2rem;
-    padding-top: 4.6rem;
+    padding-top: 8.4rem;
     text-align: center;
   }
 
   .heroTitle {
     max-width: 15.5ch;
-    font-size: clamp(3.2rem, 8vw, 4.8rem);
-    line-height: 0.89;
+    font-size: clamp(2.5rem, 6.2vw, 3.2rem);
+    line-height: 1.08;
   }
 
   .heroLead {
@@ -2600,7 +2604,8 @@
 
   .conversionTitle {
     max-width: 9ch;
-    font-size: clamp(2.4rem, 8vw, 3.4rem);
+    font-size: clamp(2.1rem, 6.8vw, 2.9rem);
+    line-height: 1.07;
   }
 
   .conversionAsidePanel,
@@ -2614,7 +2619,8 @@
 
   .formTitle {
     max-width: none;
-    font-size: clamp(2rem, 7.2vw, 2.8rem);
+    font-size: clamp(1.85rem, 6.3vw, 2.45rem);
+    line-height: 1.08;
   }
 
   .chapterSection {
@@ -2634,7 +2640,8 @@
   }
 
   .painTitle {
-    font-size: clamp(2.9rem, 10vw, 4.25rem);
+    font-size: clamp(2.4rem, 8.2vw, 3.5rem);
+    line-height: 1.07;
   }
 
   .painRailLabel {
@@ -2711,12 +2718,13 @@
   }
 
   .mobileNavLink {
-    font-size: clamp(1.8rem, 10vw, 2.55rem);
+    font-size: clamp(1.65rem, 8.5vw, 2.25rem);
+    line-height: 1.08;
   }
 
   .heroViewport {
-    min-height: 612px;
-    padding-bottom: 2.25rem;
+    min-height: 760px;
+    padding-bottom: 0;
   }
 
   .heroViewport::after {
@@ -2726,7 +2734,7 @@
   .heroCenter {
     max-width: 100%;
     gap: 1rem;
-    padding-top: 5.45rem;
+    padding-top: 9.5rem;
     padding-inline: 1rem;
   }
 
@@ -2739,15 +2747,15 @@
   .editorialTitle,
   .missionTitle,
   .formTitle {
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
   }
 
   .heroTitle {
     width: 100%;
     margin-inline: auto;
     text-align: center;
-    font-size: clamp(2.5rem, 11.5vw, 3.85rem);
-    line-height: 0.9;
+    font-size: clamp(2rem, 8.2vw, 2.7rem);
+    line-height: 1.08;
   }
 
   .heroLead {
@@ -2822,8 +2830,8 @@
   }
 
   .heroLabTitle {
-    font-size: clamp(2.45rem, 12vw, 3.8rem);
-    line-height: 0.94;
+    font-size: clamp(2.05rem, 9.5vw, 3.1rem);
+    line-height: 1.06;
   }
 
   .heroLabText {
@@ -2846,8 +2854,8 @@
 
   .conversionTitle {
     max-width: 8ch;
-    font-size: clamp(2.1rem, 10vw, 3rem);
-    line-height: 0.94;
+    font-size: clamp(1.9rem, 8.4vw, 2.55rem);
+    line-height: 1.07;
   }
 
   .conversionLead,
@@ -2875,11 +2883,12 @@
 
   .conversionAsideTitle {
     max-width: 10ch;
-    font-size: clamp(1.8rem, 9vw, 2.45rem);
+    font-size: clamp(1.65rem, 7.6vw, 2.12rem);
+    line-height: 1.08;
   }
 
   .faqTitle {
-    font-size: 1.65rem;
+    font-size: 1.5rem;
   }
 
   .fieldLabelRow {
@@ -2941,9 +2950,9 @@
   }
 
   .painTitle {
-    font-size: clamp(2.45rem, 12.5vw, 3.85rem);
-    line-height: 0.95;
-    letter-spacing: -0.04em;
+    font-size: clamp(2.05rem, 10vw, 3.25rem);
+    line-height: 1.07;
+    letter-spacing: 0;
   }
 
   .painIntro {

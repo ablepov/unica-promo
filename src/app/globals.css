@@ -23,8 +23,8 @@
 @theme inline {
   --color-background: var(--background);
   --color-foreground: var(--foreground);
-  --font-sans: var(--font-onest);
-  --font-mono: var(--font-ibm-plex-mono);
+  --font-sans: var(--font-promo-sans);
+  --font-mono: "SFMono-Regular", Consolas, "Liberation Mono", monospace;
 }
 
 html {
@@ -40,7 +40,7 @@ body {
     radial-gradient(circle at 82% 18%, rgba(142, 165, 255, 0.14), transparent 20%),
     linear-gradient(180deg, #090c13 0%, #05070b 36%, #04060a 100%);
   color: var(--foreground);
-  font-family: var(--font-onest), sans-serif;
+  font-family: var(--font-promo-sans), sans-serif;
   text-rendering: optimizeLegibility;
 }
 
