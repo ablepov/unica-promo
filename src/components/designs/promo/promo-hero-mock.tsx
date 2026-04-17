@@ -13,21 +13,21 @@ import {
 import { createPortal } from "react-dom";
 
 import {
-  OBSIDIAN_HERO_ARTBOARD,
-  type ObsidianHeroMockAiMenuItem,
-  type ObsidianHeroMockChatBubble,
-  getObsidianHeroMockScene,
-  type ObsidianHeroMockHistoryItem,
-  type ObsidianHeroMockIcon,
-  type ObsidianHeroMockLine,
-  type ObsidianHeroMockNavItem,
-  type ObsidianHeroMockScene,
-  type ObsidianHeroMockVariant,
-  type ObsidianHeroMockSummarySection,
-} from "./obsidian-hero-mock.scene";
+  PROMO_HERO_ARTBOARD,
+  type PromoHeroMockAiMenuItem,
+  type PromoHeroMockChatBubble,
+  getPromoHeroMockScene,
+  type PromoHeroMockHistoryItem,
+  type PromoHeroMockIcon,
+  type PromoHeroMockLine,
+  type PromoHeroMockNavItem,
+  type PromoHeroMockScene,
+  type PromoHeroMockVariant,
+  type PromoHeroMockSummarySection,
+} from "./promo-hero-mock.scene";
 
-const SIDEBAR_LOGO_SRC = "/designs/obsidian/logo.svg";
-const SIDEBAR_AVATAR_SRC = "/designs/obsidian/avatar.png";
+const SIDEBAR_LOGO_SRC = "/designs/promo/logo.svg";
+const SIDEBAR_AVATAR_SRC = "/designs/promo/avatar.png";
 
 const HOST_STYLE = {
   display: "block",
@@ -36,8 +36,8 @@ const HOST_STYLE = {
   position: "relative",
   overflow: "hidden",
   background: "#0d0f14",
-  "--mock-font-sans": 'var(--font-obsidian-sans), "Inter", system-ui, sans-serif',
-  "--mock-font-display": 'var(--font-obsidian-display), "Georgia", serif',
+  "--mock-font-sans": 'var(--font-promo-sans), "Inter", system-ui, sans-serif',
+  "--mock-font-display": 'var(--font-promo-display), "Georgia", serif',
 } as CSSProperties;
 
 const SHADOW_STYLES = `
@@ -1484,7 +1484,7 @@ const COMPACT_TO_ULTRA_SIDEBAR_THRESHOLD = 920;
 
 function shouldUseDenseSidebar(
   hostWidth: number,
-  variant: ObsidianHeroMockScene["variant"],
+  variant: PromoHeroMockScene["variant"],
 ) {
   if (variant === "ultra" || variant === "narrow") {
     return true;
@@ -1496,24 +1496,24 @@ function shouldUseDenseSidebar(
 function getMockLayout(
   width: number,
   height: number,
-  variant: ObsidianHeroMockScene["variant"],
+  variant: PromoHeroMockScene["variant"],
   frameWidth: number,
   layoutMode: MockLayoutMode,
 ): MockLayout {
-  const safeWidth = width || OBSIDIAN_HERO_ARTBOARD.width;
-  const safeHeight = height || OBSIDIAN_HERO_ARTBOARD.height;
+  const safeWidth = width || PROMO_HERO_ARTBOARD.width;
+  const safeHeight = height || PROMO_HERO_ARTBOARD.height;
   const isContainLayout = layoutMode === "contain";
   const isTopAlignedCoverLayout = layoutMode === "coverTop";
   const visibleWidth =
-    variant === "desktop" ? OBSIDIAN_HERO_ARTBOARD.width : frameWidth || OBSIDIAN_HERO_ARTBOARD.width;
+    variant === "desktop" ? PROMO_HERO_ARTBOARD.width : frameWidth || PROMO_HERO_ARTBOARD.width;
   const widthScale = safeWidth / visibleWidth;
-  const heightScale = safeHeight / OBSIDIAN_HERO_ARTBOARD.height;
+  const heightScale = safeHeight / PROMO_HERO_ARTBOARD.height;
   const scale =
     isContainLayout
       ? Math.min(widthScale, heightScale)
       : Math.max(widthScale, heightScale);
-  const scaledWidth = OBSIDIAN_HERO_ARTBOARD.width * scale;
-  const scaledHeight = OBSIDIAN_HERO_ARTBOARD.height * scale;
+  const scaledWidth = PROMO_HERO_ARTBOARD.width * scale;
+  const scaledHeight = PROMO_HERO_ARTBOARD.height * scale;
   const visibleOffsetX =
     isContainLayout && variant !== "desktop"
       ? (safeWidth - visibleWidth * scale) / 2
@@ -1534,9 +1534,9 @@ function clampNumber(value: number, min: number, max: number) {
 
 function getVariantLayoutMetrics(
   hostWidth: number,
-  variant: ObsidianHeroMockScene["variant"],
+  variant: PromoHeroMockScene["variant"],
 ): VariantLayoutMetrics {
-  const safeHostWidth = hostWidth > 0 ? hostWidth : OBSIDIAN_HERO_ARTBOARD.width;
+  const safeHostWidth = hostWidth > 0 ? hostWidth : PROMO_HERO_ARTBOARD.width;
 
   switch (variant) {
     case "ultra":
@@ -1609,7 +1609,7 @@ function getVariantLayoutMetrics(
       }
     default:
       return {
-        frameWidth: OBSIDIAN_HERO_ARTBOARD.width,
+        frameWidth: PROMO_HERO_ARTBOARD.width,
         sidebarWidth: 274,
         chatWidth: 632,
         inspectorWidth: 638,
@@ -1692,7 +1692,7 @@ function getStreamedText(content: string, progress: number) {
 }
 
 type DemoChatBubbleState = {
-  bubble: ObsidianHeroMockChatBubble;
+  bubble: PromoHeroMockChatBubble;
   opacity: number;
   translateY: number;
 };
@@ -1713,7 +1713,7 @@ type DemoCursorState = {
   fileOpacity: number;
 };
 
-type DemoCursorTargets = ObsidianHeroMockScene["workspace"]["loop"]["cursorTargets"];
+type DemoCursorTargets = PromoHeroMockScene["workspace"]["loop"]["cursorTargets"];
 
 type DemoState = {
   elapsedMs: number;
@@ -1764,7 +1764,7 @@ function getBubbleVisibility(
 }
 
 function getSummarySectionStates(
-  sections: readonly ObsidianHeroMockSummarySection[],
+  sections: readonly PromoHeroMockSummarySection[],
   rewriteProgress: number,
 ): readonly DemoSummarySectionState[] {
   if (rewriteProgress <= 0) {
@@ -1816,7 +1816,7 @@ function areCursorTargetsEqual(
 }
 
 function getCursorState(
-  scene: ObsidianHeroMockScene,
+  scene: PromoHeroMockScene,
   elapsedMs: number,
   cursorTargets: DemoCursorTargets = scene.workspace.loop.cursorTargets,
 ): DemoCursorState {
@@ -1951,7 +1951,7 @@ function getCursorState(
 }
 
 function getDemoState(
-  scene: ObsidianHeroMockScene,
+  scene: PromoHeroMockScene,
   elapsedMs: number,
   layoutMetrics: VariantLayoutMetrics,
 ): DemoState {
@@ -2154,7 +2154,7 @@ function getDemoState(
   };
 }
 
-function MockIcon({ name }: { name: ObsidianHeroMockIcon }) {
+function MockIcon({ name }: { name: PromoHeroMockIcon }) {
   const svgProps: SVGProps<SVGSVGElement> = {
     viewBox: "0 0 24 24",
     "aria-hidden": true,
@@ -2408,7 +2408,7 @@ function SidebarNavItem({
   hovered = false,
   pressed = false,
 }: {
-  item: ObsidianHeroMockNavItem;
+  item: PromoHeroMockNavItem;
   hovered?: boolean;
   pressed?: boolean;
 }) {
@@ -2432,7 +2432,7 @@ function SidebarNavItem({
   );
 }
 
-function SidebarHistoryItem({ item }: { item: ObsidianHeroMockHistoryItem }) {
+function SidebarHistoryItem({ item }: { item: PromoHeroMockHistoryItem }) {
   const className = [
     "historyItem",
     item.active ? "historyItemActive" : "historyItemMuted",
@@ -2452,7 +2452,7 @@ function SidebarHistoryItem({ item }: { item: ObsidianHeroMockHistoryItem }) {
   );
 }
 
-function TranscriptLine({ line }: { line: ObsidianHeroMockLine }) {
+function TranscriptLine({ line }: { line: PromoHeroMockLine }) {
   return (
     <p className="transcriptLine">
       {line.segments.map((segment, index) => (
@@ -2583,7 +2583,7 @@ function ActionMenu({
   opacity,
   summaryItemRef,
 }: {
-  items: readonly ObsidianHeroMockAiMenuItem[];
+  items: readonly PromoHeroMockAiMenuItem[];
   hoveredItemId: string | null;
   selectedItemId: string | null;
   opacity: number;
@@ -2619,7 +2619,7 @@ function CursorOverlay({
   fileBubble,
 }: {
   cursor: DemoCursorState;
-  fileBubble: ObsidianHeroMockChatBubble;
+  fileBubble: PromoHeroMockChatBubble;
 }) {
   if (!cursor.visible) {
     return null;
@@ -2670,7 +2670,7 @@ function ShadowMarkup({
   demo,
 }: {
   layout: MockLayout;
-  scene: ObsidianHeroMockScene;
+  scene: PromoHeroMockScene;
   demo: DemoState;
 }) {
   const artboardRef = useRef<HTMLDivElement | null>(null);
@@ -2718,43 +2718,49 @@ function ShadowMarkup({
   );
 
   useLayoutEffect(() => {
-    const artboardNode = artboardRef.current;
+    const animationFrame = window.requestAnimationFrame(() => {
+      const artboardNode = artboardRef.current;
 
-    if (!artboardNode) {
-      return;
-    }
-
-    const artboardRect = artboardNode.getBoundingClientRect();
-    const scale = layout.scale || 1;
-    const nextTargets: Partial<DemoCursorTargets> = {};
-    const measureTarget = (
-      node: HTMLDivElement | null,
-      key: keyof DemoCursorTargets,
-      hotspot: { x: number; y: number } = { x: 0.5, y: 0.5 },
-    ) => {
-      if (!node) {
+      if (!artboardNode) {
         return;
       }
 
-      const rect = node.getBoundingClientRect();
+      const artboardRect = artboardNode.getBoundingClientRect();
+      const scale = layout.scale || 1;
+      const nextTargets: Partial<DemoCursorTargets> = {};
+      const measureTarget = (
+        node: HTMLDivElement | null,
+        key: keyof DemoCursorTargets,
+        hotspot: { x: number; y: number } = { x: 0.5, y: 0.5 },
+      ) => {
+        if (!node) {
+          return;
+        }
 
-      nextTargets[key] = {
-        x: Math.round((rect.left - artboardRect.left + rect.width * hotspot.x) / scale),
-        y: Math.round((rect.top - artboardRect.top + rect.height * hotspot.y) / scale),
+        const rect = node.getBoundingClientRect();
+
+        nextTargets[key] = {
+          x: Math.round((rect.left - artboardRect.left + rect.width * hotspot.x) / scale),
+          y: Math.round((rect.top - artboardRect.top + rect.height * hotspot.y) / scale),
+        };
       };
-    };
 
-    measureTarget(newChatRef.current, "newChat", { x: 0.32, y: 0.5 });
-    measureTarget(composerRef.current, "composerDrop", { x: 0.54, y: 0.34 });
-    measureTarget(transcriptActionRef.current, "transcriptAction");
-    measureTarget(actionButtonRef.current, "aiActionButton");
-    measureTarget(summaryMenuItemRef.current, "aiActionMenuItem");
+      measureTarget(newChatRef.current, "newChat", { x: 0.32, y: 0.5 });
+      measureTarget(composerRef.current, "composerDrop", { x: 0.54, y: 0.34 });
+      measureTarget(transcriptActionRef.current, "transcriptAction");
+      measureTarget(actionButtonRef.current, "aiActionButton");
+      measureTarget(summaryMenuItemRef.current, "aiActionMenuItem");
 
-    setMeasuredTargets((current) => {
-      const mergedTargets = { ...current, ...nextTargets };
+      setMeasuredTargets((current) => {
+        const mergedTargets = { ...current, ...nextTargets };
 
-      return areCursorTargetsEqual(current, mergedTargets) ? current : mergedTargets;
+        return areCursorTargetsEqual(current, mergedTargets) ? current : mergedTargets;
+      });
     });
+
+    return () => {
+      window.cancelAnimationFrame(animationFrame);
+    };
   }, [layout.scale, demo.documentActionsVisible, demo.actionMenuOpen, demo.inspectorOpenProgress]);
 
   const documentCardMarkup = demo.documentCardVisible ? (
@@ -3064,11 +3070,11 @@ function ShadowMarkup({
   );
 }
 
-export function ObsidianHeroMock({
+export function PromoHeroMock({
   forcedVariant,
   layoutMode = "cover",
 }: {
-  forcedVariant?: ObsidianHeroMockVariant;
+  forcedVariant?: PromoHeroMockVariant;
   layoutMode?: MockLayoutMode;
 }) {
   const hostRef = useRef<HTMLDivElement | null>(null);
@@ -3136,7 +3142,7 @@ export function ObsidianHeroMock({
     return () => window.cancelAnimationFrame(frameId);
   }, []);
 
-  const scene = getObsidianHeroMockScene(hostSize.width, forcedVariant);
+  const scene = getPromoHeroMockScene(hostSize.width, forcedVariant);
   const layoutMetrics = getVariantLayoutMetrics(hostSize.width, scene.variant);
   const layout = getMockLayout(
     hostSize.width,

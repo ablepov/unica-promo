@@ -1,10 +1,10 @@
-import { ObsidianLanding } from "@/components/designs/obsidian/landing";
-import { ObsidianThemeShell } from "@/components/designs/obsidian/theme-shell";
+import { PromoLanding } from "@/components/designs/promo/landing";
+import { PromoThemeShell } from "@/components/designs/promo/theme-shell";
 
 export default function Home() {
   return (
-    <ObsidianThemeShell>
-      <ObsidianLanding />
-    </ObsidianThemeShell>
+    <PromoThemeShell>
+      <PromoLanding />
+    </PromoThemeShell>
   );
 }

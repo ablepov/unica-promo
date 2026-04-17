@@ -24,14 +24,14 @@ import {
   trustLogos,
   useCases,
 } from "./content";
-import { ObsidianHeroInterface } from "./obsidian-hero-interface";
-import { ObsidianLeadForm } from "./lead-form";
-import styles from "./obsidian.module.css";
+import { PromoHeroInterface } from "./promo-hero-interface";
+import { PromoLeadForm } from "./lead-form";
+import styles from "./promo.module.css";
 
-const screenSrc = "/designs/obsidian/screen.png";
-const stoneLeftSrc = "/designs/obsidian/stone-left.avif";
-const stoneRightSrc = "/designs/obsidian/stone-right.avif";
-const headerLogoSrc = "/designs/obsidian/logo.svg";
+const screenSrc = "/designs/promo/screen.png";
+const stoneLeftSrc = "/designs/promo/stone-left.avif";
+const stoneRightSrc = "/designs/promo/stone-right.avif";
+const headerLogoSrc = "/designs/promo/logo.svg";
 const stoneRightSizes =
   "(min-width: 1280px) 1377px, (min-width: 810px) and (max-width: 1279.98px) 1377px, (max-width: 399.98px) 1155px, (min-width: 400px) and (max-width: 809.98px) 1155px";
 const stoneLeftSizes =
@@ -105,7 +105,7 @@ function OrchestratorIcon({
   return null;
 }
 
-export function ObsidianLanding() {
+export function PromoLanding() {
   const headerInnerRef = useRef<HTMLDivElement | null>(null);
   const [isScrolled, setIsScrolled] = useState(false);
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
@@ -315,7 +315,7 @@ export function ObsidianLanding() {
             type="button"
             aria-label={isMobileMenuOpen ? "Закрыть меню" : "Открыть меню"}
             aria-expanded={isMobileMenuOpen}
-            aria-controls="obsidian-mobile-menu"
+            aria-controls="promo-mobile-menu"
             className={`${styles.mobileMenuButton} ${
               isMobileMenuOpen ? styles.mobileMenuButtonOpen : ""
             }`}
@@ -330,7 +330,7 @@ export function ObsidianLanding() {
         </div>
 
         <div
-          id="obsidian-mobile-menu"
+          id="promo-mobile-menu"
           aria-hidden={!isMobileMenuOpen}
           className={`${styles.mobileMenuPanel} ${
             isMobileMenuOpen ? styles.mobileMenuPanelOpen : ""
@@ -410,7 +410,7 @@ export function ObsidianLanding() {
             </div>
 
             <div className={styles.heroStage}>
-              <ObsidianHeroInterface />
+              <PromoHeroInterface />
             </div>
           </div>
         </section>
@@ -811,7 +811,7 @@ export function ObsidianLanding() {
                   </p>
                 </div>
 
-                <ObsidianLeadForm />
+                <PromoLeadForm />
               </div>
             </div>
           </section>

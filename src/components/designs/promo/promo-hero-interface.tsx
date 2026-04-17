@@ -2,11 +2,11 @@
 
 import { useCallback, useEffect, useState, type CSSProperties } from "react";
 
-import { ObsidianHeroMock } from "./obsidian-hero-mock";
-import { OBSIDIAN_HERO_ARTBOARD } from "./obsidian-hero-mock.scene";
-import styles from "./obsidian.module.css";
+import { PromoHeroMock } from "./promo-hero-mock";
+import { PROMO_HERO_ARTBOARD } from "./promo-hero-mock.scene";
+import styles from "./promo.module.css";
 
-type ObsidianHeroInterfaceProps = {
+type PromoHeroInterfaceProps = {
   className?: string;
   interactive?: boolean;
 };
@@ -33,7 +33,7 @@ function getInteractiveFrameWidth(width: number) {
     return clampNumber(Math.round(width), 1020, 1180);
   }
 
-  return OBSIDIAN_HERO_ARTBOARD.width;
+  return PROMO_HERO_ARTBOARD.width;
 }
 
 function getInteractivePanelHeight(width: number) {
@@ -43,7 +43,7 @@ function getInteractivePanelHeight(width: number) {
 
   const frameWidth = getInteractiveFrameWidth(width);
 
-  return Math.ceil((width * OBSIDIAN_HERO_ARTBOARD.height) / frameWidth);
+  return Math.ceil((width * PROMO_HERO_ARTBOARD.height) / frameWidth);
 }
 
 function getStaticMobilePanelHeight(width: number) {
@@ -67,10 +67,10 @@ function getStaticMobilePanelHeight(width: number) {
   );
 }
 
-export function ObsidianHeroInterface({
+export function PromoHeroInterface({
   className,
   interactive = false,
-}: ObsidianHeroInterfaceProps) {
+}: PromoHeroInterfaceProps) {
   const [panelElement, setPanelElement] = useState<HTMLDivElement | null>(null);
   const [panelWidth, setPanelWidth] = useState(0);
   const handlePanelRef = useCallback((node: HTMLDivElement | null) => {
@@ -137,7 +137,7 @@ export function ObsidianHeroInterface({
   return (
     <div ref={handlePanelRef} className={panelClassName} style={panelStyle}>
       <div className={styles.heroShot} style={shotStyle}>
-        <ObsidianHeroMock
+        <PromoHeroMock
           forcedVariant={forcedVariant}
           layoutMode={
             interactive ? "cover" : useStaticMobileLayout ? "coverTop" : "contain"

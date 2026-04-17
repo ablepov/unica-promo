@@ -1,9 +1,9 @@
-export const OBSIDIAN_HERO_ARTBOARD = {
+export const PROMO_HERO_ARTBOARD = {
   width: 1912,
   height: 760,
 } as const;
 
-export type ObsidianHeroMockIcon =
+export type PromoHeroMockIcon =
   | "plus"
   | "sparkles"
   | "brain"
@@ -27,65 +27,65 @@ export type ObsidianHeroMockIcon =
   | "ellipsis"
   | "unica";
 
-export type ObsidianHeroMockVariant = "desktop" | "compact" | "narrow" | "ultra";
+export type PromoHeroMockVariant = "desktop" | "compact" | "narrow" | "ultra";
 
-export type ObsidianHeroMockTextSegment = {
+export type PromoHeroMockTextSegment = {
   text: string;
   highlight?: boolean;
   metadata?: boolean;
 };
 
-export type ObsidianHeroMockLine = {
-  segments: readonly ObsidianHeroMockTextSegment[];
+export type PromoHeroMockLine = {
+  segments: readonly PromoHeroMockTextSegment[];
 };
 
-export type ObsidianHeroMockNavItem = {
-  icon: ObsidianHeroMockIcon;
+export type PromoHeroMockNavItem = {
+  icon: PromoHeroMockIcon;
   label: string;
   count?: string;
   active?: boolean;
 };
 
-export type ObsidianHeroMockHistoryItem = {
+export type PromoHeroMockHistoryItem = {
   label: string;
   count?: string;
   active?: boolean;
   indent?: boolean;
-  icon?: ObsidianHeroMockIcon;
+  icon?: PromoHeroMockIcon;
 };
 
-export type ObsidianHeroMockWorkspaceAction = {
+export type PromoHeroMockWorkspaceAction = {
   label: string;
   active?: boolean;
 };
 
-export type ObsidianHeroMockChatBubbleKind = "assistantText" | "userFile";
+export type PromoHeroMockChatBubbleKind = "assistantText" | "userFile";
 
-export type ObsidianHeroMockChatBubble = {
+export type PromoHeroMockChatBubble = {
   id: string;
-  kind: ObsidianHeroMockChatBubbleKind;
+  kind: PromoHeroMockChatBubbleKind;
   content?: string;
   title?: string;
   extension?: string;
-  icon?: ObsidianHeroMockIcon;
+  icon?: PromoHeroMockIcon;
 };
 
-export type ObsidianHeroMockSummarySection = {
+export type PromoHeroMockSummarySection = {
   heading: string;
   body: string;
 };
 
-export type ObsidianHeroMockAiMenuItem = {
+export type PromoHeroMockAiMenuItem = {
   id: string;
   label: string;
 };
 
-export type ObsidianHeroMockLoopPoint = {
+export type PromoHeroMockLoopPoint = {
   x: number;
   y: number;
 };
 
-export type ObsidianHeroMockLoopPhases = {
+export type PromoHeroMockLoopPhases = {
   idleEndMs: number;
   dragEndMs: number;
   processingEndMs: number;
@@ -102,14 +102,14 @@ export type ObsidianHeroMockLoopPhases = {
   cycleEndMs: number;
 };
 
-export type ObsidianHeroMockScene = {
-  variant: ObsidianHeroMockVariant;
+export type PromoHeroMockScene = {
+  variant: PromoHeroMockVariant;
   sidebar: {
     workspaceName: string;
     workspacePlan: string;
-    primaryNav: readonly ObsidianHeroMockNavItem[];
+    primaryNav: readonly PromoHeroMockNavItem[];
     historyTitle: string;
-    historyItems: readonly ObsidianHeroMockHistoryItem[];
+    historyItems: readonly PromoHeroMockHistoryItem[];
     footer: {
       name: string;
       email: string;
@@ -119,27 +119,27 @@ export type ObsidianHeroMockScene = {
     title: string;
     loop: {
       cycleDurationMs: number;
-      phases: ObsidianHeroMockLoopPhases;
+      phases: PromoHeroMockLoopPhases;
       cursorTargets: {
-        fileStart: ObsidianHeroMockLoopPoint;
-        composerDrop: ObsidianHeroMockLoopPoint;
-        transcriptAction: ObsidianHeroMockLoopPoint;
-        aiActionButton: ObsidianHeroMockLoopPoint;
-        aiActionMenuItem: ObsidianHeroMockLoopPoint;
-        newChat: ObsidianHeroMockLoopPoint;
+        fileStart: PromoHeroMockLoopPoint;
+        composerDrop: PromoHeroMockLoopPoint;
+        transcriptAction: PromoHeroMockLoopPoint;
+        aiActionButton: PromoHeroMockLoopPoint;
+        aiActionMenuItem: PromoHeroMockLoopPoint;
+        newChat: PromoHeroMockLoopPoint;
       };
     };
     fileCard: {
       title: string;
       extension: string;
       processingSteps: readonly string[];
-      readyActions: readonly ObsidianHeroMockWorkspaceAction[];
+      readyActions: readonly PromoHeroMockWorkspaceAction[];
     };
     chat: {
-      idleAssistant: ObsidianHeroMockChatBubble;
-      fileBubble: ObsidianHeroMockChatBubble;
-      readyAssistant: ObsidianHeroMockChatBubble;
-      summaryAssistant: ObsidianHeroMockChatBubble;
+      idleAssistant: PromoHeroMockChatBubble;
+      fileBubble: PromoHeroMockChatBubble;
+      readyAssistant: PromoHeroMockChatBubble;
+      summaryAssistant: PromoHeroMockChatBubble;
     };
     composer: {
       idleText: string;
@@ -149,22 +149,22 @@ export type ObsidianHeroMockScene = {
   inspector: {
     title: string;
     actionLabel: string;
-    rawLines: readonly ObsidianHeroMockLine[];
-    summarySections: readonly ObsidianHeroMockSummarySection[];
-    menuItems: readonly ObsidianHeroMockAiMenuItem[];
+    rawLines: readonly PromoHeroMockLine[];
+    summarySections: readonly PromoHeroMockSummarySection[];
+    menuItems: readonly PromoHeroMockAiMenuItem[];
     hint: string;
     showDownload: boolean;
     showClose: boolean;
   };
 };
 
-const PRIMARY_NAV: readonly ObsidianHeroMockNavItem[] = [
+const PRIMARY_NAV: readonly PromoHeroMockNavItem[] = [
   { icon: "plus", label: "Новый чат", active: true },
   { icon: "sparkles", label: "Ассистенты" },
   { icon: "brain", label: "База знаний", count: "25" },
 ] as const;
 
-const HISTORY_ITEMS: readonly ObsidianHeroMockHistoryItem[] = [
+const HISTORY_ITEMS: readonly PromoHeroMockHistoryItem[] = [
   { label: "Встречи", count: "18", active: true, icon: "sparkles" },
   { label: "Регламенты", count: "5", icon: "wand" },
   { label: "Документы", count: "98", icon: "wand" },
@@ -180,7 +180,7 @@ const HISTORY_ITEMS: readonly ObsidianHeroMockHistoryItem[] = [
   { label: "Код", count: "1", icon: "wand" },
 ] as const;
 
-const RAW_TRANSCRIPT_LINES: readonly ObsidianHeroMockLine[] = [
+const RAW_TRANSCRIPT_LINES: readonly PromoHeroMockLine[] = [
   {
     segments: [
       { text: "[Анна, 11:03:00-11:03:16]: ", metadata: true },
@@ -255,7 +255,7 @@ const RAW_TRANSCRIPT_LINES: readonly ObsidianHeroMockLine[] = [
   },
 ] as const;
 
-const SUMMARY_SECTIONS: readonly ObsidianHeroMockSummarySection[] = [
+const SUMMARY_SECTIONS: readonly PromoHeroMockSummarySection[] = [
   {
     heading: "Контекст",
     body: "Команда готовит демонстрацию для клиента «СеверЛогистик» и обсуждает, как показать скорость работы Unica в едином окне.",
@@ -274,14 +274,14 @@ const SUMMARY_SECTIONS: readonly ObsidianHeroMockSummarySection[] = [
   },
 ] as const;
 
-const AI_ACTION_MENU_ITEMS: readonly ObsidianHeroMockAiMenuItem[] = [
+const AI_ACTION_MENU_ITEMS: readonly PromoHeroMockAiMenuItem[] = [
   { id: "summary", label: "Сделать сводку" },
   { id: "minutes", label: "Оформить протокол" },
   { id: "risks", label: "Выделить риски" },
   { id: "email", label: "Подготовить письмо" },
 ] as const;
 
-const LOOP_PHASES: ObsidianHeroMockLoopPhases = {
+const LOOP_PHASES: PromoHeroMockLoopPhases = {
   idleEndMs: 1000,
   dragEndMs: 2400,
   processingEndMs: 3800,
@@ -307,11 +307,11 @@ const CURSOR_TARGETS = {
   newChat: { x: 96, y: 138 },
 } as const;
 
-export function getObsidianHeroMockScene(
+export function getPromoHeroMockScene(
   hostWidth: number,
-  forcedVariant?: ObsidianHeroMockVariant,
-): ObsidianHeroMockScene {
-  const variant: ObsidianHeroMockVariant =
+  forcedVariant?: PromoHeroMockVariant,
+): PromoHeroMockScene {
+  const variant: PromoHeroMockVariant =
     forcedVariant ??
     (hostWidth > 0 && hostWidth < 420
       ? "ultra"

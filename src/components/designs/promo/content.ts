@@ -13,7 +13,7 @@ export const trustLogos = [
   {
     label: "Суды России",
     caption: "Суды России",
-    src: "/designs/obsidian/logos/courts-russia-color.svg",
+    src: "/designs/promo/logos/courts-russia-color.svg",
     height: 2.85,
     imageWidth: 366.943,
     imageHeight: 401.991,
@@ -23,7 +23,7 @@ export const trustLogos = [
   },
   {
     label: "МТС",
-    src: "/designs/obsidian/logos/mts-color.svg",
+    src: "/designs/promo/logos/mts-color.svg",
     height: 2.7,
     imageWidth: 850.4,
     imageHeight: 850.4,
@@ -34,7 +34,7 @@ export const trustLogos = [
   {
     label: "Правительство Татарстана",
     caption: "Правительство Татарстана",
-    src: "/designs/obsidian/logos/tatarstan-government-color.svg",
+    src: "/designs/promo/logos/tatarstan-government-color.svg",
     height: 2.55,
     imageWidth: 32,
     imageHeight: 32,
@@ -45,7 +45,7 @@ export const trustLogos = [
   },
   {
     label: "ПРОМОМЕД",
-    src: "/designs/obsidian/logos/promomed-color.svg",
+    src: "/designs/promo/logos/promomed-color.svg",
     height: 2.7,
     imageWidth: 240,
     imageHeight: 67,
@@ -55,7 +55,7 @@ export const trustLogos = [
   },
   {
     label: "Нефтиса",
-    src: "/designs/obsidian/logos/neftisa-color.svg",
+    src: "/designs/promo/logos/neftisa-color.svg",
     height: 2.7,
     imageWidth: 193,
     imageHeight: 64,
@@ -135,7 +135,7 @@ export const painPoints = [
     title: "Единый контур данных и знаний",
     description:
       "Документы, базы знаний, переписки, звонки и внутренние системы объединены в один AI-контур.",
-    imageSrc: "/designs/obsidian/pain/pain-point-1.webp",
+    imageSrc: "/designs/promo/pain/pain-point-1.webp",
     imageAlt: "Connected knowledge sources orbiting inside a glass control panel.",
     imagePosition: "50% 50%",
   },
@@ -143,7 +143,7 @@ export const painPoints = [
     title: "Переход от пилотов к продуктиву",
     description:
       "AI-сценарии становятся масштабируемыми рабочими инструментами для команд и бизнес-процессов.",
-    imageSrc: "/designs/obsidian/pain/pain-point-2.webp",
+    imageSrc: "/designs/promo/pain/pain-point-2.webp",
     imageAlt: "A rollout path that moves from pilot to workflow to production.",
     imagePosition: "50% 42%",
   },
@@ -151,7 +151,7 @@ export const painPoints = [
     title: "Контроль и прозрачность по умолчанию",
     description:
       "Понятно, кто к чему имеет доступ, на чём основан ответ и как используются ресурсы.",
-    imageSrc: "/designs/obsidian/pain/pain-point-3.webp",
+    imageSrc: "/designs/promo/pain/pain-point-3.webp",
     imageAlt:
       "Role-based access controls with an audit history entry for legal operations.",
     imagePosition: "50% 46%",
@@ -160,7 +160,7 @@ export const painPoints = [
     title: "Единая платформа вместо набора решений",
     description:
       "Поиск, документы, речь и автоматизация работают в одном управляемом контуре и дают единый результат.",
-    imageSrc: "/designs/obsidian/pain/pain-point-4.webp",
+    imageSrc: "/designs/promo/pain/pain-point-4.webp",
     imageAlt: "A single prompt surface combining document upload and voice input.",
     imagePosition: "50% 58%",
   },

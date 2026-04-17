@@ -2,7 +2,7 @@
 
 import { startTransition, useState } from "react";
 
-import styles from "./obsidian.module.css";
+import styles from "./promo.module.css";
 
 type FormState =
   | { kind: "idle"; message: string }
@@ -32,7 +32,7 @@ const deliveryOptions = [
   },
 ] as const;
 
-export function ObsidianLeadForm() {
+export function PromoLeadForm() {
   const [state, setState] = useState<FormState>(initialState);
   const [isPending, setIsPending] = useState(false);
 
@@ -98,11 +98,11 @@ export function ObsidianLeadForm() {
 
       <div className={styles.fieldGrid}>
         <div className={styles.fieldBlock}>
-          <label className={styles.fieldLabel} htmlFor="obsidian-name">
+          <label className={styles.fieldLabel} htmlFor="promo-name">
             Имя
           </label>
           <input
-            id="obsidian-name"
+            id="promo-name"
             name="name"
             className={styles.field}
             placeholder="Например, Антон"
@@ -111,11 +111,11 @@ export function ObsidianLeadForm() {
         </div>
 
         <div className={styles.fieldBlock}>
-          <label className={styles.fieldLabel} htmlFor="obsidian-company">
+          <label className={styles.fieldLabel} htmlFor="promo-company">
             Компания
           </label>
           <input
-            id="obsidian-company"
+            id="promo-company"
             name="company"
             className={styles.field}
             placeholder="Название компании"
@@ -124,11 +124,11 @@ export function ObsidianLeadForm() {
         </div>
 
         <div className={styles.fieldBlock}>
-          <label className={styles.fieldLabel} htmlFor="obsidian-contact">
+          <label className={styles.fieldLabel} htmlFor="promo-contact">
             Контакт
           </label>
           <input
-            id="obsidian-contact"
+            id="promo-contact"
             name="contact"
             className={styles.field}
             placeholder="Email, телефон или Telegram"
@@ -158,11 +158,11 @@ export function ObsidianLeadForm() {
         </div>
 
         <div className={`${styles.fieldBlock} ${styles.fieldBlockFull}`}>
-          <label className={styles.fieldLabel} htmlFor="obsidian-message">
+          <label className={styles.fieldLabel} htmlFor="promo-message">
             Сценарий
           </label>
           <textarea
-            id="obsidian-message"
+            id="promo-message"
             name="message"
             className={styles.textarea}
             placeholder="Задача, данные, ограничения, контур."

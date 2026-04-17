@@ -44,7 +44,7 @@ body {
   text-rendering: optimizeLegibility;
 }
 
-body.obsidian-route {
+body.promo-route {
   background: #050404;
 }
 
@@ -78,8 +78,8 @@ body::after {
   opacity: 0.72;
 }
 
-body.obsidian-route::before,
-body.obsidian-route::after {
+body.promo-route::before,
+body.promo-route::after {
   display: none;
 }
 

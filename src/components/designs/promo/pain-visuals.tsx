@@ -1,6 +1,6 @@
 import Image from "next/image";
 
-import styles from "./obsidian.module.css";
+import styles from "./promo.module.css";
 
 type PainVisualItem = {
   imageAlt: string;
@@ -8,7 +8,7 @@ type PainVisualItem = {
   imageSrc: string;
 };
 
-type ObsidianPainVisualProps = {
+type PromoPainVisualProps = {
   index: number;
   isActive: boolean;
   item: PainVisualItem;
@@ -194,12 +194,12 @@ function PainAccessVisual({ isActive, item }: { isActive: boolean; item: PainVis
   );
 }
 
-export function ObsidianPainVisual({
+export function PromoPainVisual({
   index,
   isActive,
   item,
   priority = false,
-}: ObsidianPainVisualProps) {
+}: PromoPainVisualProps) {
   switch (index) {
     case 0:
       return <PainKnowledgeVisual isActive={isActive} item={item} />;
